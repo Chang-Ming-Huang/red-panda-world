@@ -25,8 +25,6 @@
         --tech-white: #ffffff;
         --tech-silver: #e5e7eb;
         --tech-accent: #ec6d13;
-        --tech-blue: #0066cc;
-        --tech-green: #00ff88;
         --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
@@ -297,7 +295,7 @@
         color: var(--charcoal-white);
         margin-bottom: 16px;
         letter-spacing: -0.5px;
-        text-shadow: 0 0 20px rgba(236, 109, 19, 0.3);
+        /* 移除霓虹發光 */
     }
 
     .quiz-subtitle {
@@ -316,14 +314,9 @@
     .quiz-icon {
         font-size: 48px;
         margin-bottom: 16px;
-        animation: iconPulse 3s ease-in-out infinite;
-        filter: drop-shadow(0 0 20px rgba(236, 109, 19, 0.4));
+        /* 移除霓虹投影 */
     }
 
-    @keyframes iconPulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-    }
 
     .quiz-main-title {
         font-size: 24px;
@@ -331,7 +324,7 @@
         color: var(--charcoal-white);
         margin-bottom: 12px;
         letter-spacing: -0.5px;
-        text-shadow: 0 0 20px rgba(236, 109, 19, 0.3);
+        /* 移除霓虹發光 */
     }
 
     .quiz-header-section .quiz-subtitle {
@@ -554,7 +547,7 @@
         transition: width 0.5s ease;
         width: 0%;
         position: relative;
-        box-shadow: 0 0 10px rgba(236, 109, 19, 0.5);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
 
     @keyframes progressShimmer {
@@ -688,14 +681,14 @@
         background: linear-gradient(135deg, rgba(74, 222, 128, 0.15), rgba(74, 222, 128, 0.1));
         border-color: var(--charcoal-success);
         color: var(--charcoal-success);
-        box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
 
     .option-btn.incorrect {
         background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.1));
         border-color: var(--charcoal-error);
         color: var(--charcoal-error);
-        box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
 
     .option-btn:disabled {
@@ -799,7 +792,7 @@
         font-size: 64px;
         margin-bottom: 16px;
         animation: techCelebrate 1s ease-out;
-        text-shadow: 0 0 30px rgba(236, 109, 19, 0.5);
+        /* 移除霓虹發光 */
     }
 
     @keyframes techCelebrate {
@@ -808,7 +801,7 @@
         }
         40% {
             transform: translateY(-20px) scale(1.1);
-            filter: drop-shadow(0 10px 20px rgba(236, 109, 19, 0.4));
+            /* 移除霓虹投影 */
         }
         60% {
             transform: translateY(-10px) scale(1.05);
@@ -881,12 +874,12 @@
 
     .score-item.correct .score-number {
         color: var(--charcoal-success);
-        text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+        /* 移除霓虹發光 */
     }
 
     .score-item.incorrect .score-number {
         color: var(--charcoal-error);
-        text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+        /* 移除霓虹發光 */
     }
 
     .score-label {
@@ -925,7 +918,7 @@
         color: var(--charcoal-accent);
         margin-bottom: 4px;
         font-family: 'SF Mono', monospace;
-        text-shadow: 0 0 20px rgba(236, 109, 19, 0.5);
+        /* 移除霓虹發光 */
     }
 
     .final-score-label {
@@ -1127,9 +1120,6 @@
         <div class="quiz-start">
             <!-- Quiz 主題區域 -->
             <div class="quiz-header-section">
-                <div class="quiz-icon">
-                    🐼
-                </div>
                 <h2 class="quiz-main-title">小熊貓亞種知識測驗</h2>
                 <p class="quiz-subtitle">測試你對中華和喜馬拉雅小熊貓的了解程度</p>
             </div>
@@ -1265,7 +1255,6 @@ async function loadQuizData() {
         quizData = await response.json();
 
         // 更新開始頁面資訊
-        document.getElementById('total-questions').textContent = quizData.quiz_info.total_questions;
         document.getElementById('passing-score').textContent = quizData.quiz_info.passing_score;
         document.getElementById('total-questions-display').textContent = quizData.quiz_info.total_questions;
 

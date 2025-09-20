@@ -13,8 +13,6 @@
         --tech-white: #ffffff;
         --tech-silver: #e5e7eb;
         --tech-accent: #ec6d13;
-        --tech-blue: #0066cc;
-        --tech-green: #00ff88;
         --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
@@ -77,12 +75,12 @@
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: var(--tech-green);
+        background: var(--tech-accent);
         animation: statusBlink 2s infinite;
     }
 
     .status-dot:nth-child(2) {
-        background: var(--tech-blue);
+        background: var(--tech-accent);
         animation-delay: 0.5s;
     }
 
@@ -263,7 +261,7 @@
         left: 0;
         right: 0;
         height: 3px;
-        background: linear-gradient(90deg, var(--tech-accent), var(--tech-blue), var(--tech-green));
+        background: var(--tech-accent);
         border-radius: 12px 12px 0 0;
     }
 
@@ -418,7 +416,7 @@
         left: 1rem;
         right: 1rem;
         height: 3px;
-        background: var(--tech-blue);
+        background: var(--tech-accent);
         border-radius: 0 0 4px 4px;
     }
 
@@ -469,7 +467,7 @@
         left: 1rem;
         right: 1rem;
         height: 3px;
-        background: var(--tech-green);
+        background: var(--tech-accent);
         border-radius: 0 0 4px 4px;
     }
 
