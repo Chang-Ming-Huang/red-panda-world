@@ -283,7 +283,12 @@
     }
 
     .neon-card-inner {
-        padding: 32px;
+        padding: 24px;
+    }
+
+    /* Quiz 內容區域的 card-inner 調整 */
+    .quiz-content .neon-card-inner {
+        padding: 20px;
     }
 
     .loading-container {
@@ -500,7 +505,9 @@
     }
 
     .progress-section {
-        margin-bottom: 24px;
+        flex-shrink: 0;
+        margin-bottom: 16px;
+        padding: 0 8px;
     }
 
     .progress-header {
@@ -576,7 +583,8 @@
     }
 
     .question-card {
-        margin-bottom: 24px;
+        flex-shrink: 0;
+        margin-bottom: 16px;
     }
 
     .question-category {
@@ -606,22 +614,24 @@
     .options-container {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
+        margin-top: 16px;
     }
 
     .option-btn {
         background: var(--neon-gray);
         border: 2px solid var(--neon-blue);
-        border-radius: 12px;
-        padding: 16px 20px;
+        border-radius: 10px;
+        padding: 14px 16px;
         text-align: left;
         cursor: pointer;
         transition: all 0.3s ease;
-        font-size: 16px;
+        font-size: 15px;
         color: var(--neon-white);
         position: relative;
         overflow: hidden;
         font-family: inherit;
+        line-height: 1.4;
     }
 
     .option-btn::before {
@@ -675,11 +685,12 @@
     .explanation-card {
         background: var(--neon-gray);
         border: 2px solid var(--neon-purple);
-        border-radius: 12px;
-        padding: 20px;
-        margin-bottom: 24px;
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 16px;
         position: relative;
         box-shadow: 0 0 20px rgba(128, 0, 255, 0.3);
+        flex-shrink: 0;
     }
 
     .explanation-card::before {
@@ -993,6 +1004,67 @@
         display: none !important;
     }
 
+    /* Quiz 固定高度容器 */
+    .quiz-fixed-container {
+        height: calc(100vh - 140px);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        min-height: 500px;
+    }
+
+    .quiz-main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        min-height: 0;
+    }
+
+    .quiz-footer {
+        flex-shrink: 0;
+        padding: 16px 8px 8px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    }
+
+    /* 選項解釋區域 */
+    .option-explanation {
+        display: none;
+        margin-top: 12px;
+        padding: 12px;
+        background: rgba(128, 0, 255, 0.1);
+        border: 1px solid var(--neon-purple);
+        border-radius: 8px;
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--neon-white);
+        position: relative;
+    }
+
+    .option-explanation::before {
+        content: '💡';
+        margin-right: 6px;
+        color: var(--neon-purple);
+    }
+
+    .option-btn.show-explanation .option-explanation {
+        display: block;
+        animation: explanationSlide 0.3s ease-out;
+    }
+
+    @keyframes explanationSlide {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+            max-height: 0;
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+            max-height: 100px;
+        }
+    }
+
     /* Mobile Navigation Styles */
     .navbar-fixed {
         position: fixed;
@@ -1044,10 +1116,37 @@
     <!-- 測驗開始畫面 -->
     <div id="quiz-start" class="neon-card hidden">
         <div class="quiz-start">
-            <h1 class="quiz-title">🐾 小熊貓亞種測驗</h1>
-            <p class="quiz-subtitle">
-                測試你對中華小熊貓和喜馬拉雅小熊貓的了解程度！
-            </p>
+            <!-- Quiz 主題區域 -->
+            <div style="margin-bottom: 32px;">
+                <div style="font-size: 3rem; margin-bottom: 16px; animation: neonGlow 3s ease-in-out infinite;">🐼</div>
+                <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--neon-white); margin-bottom: 8px; text-transform: uppercase;">小熊貓亞種知識測驗</h2>
+                <p style="color: var(--neon-blue); text-shadow: 0 0 5px var(--neon-blue);">測試你對中華和喜馬拉雅小熊貓的了解程度</p>
+            </div>
+
+            <!-- 統計資訊卡片 -->
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 32px;">
+                <div style="background: var(--neon-gray); border: 2px solid var(--neon-blue); border-radius: 12px; padding: 16px; text-align: center; box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);">
+                    <div style="font-size: 1.25rem; margin-bottom: 8px;">📋</div>
+                    <div style="font-size: 1.125rem; font-weight: 700; color: var(--neon-blue); text-shadow: 0 0 5px var(--neon-blue);" id="total-questions-stat"></div>
+                    <div style="font-size: 0.75rem; color: var(--neon-white); text-transform: uppercase; letter-spacing: 1px;">題目</div>
+                </div>
+                <div style="background: var(--neon-gray); border: 2px solid var(--neon-pink); border-radius: 12px; padding: 16px; text-align: center; box-shadow: 0 0 15px rgba(255, 0, 128, 0.3);">
+                    <div style="font-size: 1.25rem; margin-bottom: 8px;">⏱️</div>
+                    <div style="font-size: 1.125rem; font-weight: 700; color: var(--neon-pink); text-shadow: 0 0 5px var(--neon-pink);">3-5</div>
+                    <div style="font-size: 0.75rem; color: var(--neon-white); text-transform: uppercase; letter-spacing: 1px;">分鐘</div>
+                </div>
+                <div style="background: var(--neon-gray); border: 2px solid var(--neon-green); border-radius: 12px; padding: 16px; text-align: center; box-shadow: 0 0 15px rgba(0, 255, 128, 0.3);">
+                    <div style="font-size: 1.25rem; margin-bottom: 8px;">🎯</div>
+                    <div style="font-size: 1.125rem; font-weight: 700; color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green);" id="passing-score-stat"></div>
+                    <div style="font-size: 0.75rem; color: var(--neon-white); text-transform: uppercase; letter-spacing: 1px;">通過分數</div>
+                </div>
+                <div style="background: var(--neon-gray); border: 2px solid var(--neon-purple); border-radius: 12px; padding: 16px; text-align: center; box-shadow: 0 0 15px rgba(128, 0, 255, 0.3);">
+                    <div style="font-size: 1.25rem; margin-bottom: 8px;">🏆</div>
+                    <div style="font-size: 1.125rem; font-weight: 700; color: var(--neon-purple); text-shadow: 0 0 5px var(--neon-purple);">中級</div>
+                    <div style="font-size: 0.75rem; color: var(--neon-white); text-transform: uppercase; letter-spacing: 1px;">難度</div>
+                </div>
+            </div>
+
             <div class="quiz-rules">
                 <h3 class="rules-title">SYSTEM_PARAMETERS</h3>
                 <ul class="rules-list">
@@ -1064,8 +1163,8 @@
     </div>
 
     <!-- 測驗進行中 -->
-    <div id="quiz-content" class="hidden">
-        <!-- 進度條 -->
+    <div id="quiz-content" class="quiz-fixed-container hidden">
+        <!-- Quiz Header: 進度條 -->
         <div class="progress-section">
             <div class="progress-header">
                 <span class="progress-label">PROGRESS</span>
@@ -1078,28 +1177,27 @@
             </div>
         </div>
 
-        <!-- 問題卡片 -->
-        <div class="neon-card question-card">
-            <div class="neon-card-inner">
-                <div class="question-category" id="question-category"></div>
-                <h2 class="question-text" id="question-text"></h2>
-                <div id="options-container" class="options-container">
-                    <!-- 選項會動態插入 -->
+        <!-- Quiz Main Content: 問題和選項 -->
+        <div class="quiz-main-content">
+            <!-- 問題卡片 -->
+            <div class="neon-card question-card">
+                <div class="neon-card-inner quiz-content">
+                    <div class="question-category" id="question-category"></div>
+                    <h2 class="question-text" id="question-text"></h2>
+                    <div id="options-container" class="options-container">
+                        <!-- 選項會動態插入 -->
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 答案解釋 -->
-        <div id="explanation" class="explanation-card hidden">
-            <h3 class="explanation-title">💡 DATA_ANALYSIS</h3>
-            <p id="explanation-text" class="explanation-text"></p>
-        </div>
-
-        <!-- 下一題按鈕 -->
-        <div id="next-button-container" class="next-button-container hidden">
-            <button class="next-button" onclick="nextQuestion()">
-                NEXT_QUERY →
-            </button>
+        <!-- Quiz Footer: 下一題按鈕 -->
+        <div class="quiz-footer">
+            <div id="next-button-container" class="next-button-container hidden">
+                <button class="next-button" onclick="nextQuestion()">
+                    NEXT_QUERY →
+                </button>
+            </div>
         </div>
     </div>
 
@@ -1159,6 +1257,10 @@ async function loadQuizData() {
         document.getElementById('passing-score').textContent = quizData.quiz_info.passing_score;
         document.getElementById('total-questions-display').textContent = quizData.quiz_info.total_questions;
 
+        // 更新統計卡片
+        document.getElementById('total-questions-stat').textContent = quizData.quiz_info.total_questions;
+        document.getElementById('passing-score-stat').textContent = quizData.quiz_info.passing_score + '+分';
+
         // 隱藏載入畫面，顯示開始頁面
         document.getElementById('loading').classList.add('hidden');
         document.getElementById('quiz-start').classList.remove('hidden');
@@ -1198,15 +1300,26 @@ function showQuestion() {
 
     // 添加選項
     question.options.forEach((option, index) => {
+        const optionWrapper = document.createElement('div');
+
         const optionButton = document.createElement('button');
         optionButton.className = 'option-btn';
         optionButton.textContent = option.text;
         optionButton.onclick = () => selectOption(index, option.correct);
-        optionsContainer.appendChild(optionButton);
+
+        // 添加解釋區域（只在正確答案顯示）
+        if (option.correct) {
+            const explanationDiv = document.createElement('div');
+            explanationDiv.className = 'option-explanation';
+            explanationDiv.textContent = question.explanation;
+            optionButton.appendChild(explanationDiv);
+        }
+
+        optionWrapper.appendChild(optionButton);
+        optionsContainer.appendChild(optionWrapper);
     });
 
-    // 隱藏解釋和下一題按鈕
-    document.getElementById('explanation').classList.add('hidden');
+    // 隱藏下一題按鈕（解釋已整合到選項中）
     document.getElementById('next-button-container').classList.add('hidden');
 }
 
@@ -1231,14 +1344,14 @@ function selectOption(selectedIndex, isCorrect) {
 
         if (question.options[index].correct) {
             btn.classList.add('correct');
+            // 為正確答案顯示解釋
+            btn.classList.add('show-explanation');
         } else if (index === selectedIndex && !isCorrect) {
             btn.classList.add('incorrect');
         }
     });
 
-    // 顯示解釋
-    document.getElementById('explanation-text').textContent = question.explanation;
-    document.getElementById('explanation').classList.remove('hidden');
+    // 解釋已整合到選項中
 
     // 顯示下一題按鈕或完成按鈕
     const nextButtonContainer = document.getElementById('next-button-container');

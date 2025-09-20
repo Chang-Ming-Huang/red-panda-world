@@ -50,6 +50,71 @@
     body {
         min-height: max(884px, 100dvh);
     }
+
+    /* Quiz 固定高度容器 */
+    .quiz-fixed-container {
+        height: calc(100vh - 140px);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        min-height: 500px;
+    }
+
+    .quiz-main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        min-height: 0;
+    }
+
+    .quiz-footer {
+        flex-shrink: 0;
+        padding: 16px 8px 8px;
+        background: linear-gradient(to top, var(--tw-gradient-stops));
+    }
+
+    /* 選項解釋區域 */
+    .option-explanation {
+        display: none;
+        margin-top: 12px;
+        padding: 12px;
+        background: #dbeafe;
+        border: 1px solid #3b82f6;
+        border-radius: 8px;
+        font-size: 13px;
+        line-height: 1.5;
+        color: #1e40af;
+        position: relative;
+    }
+
+    .dark .option-explanation {
+        background: rgba(59, 130, 246, 0.1);
+        color: #93c5fd;
+    }
+
+    .option-explanation::before {
+        content: '💡';
+        margin-right: 6px;
+    }
+
+    .option-btn.show-explanation .option-explanation {
+        display: block;
+        animation: explanationSlide 0.3s ease-out;
+    }
+
+    @keyframes explanationSlide {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+            max-height: 0;
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+            max-height: 100px;
+        }
+    }
     .option-btn {
         transition: all 0.2s ease;
     }
@@ -86,14 +151,44 @@
 
     <!-- 測驗開始畫面 -->
     <div id="quiz-start" class="hidden text-center py-8">
+        <!-- Quiz 主題區域 -->
+        <div class="mb-8">
+            <div class="text-5xl mb-4 animate-bounce">🐼</div>
+            <h2 class="text-2xl font-bold text-background-dark dark:text-background-light mb-2">小熊貓亞種知識測驗</h2>
+            <p class="text-background-dark/70 dark:text-background-light/70">測試你對中華和喜馬拉雅小熊貓的了解程度</p>
+        </div>
+
+        <!-- 統計資訊卡片 -->
+        <div class="grid grid-cols-2 gap-3 mb-8">
+            <div class="bg-white dark:bg-zinc-800/20 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-600">
+                <div class="text-xl mb-2">📋</div>
+                <div class="text-lg font-bold text-primary" id="total-questions-stat"></div>
+                <div class="text-xs text-background-dark/60 dark:text-background-light/60">題目</div>
+            </div>
+            <div class="bg-white dark:bg-zinc-800/20 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-600">
+                <div class="text-xl mb-2">⏱️</div>
+                <div class="text-lg font-bold text-primary">3-5</div>
+                <div class="text-xs text-background-dark/60 dark:text-background-light/60">分鐘</div>
+            </div>
+            <div class="bg-white dark:bg-zinc-800/20 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-600">
+                <div class="text-xl mb-2">🎯</div>
+                <div class="text-lg font-bold text-primary" id="passing-score-stat"></div>
+                <div class="text-xs text-background-dark/60 dark:text-background-light/60">通過分數</div>
+            </div>
+            <div class="bg-white dark:bg-zinc-800/20 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-600">
+                <div class="text-xl mb-2">🏆</div>
+                <div class="text-lg font-bold text-primary">中級</div>
+                <div class="text-xs text-background-dark/60 dark:text-background-light/60">難度</div>
+            </div>
+        </div>
+
         <div class="bg-white dark:bg-zinc-800/20 rounded-xl p-6 mb-6 shadow-lg">
-                <h3 class="font-bold mb-4">測驗規則：</h3>
-                <div class="space-y-2 text-sm text-left">
-                    <p>📝 共 <span id="total-questions" class="font-bold text-primary"></span> 道題目</p>
-                    <p>⏱️ 每題選擇後會立即顯示答案解釋</p>
-                    <p>🎯 答對 <span id="passing-score" class="font-bold text-primary"></span> 題以上算通過</p>
-                    <p>🏆 完成後會給你專屬的成績評價</p>
-                </div>
+            <h3 class="font-bold mb-4">測驗規則：</h3>
+            <div class="space-y-2 text-sm text-left">
+                <p>📝 共 <span id="total-questions" class="font-bold text-primary"></span> 道題目</p>
+                <p>⏱️ 每題選擇後會立即顯示答案解釋</p>
+                <p>🎯 答對 <span id="passing-score" class="font-bold text-primary"></span> 題以上算通過</p>
+                <p>🏆 完成後會給你專屬的成績評價</p>
             </div>
         </div>
         <button onclick="startQuiz()" class="bg-gradient-to-r from-primary to-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
@@ -102,9 +197,9 @@
     </div>
 
     <!-- 測驗進行中 -->
-    <div id="quiz-content" class="hidden">
-        <!-- 進度條 -->
-        <div class="mb-6">
+    <div id="quiz-content" class="quiz-fixed-container hidden">
+        <!-- Quiz Header: 進度條 -->
+        <div class="mb-4 flex-shrink-0 px-2">
             <div class="flex justify-between items-center mb-2">
                 <span class="text-sm font-medium">進度</span>
                 <span class="text-sm text-background-dark/60 dark:text-background-light/60">
@@ -116,30 +211,29 @@
             </div>
         </div>
 
-        <!-- 問題卡片 -->
-        <div class="bg-white dark:bg-zinc-800/20 rounded-xl p-6 mb-6 shadow-lg">
-            <div class="mb-4">
-                <span id="question-category" class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium"></span>
-            </div>
-            <h2 id="question-text" class="text-xl font-bold mb-6"></h2>
+        <!-- Quiz Main Content: 問題和選項 -->
+        <div class="quiz-main-content">
+            <!-- 問題卡片 -->
+            <div class="bg-white dark:bg-zinc-800/20 rounded-xl p-5 mb-4 shadow-lg flex-shrink-0">
+                <div class="mb-3">
+                    <span id="question-category" class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium"></span>
+                </div>
+                <h2 id="question-text" class="text-lg font-bold mb-4"></h2>
 
-            <!-- 選項 -->
-            <div id="options-container" class="space-y-4">
-                <!-- 選項會動態插入 -->
+                <!-- 選項 -->
+                <div id="options-container" class="space-y-3">
+                    <!-- 選項會動態插入 -->
+                </div>
             </div>
         </div>
 
-        <!-- 答案解釋 -->
-        <div id="explanation" class="hidden bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 mb-6 border-l-4 border-blue-500">
-            <h3 class="font-bold mb-2 text-blue-800 dark:text-blue-300">💡 解釋</h3>
-            <p id="explanation-text" class="text-blue-700 dark:text-blue-200"></p>
-        </div>
-
-        <!-- 下一題按鈕 -->
-        <div id="next-button-container" class="hidden text-center">
-            <button onclick="nextQuestion()" class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
-                下一題 →
-            </button>
+        <!-- Quiz Footer: 下一題按鈕 -->
+        <div class="quiz-footer text-center">
+            <div id="next-button-container" class="hidden">
+                <button onclick="nextQuestion()" class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+                    下一題 →
+                </button>
+            </div>
         </div>
     </div>
 
@@ -203,6 +297,10 @@ async function loadQuizData() {
         document.getElementById('passing-score').textContent = quizData.quiz_info.passing_score;
         document.getElementById('total-questions-display').textContent = quizData.quiz_info.total_questions;
 
+        // 更新統計卡片
+        document.getElementById('total-questions-stat').textContent = quizData.quiz_info.total_questions;
+        document.getElementById('passing-score-stat').textContent = quizData.quiz_info.passing_score + '+分';
+
         // 隱藏載入畫面，顯示開始頁面
         document.getElementById('loading').classList.add('hidden');
         document.getElementById('quiz-start').classList.remove('hidden');
@@ -242,15 +340,26 @@ function showQuestion() {
 
     // 添加選項
     question.options.forEach((option, index) => {
+        const optionWrapper = document.createElement('div');
+
         const optionButton = document.createElement('button');
-        optionButton.className = 'option-btn w-full p-4 border-2 border-gray-200 dark:border-gray-600 rounded-lg text-left hover:border-primary transition-all bg-white dark:bg-zinc-800/50';
+        optionButton.className = 'option-btn w-full p-3 border-2 border-gray-200 dark:border-gray-600 rounded-lg text-left hover:border-primary transition-all bg-white dark:bg-zinc-800/50 text-sm';
         optionButton.textContent = option.text;
         optionButton.onclick = () => selectOption(index, option.correct);
-        optionsContainer.appendChild(optionButton);
+
+        // 添加解釋區域（只在正確答案顯示）
+        if (option.correct) {
+            const explanationDiv = document.createElement('div');
+            explanationDiv.className = 'option-explanation';
+            explanationDiv.textContent = question.explanation;
+            optionButton.appendChild(explanationDiv);
+        }
+
+        optionWrapper.appendChild(optionButton);
+        optionsContainer.appendChild(optionWrapper);
     });
 
-    // 隱藏解釋和下一題按鈕
-    document.getElementById('explanation').classList.add('hidden');
+    // 隱藏下一題按鈕（解釋已整合到選項中）
     document.getElementById('next-button-container').classList.add('hidden');
 }
 
@@ -276,15 +385,15 @@ function selectOption(selectedIndex, isCorrect) {
         if (question.options[index].correct) {
             btn.classList.add('correct');
             btn.classList.remove('border-gray-200', 'dark:border-gray-600');
+            // 為正確答案顯示解釋
+            btn.classList.add('show-explanation');
         } else if (index === selectedIndex && !isCorrect) {
             btn.classList.add('incorrect');
             btn.classList.remove('border-gray-200', 'dark:border-gray-600');
         }
     });
 
-    // 顯示解釋
-    document.getElementById('explanation-text').textContent = question.explanation;
-    document.getElementById('explanation').classList.remove('hidden');
+    // 解釋已整合到選項中
 
     // 顯示下一題按鈕或完成按鈕
     const nextButtonContainer = document.getElementById('next-button-container');
