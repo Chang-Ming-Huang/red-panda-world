@@ -377,6 +377,7 @@
     }
 
     .option-btn {
+        width: 100%;
         background: rgba(255, 255, 255, 0.9);
         border: 2px solid var(--organic-sand);
         border-radius: 18px;
@@ -454,6 +455,69 @@
         font-size: 16px;
         color: var(--organic-dark);
         line-height: 1.7;
+    }
+
+    /* 獨立解說區塊 */
+    .explanation-section {
+        margin: 2rem 0;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .explanation-section:not(.hidden) {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .explanation-section .explanation-card {
+        background: rgba(255, 255, 255, 0.95);
+        border: 2px solid var(--organic-accent);
+        border-radius: 20px;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(140, 86, 75, 0.2);
+    }
+
+    .explanation-section .explanation-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--organic-accent), var(--organic-accent-light));
+        border-radius: 20px 20px 0 0;
+    }
+
+    .explanation-section .explanation-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--organic-accent);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        font-family: 'Georgia', serif;
+    }
+
+    .explanation-section .explanation-title::before {
+        content: '🌿';
+        margin-right: 8px;
+        animation: organicBreathe 3s ease-in-out infinite;
+    }
+
+    .explanation-section .explanation-text {
+        font-size: 16px;
+        color: var(--organic-dark);
+        line-height: 1.7;
+        font-family: 'Georgia', serif;
+    }
+
+    @keyframes organicBreathe {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
     }
 
     .next-button-container {
@@ -795,6 +859,14 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 獨立答案解說區塊 -->
+            <div id="explanation-section" class="explanation-section hidden">
+                <div class="explanation-card">
+                    <div class="explanation-title">🌿 答案解說</div>
+                    <div id="explanation-text" class="explanation-text"></div>
+                </div>
+            </div>
         </div>
 
         <!-- Quiz Footer: 下一題按鈕 -->
@@ -913,20 +985,15 @@ function showQuestion() {
         optionButton.textContent = option.text;
         optionButton.onclick = () => selectOption(index, option.correct);
 
-        // 添加解釋區域（只在正確答案顯示）
-        if (option.correct) {
-            const explanationDiv = document.createElement('div');
-            explanationDiv.className = 'option-explanation';
-            explanationDiv.textContent = question.explanation;
-            optionButton.appendChild(explanationDiv);
-        }
+        // 不再添加內嵌解釋區域
 
         optionWrapper.appendChild(optionButton);
         optionsContainer.appendChild(optionWrapper);
     });
 
-    // 隱藏下一題按鈕（解釋已整合到選項中）
+    // 隱藏下一題按鈕和解說區塊
     document.getElementById('next-button-container').classList.add('hidden');
+    document.getElementById('explanation-section').classList.add('hidden');
 }
 
 // 選擇選項
@@ -950,14 +1017,16 @@ function selectOption(selectedIndex, isCorrect) {
 
         if (question.options[index].correct) {
             btn.classList.add('correct');
-            // 為正確答案顯示解釋
-            btn.classList.add('show-explanation');
         } else if (index === selectedIndex && !isCorrect) {
             btn.classList.add('incorrect');
         }
     });
 
-    // 解釋已整合到選項中
+    // 顯示獨立解說區塊
+    const explanationSection = document.getElementById('explanation-section');
+    const explanationText = document.getElementById('explanation-text');
+    explanationText.textContent = question.explanation;
+    explanationSection.classList.remove('hidden');
 
     // 顯示下一題按鈕或完成按鈕
     const nextButtonContainer = document.getElementById('next-button-container');

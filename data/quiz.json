@@ -9,7 +9,7 @@
     {
       "id": 1,
       "category": "appearance",
-      "question": "哪個亞種的體型較大？",
+      "question": "誰的體型較大？",
       "explanation": "中華小熊貓的體重為4.2-6.2kg，比喜馬拉雅小熊貓（3.0-4.8kg）大20-25%",
       "options": [
         {
@@ -27,7 +27,7 @@
     {
       "id": 2,
       "category": "appearance",
-      "question": "哪個亞種的毛色是深紅棕色？",
+      "question": "誰的毛色是深紅棕色？",
       "explanation": "中華小熊貓具有深紅棕色的毛皮，而喜馬拉雅小熊貓的毛色是淺金紅色",
       "options": [
         {
@@ -45,7 +45,7 @@
     {
       "id": 3,
       "category": "appearance",
-      "question": "哪個亞種的尾巴環紋較清晰且較多？",
+      "question": "誰的尾巴環紋較清晰且較多？",
       "explanation": "中華小熊貓有7-9個清晰的尾環，喜馬拉雅小熊貓只有5-7個較模糊的尾環",
       "options": [
         {
@@ -99,7 +99,7 @@
     {
       "id": 6,
       "category": "behavior",
-      "question": "哪個亞種的領域性較強？",
+      "question": "誰的領域性較強？",
       "explanation": "中華小熊貓具有較強的領域性，而喜馬拉雅小熊貓相對較為寬容",
       "options": [
         {
@@ -135,7 +135,7 @@
     {
       "id": 8,
       "category": "behavior",
-      "question": "哪個亞種的攀爬風格較為敏捷？",
+      "question": "誰的攀爬風格較為敏捷？",
       "explanation": "喜馬拉雅小熊貓採用敏捷型攀爬，中華小熊貓採用謹慎型攀爬",
       "options": [
         {

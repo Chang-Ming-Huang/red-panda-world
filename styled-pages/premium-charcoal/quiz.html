@@ -598,6 +598,7 @@
     }
 
     .option-btn {
+        width: 100%;
         background: var(--charcoal-medium);
         border: 1px solid var(--charcoal-gray);
         border-radius: 10px;
@@ -732,6 +733,62 @@
     }
 
     .explanation-text {
+        font-size: 15px;
+        color: var(--charcoal-white);
+        line-height: 1.6;
+    }
+
+    /* 獨立解說區塊 */
+    .explanation-section {
+        margin: 2rem 0;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s ease;
+    }
+
+    .explanation-section:not(.hidden) {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .explanation-section .explanation-card {
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+        border: 1px solid var(--charcoal-accent);
+        border-radius: 12px;
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .explanation-section .explanation-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--charcoal-accent);
+        border-radius: 12px 12px 0 0;
+    }
+
+    .explanation-section .explanation-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--charcoal-accent);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .explanation-section .explanation-title::before {
+        content: '◉';
+        margin-right: 8px;
+        animation: statusPulse 2s ease-in-out infinite;
+    }
+
+    .explanation-section .explanation-text {
         font-size: 15px;
         color: var(--charcoal-white);
         line-height: 1.6;
@@ -1190,7 +1247,13 @@
                 </div>
             </div>
 
-            <!-- 答案解釋已整合到選項中 -->
+            <!-- 獨立答案解說區塊 -->
+            <div id="explanation-section" class="explanation-section hidden">
+                <div class="explanation-card">
+                    <div class="explanation-title">ANSWER ANALYSIS</div>
+                    <div id="explanation-text" class="explanation-text"></div>
+                </div>
+            </div>
         </div>
 
         <!-- Quiz Footer: 下一題按鈕 -->
@@ -1308,20 +1371,15 @@ function showQuestion() {
         optionButton.textContent = option.text;
         optionButton.onclick = () => selectOption(index, option.correct);
 
-        // 添加解釋區域（只在正確答案顯示）
-        if (option.correct) {
-            const explanationDiv = document.createElement('div');
-            explanationDiv.className = 'option-explanation';
-            explanationDiv.textContent = question.explanation;
-            optionButton.appendChild(explanationDiv);
-        }
+        // 不再添加內嵌解釋區域
 
         optionWrapper.appendChild(optionButton);
         optionsContainer.appendChild(optionWrapper);
     });
 
-    // 隱藏下一題按鈕（解釋已整合到選項中）
+    // 隱藏下一題按鈕和解說區塊
     document.getElementById('next-button-container').classList.add('hidden');
+    document.getElementById('explanation-section').classList.add('hidden');
 }
 
 // 選擇選項
@@ -1345,12 +1403,16 @@ function selectOption(selectedIndex, isCorrect) {
 
         if (question.options[index].correct) {
             btn.classList.add('correct');
-            // 為正確答案顯示解釋
-            btn.classList.add('show-explanation');
         } else if (index === selectedIndex && !isCorrect) {
             btn.classList.add('incorrect');
         }
     });
+
+    // 顯示獨立解說區塊
+    const explanationSection = document.getElementById('explanation-section');
+    const explanationText = document.getElementById('explanation-text');
+    explanationText.textContent = question.explanation;
+    explanationSection.classList.remove('hidden');
 
     // 顯示下一題按鈕或完成按鈕
     const nextButtonContainer = document.getElementById('next-button-container');
