@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小熊貓圖片藝廊 - 小熊貓世界</title>
+<style>
+    :root {
+        --flow-sage: #9caf88;
+        --flow-moss: #7a8b6c;
+        --flow-cream: #f7f5f1;
+        --flow-sand: #ede7db;
+        --flow-earth: #8b7355;
+        --flow-bark: #6b4e3d;
+        --flow-forest: #3e4a3a;
+        --red-panda-orange: #ec6d13;
+        --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+        background: var(--flow-cream);
+        color: var(--flow-forest);
+        line-height: 1.7;
+        overflow-x: hidden;
+        padding-bottom: calc(120px + var(--mobile-safe-bottom));
+        min-height: 100vh;
+        font-weight: 400;
+    }
+
+    /* 有機流動背景 */
+    .flow-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+    }
+
+    .flow-shape {
+        position: absolute;
+        background: var(--flow-sage);
+        opacity: 0.1;
+        border-radius: 50% 40% 60% 30%;
+    }
+
+    .flow-shape:nth-child(1) {
+        width: 300px;
+        height: 200px;
+        top: 15%;
+        right: -5%;
+        animation: flowFloat 25s infinite ease-in-out;
+        transform: rotate(15deg);
+    }
+
+    .flow-shape:nth-child(2) {
+        width: 250px;
+        height: 180px;
+        bottom: 20%;
+        left: -8%;
+        background: var(--flow-moss);
+        animation: flowFloat 30s infinite ease-in-out reverse;
+        transform: rotate(-20deg);
+    }
+
+    .flow-shape:nth-child(3) {
+        width: 180px;
+        height: 140px;
+        top: 50%;
+        left: 50%;
+        background: var(--flow-earth);
+        opacity: 0.08;
+        animation: flowFloat 35s infinite ease-in-out;
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    @keyframes flowFloat {
+        0%, 100% {
+            transform: translate(0, 0) rotate(0deg) scale(1);
+        }
+        33% {
+            transform: translate(-20px, -15px) rotate(5deg) scale(1.05);
+        }
+        66% {
+            transform: translate(15px, -25px) rotate(-3deg) scale(0.95);
+        }
+    }
+
+    /* Header */
+    .flow-header {
+        text-align: center;
+        padding: 4rem 2rem 3rem;
+        position: relative;
+    }
+
+    .flow-title {
+        font-size: 2.5rem;
+        font-weight: 500;
+        color: var(--flow-forest);
+        margin-bottom: 1rem;
+        letter-spacing: 0.02em;
+    }
+
+    .flow-subtitle {
+        font-size: 1.1rem;
+        color: var(--flow-moss);
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+    }
+
+    /* Main Container */
+    .flow-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* Loading */
+    .flow-loading {
+        text-align: center;
+        padding: 4rem 0;
+    }
+
+    .flow-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid var(--flow-sand);
+        border-top: 3px solid var(--red-panda-orange);
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        animation: spin 1.5s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Gallery Grid */
+    .flow-gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    @media (max-width: 640px) {
+        .flow-gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+    }
+
+    .flow-gallery-item {
+        aspect-ratio: 1;
+        overflow: hidden;
+        border-radius: 25px;
+        border: 3px solid var(--flow-sage);
+        background: var(--flow-sand);
+        transition: all 0.3s ease;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .flow-gallery-item:hover {
+        transform: scale(1.03) rotate(1deg);
+        border-color: var(--red-panda-orange);
+        box-shadow: 0 8px 25px rgba(156, 175, 136, 0.3);
+    }
+
+    .flow-gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.3s ease;
+        filter: sepia(10%) contrast(1.05) brightness(1.02);
+    }
+
+    .flow-gallery-item:hover img {
+        transform: scale(1.05) rotate(-1deg);
+        filter: sepia(20%) contrast(1.1) brightness(1.05);
+    }
+
+    /* Placeholder Cards */
+    .flow-placeholder {
+        background: linear-gradient(135deg, var(--flow-sage), var(--flow-moss));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border: 3px solid var(--flow-sage);
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+
+    .flow-placeholder:hover {
+        transform: scale(1.03) rotate(-1deg);
+        border-color: var(--red-panda-orange);
+        background: linear-gradient(135deg, var(--red-panda-orange), var(--flow-sage));
+    }
+
+    .flow-placeholder-content {
+        padding: 2rem;
+    }
+
+    .flow-placeholder-icon {
+        width: 48px;
+        height: 48px;
+        margin: 0 auto 1rem;
+        color: var(--flow-cream);
+        opacity: 0.8;
+    }
+
+    .flow-placeholder-title {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: var(--flow-cream);
+        margin-bottom: 0.5rem;
+    }
+
+    .flow-placeholder-desc {
+        font-size: 0.9rem;
+        color: var(--flow-cream);
+        opacity: 0.8;
+    }
+
+    /* About Section */
+    .flow-about {
+        margin: 4rem 0;
+        text-align: center;
+    }
+
+    .flow-about-title {
+        font-size: 2rem;
+        font-weight: 500;
+        color: var(--flow-forest);
+        margin-bottom: 3rem;
+        letter-spacing: 0.02em;
+    }
+
+    .flow-about-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .flow-about-card {
+        background: var(--flow-sand);
+        border: 2px solid var(--flow-sage);
+        border-radius: 25px;
+        padding: 2.5rem 2rem;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .flow-about-card::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: 1.5rem;
+        right: 1.5rem;
+        height: 4px;
+        background: var(--red-panda-orange);
+        border-radius: 0 0 8px 8px;
+    }
+
+    .flow-about-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(156, 175, 136, 0.3);
+        border-color: var(--red-panda-orange);
+    }
+
+    .flow-about-card-title {
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: var(--flow-forest);
+        margin-bottom: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    .flow-about-card-desc {
+        font-size: 1rem;
+        color: var(--flow-moss);
+        line-height: 1.6;
+    }
+
+    /* Fade in animation */
+    .flow-fade-in {
+        animation: flowFadeIn 0.8s ease-out;
+    }
+
+    @keyframes flowFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    /* Hidden state */
+    .hidden {
+        display: none !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .flow-container {
+            padding: 0 1rem;
+        }
+
+        .flow-header {
+            padding: 3rem 1rem 2rem;
+        }
+
+        .flow-title {
+            font-size: 2rem;
+        }
+
+        .flow-subtitle {
+            font-size: 1rem;
+        }
+
+        .flow-about-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .flow-about-card {
+            padding: 2rem 1.5rem;
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- 有機流動背景 -->
+    <div class="flow-bg">
+        <div class="flow-shape"></div>
+        <div class="flow-shape"></div>
+        <div class="flow-shape"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="flow-header">
+        <h1 class="flow-title">小熊貓圖片藝廊</h1>
+        <p class="flow-subtitle">欣賞可愛小熊貓的美麗瞬間，感受這些森林精靈的魅力</p>
+    </header>
+
+    <div class="flow-container">
+        <!-- Loading -->
+        <div id="loading" class="flow-loading">
+            <div class="flow-spinner"></div>
+            <p>載入中...</p>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div id="gallery-grid" class="flow-gallery-grid hidden">
+            <!-- Real Images -->
+            <div class="flow-gallery-item">
+                <img src="../../images/red-panda.jpg" alt="可愛的小熊貓" loading="lazy">
+            </div>
+            <div class="flow-gallery-item">
+                <img src="../../images/chinese-red-panda.webp" alt="中華小熊貓" loading="lazy">
+            </div>
+            <div class="flow-gallery-item">
+                <img src="../../images/himalayan-red-panda.webp" alt="喜馬拉雅小熊貓" loading="lazy">
+            </div>
+
+            <!-- Placeholder Cards -->
+            <div class="flow-placeholder flow-gallery-item">
+                <div class="flow-placeholder-content">
+                    <svg class="flow-placeholder-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                    </svg>
+                    <p class="flow-placeholder-title">更多圖片</p>
+                    <p class="flow-placeholder-desc">即將上線</p>
+                </div>
+            </div>
+
+            <div class="flow-placeholder flow-gallery-item">
+                <div class="flow-placeholder-content">
+                    <svg class="flow-placeholder-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p class="flow-placeholder-title">棲息地</p>
+                    <p class="flow-placeholder-desc">生態環境</p>
+                </div>
+            </div>
+
+            <div class="flow-placeholder flow-gallery-item">
+                <div class="flow-placeholder-content">
+                    <svg class="flow-placeholder-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                    </svg>
+                    <p class="flow-placeholder-title">保護行動</p>
+                    <p class="flow-placeholder-desc">愛護生態</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <section class="flow-about">
+            <h2 class="flow-about-title">關於小熊貓</h2>
+            <div class="flow-about-grid">
+                <div class="flow-about-card">
+                    <h3 class="flow-about-card-title">外觀特徵</h3>
+                    <p class="flow-about-card-desc">
+                        紅棕色毛皮、環狀尾巴、圓耳朵，是森林中最可愛的動物之一
+                    </p>
+                </div>
+                <div class="flow-about-card">
+                    <h3 class="flow-about-card-title">生活習性</h3>
+                    <p class="flow-about-card-desc">
+                        主要生活在樹上，擅長攀爬，以竹葉和果實為主要食物
+                    </p>
+                </div>
+                <div class="flow-about-card">
+                    <h3 class="flow-about-card-title">保護狀況</h3>
+                    <p class="flow-about-card-desc">
+                        被列為易危物種，全球野生數量約2500隻，需要我們的保護
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Navigation Container -->
+    <div id="navbar-container"></div>
+
+    <script>
+    // 載入完成後顯示圖片
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('gallery-grid').classList.remove('hidden');
+            document.getElementById('gallery-grid').classList.add('flow-fade-in');
+        }, 500);
+    });
+    </script>
+
+    <script src="assets/js/navbar.js"></script>
+</body>
+</html>

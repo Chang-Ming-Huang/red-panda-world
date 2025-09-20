@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小熊貓圖片藝廊 - 小熊貓世界</title>
+<style>
+    :root {
+        --neon-night: #0a0f1c;
+        --neon-pink: #ff1744;
+        --neon-cyan: #00e5ff;
+        --neon-white: #ffffff;
+        --neon-gray: #1a1f2e;
+        --neon-dark: #0d1117;
+        --neon-glow-pink: rgba(255, 23, 68, 0.6);
+        --neon-glow-cyan: rgba(0, 229, 255, 0.6);
+        --neon-orange: #ec6d13;
+        --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+        background: var(--neon-night);
+        color: var(--neon-white);
+        line-height: 1.5;
+        overflow-x: hidden;
+        padding-bottom: calc(120px + var(--mobile-safe-bottom));
+        min-height: 100vh;
+        position: relative;
+    }
+
+    /* 霓虹城市背景 */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:
+            radial-gradient(ellipse at 20% 20%, rgba(255, 23, 68, 0.12) 0%, transparent 60%),
+            radial-gradient(ellipse at 80% 80%, rgba(0, 229, 255, 0.08) 0%, transparent 60%),
+            linear-gradient(180deg, var(--neon-night) 0%, var(--neon-dark) 100%);
+        z-index: -2;
+    }
+
+    /* 賽博朋克網格 */
+    .cyber-grid {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:
+            linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(0deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+        background-size: 30px 30px;
+        z-index: -1;
+        animation: cyber-pulse 6s ease-in-out infinite;
+    }
+
+    @keyframes cyber-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+
+    /* Header */
+    .neon-header {
+        text-align: center;
+        padding: 4rem 2rem 3rem;
+        position: relative;
+    }
+
+    .neon-title {
+        font-size: 2.5rem;
+        font-weight: 300;
+        color: var(--neon-white);
+        margin-bottom: 1rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        text-shadow:
+            0 0 10px var(--neon-cyan),
+            0 0 20px var(--neon-cyan),
+            0 0 40px var(--neon-cyan);
+        animation: neon-flicker 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes neon-flicker {
+        0%, 100% {
+            text-shadow:
+                0 0 10px var(--neon-cyan),
+                0 0 20px var(--neon-cyan),
+                0 0 40px var(--neon-cyan);
+        }
+        50% {
+            text-shadow:
+                0 0 5px var(--neon-cyan),
+                0 0 10px var(--neon-cyan),
+                0 0 20px var(--neon-cyan);
+        }
+    }
+
+    .neon-subtitle {
+        font-size: 1.1rem;
+        color: var(--neon-pink);
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        text-shadow:
+            0 0 5px var(--neon-pink),
+            0 0 10px var(--neon-pink);
+        letter-spacing: 1px;
+    }
+
+    /* Main Container */
+    .neon-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Loading */
+    .neon-loading {
+        text-align: center;
+        padding: 4rem 0;
+    }
+
+    .neon-spinner {
+        width: 40px;
+        height: 40px;
+        border: 2px solid rgba(0, 229, 255, 0.2);
+        border-top: 2px solid var(--neon-pink);
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        animation: neonSpin 1s linear infinite;
+    }
+
+    @keyframes neonSpin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Gallery Grid */
+    .neon-gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    @media (max-width: 640px) {
+        .neon-gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+    }
+
+    .neon-gallery-item {
+        aspect-ratio: 1;
+        overflow: hidden;
+        border-radius: 16px;
+        border: 2px solid rgba(0, 229, 255, 0.3);
+        background: rgba(26, 31, 46, 0.9);
+        transition: all 0.3s ease;
+        position: relative;
+        cursor: pointer;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+    }
+
+    .neon-gallery-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+        animation: neon-scan 2s linear infinite;
+        z-index: 2;
+    }
+
+    @keyframes neon-scan {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    .neon-gallery-item:hover {
+        transform: translateY(-4px) scale(1.02);
+        border-color: var(--neon-pink);
+        box-shadow:
+            0 0 30px rgba(255, 23, 68, 0.4),
+            0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .neon-gallery-item:hover::before {
+        background: var(--neon-pink);
+        box-shadow: 0 0 20px rgba(255, 23, 68, 0.8);
+    }
+
+    .neon-gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.3s ease;
+        filter: contrast(1.1) saturate(1.2);
+        margin-top: 2px;
+    }
+
+    .neon-gallery-item:hover img {
+        transform: scale(1.05);
+        filter: contrast(1.2) saturate(1.3) brightness(1.1);
+    }
+
+    /* Placeholder Cards */
+    .neon-placeholder {
+        background: rgba(13, 17, 23, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border: 2px solid rgba(0, 229, 255, 0.3);
+        border-radius: 16px;
+        transition: all 0.3s ease;
+        position: relative;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+    }
+
+    .neon-placeholder::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+        animation: neon-scan 3s linear infinite;
+    }
+
+    .neon-placeholder:hover {
+        transform: translateY(-4px) scale(1.02);
+        border-color: var(--neon-cyan);
+        box-shadow:
+            0 0 30px rgba(0, 229, 255, 0.4),
+            0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .neon-placeholder:hover::before {
+        background: var(--neon-cyan);
+        box-shadow: 0 0 20px rgba(0, 229, 255, 0.8);
+    }
+
+    .neon-placeholder-content {
+        padding: 2rem;
+        margin-top: 2px;
+    }
+
+    .neon-placeholder-icon {
+        width: 48px;
+        height: 48px;
+        margin: 0 auto 1rem;
+        color: var(--neon-cyan);
+        filter: drop-shadow(0 0 10px var(--neon-cyan));
+    }
+
+    .neon-placeholder-title {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: var(--neon-white);
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 0 0 10px var(--neon-white);
+    }
+
+    .neon-placeholder-desc {
+        font-size: 0.9rem;
+        color: var(--neon-cyan);
+        opacity: 0.8;
+        text-shadow: 0 0 5px var(--neon-cyan);
+    }
+
+    /* About Section */
+    .neon-about {
+        margin: 4rem 0;
+        text-align: center;
+    }
+
+    .neon-about-title {
+        font-size: 2rem;
+        font-weight: 300;
+        color: var(--neon-white);
+        margin-bottom: 3rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        text-shadow:
+            0 0 10px var(--neon-pink),
+            0 0 20px var(--neon-pink);
+        animation: neon-glow 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes neon-glow {
+        0%, 100% {
+            text-shadow:
+                0 0 10px var(--neon-pink),
+                0 0 20px var(--neon-pink);
+        }
+        50% {
+            text-shadow:
+                0 0 5px var(--neon-pink),
+                0 0 15px var(--neon-pink),
+                0 0 25px var(--neon-pink);
+        }
+    }
+
+    .neon-about-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .neon-about-card {
+        background: rgba(26, 31, 46, 0.9);
+        border: 2px solid rgba(0, 229, 255, 0.3);
+        border-radius: 16px;
+        padding: 2.5rem 2rem;
+        position: relative;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+    }
+
+    .neon-about-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+        border-radius: 16px 16px 0 0;
+    }
+
+    .neon-about-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--neon-pink);
+        box-shadow:
+            0 0 30px rgba(255, 23, 68, 0.3),
+            0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .neon-about-card:hover::before {
+        background: var(--neon-pink);
+        box-shadow: 0 0 20px rgba(255, 23, 68, 0.6);
+    }
+
+    .neon-about-card-title {
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: var(--neon-cyan);
+        margin-bottom: 1rem;
+        margin-top: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 0 0 10px var(--neon-cyan);
+    }
+
+    .neon-about-card-desc {
+        font-size: 1rem;
+        color: var(--neon-white);
+        line-height: 1.6;
+        opacity: 0.9;
+    }
+
+    /* Glitch effect */
+    .glitch-text {
+        position: relative;
+    }
+
+    .glitch-text::before,
+    .glitch-text::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .glitch-text::before {
+        animation: glitch-1 0.5s infinite linear alternate-reverse;
+        color: var(--neon-pink);
+        z-index: -1;
+    }
+
+    .glitch-text::after {
+        animation: glitch-2 0.5s infinite linear alternate-reverse;
+        color: var(--neon-cyan);
+        z-index: -2;
+    }
+
+    @keyframes glitch-1 {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-2px); }
+    }
+
+    @keyframes glitch-2 {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(2px); }
+    }
+
+    /* Fade in animation */
+    .neon-fade-in {
+        animation: neonFadeIn 0.8s ease-out;
+    }
+
+    @keyframes neonFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            filter: blur(2px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+    }
+
+    /* Hidden state */
+    .hidden {
+        display: none !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .neon-container {
+            padding: 0 1rem;
+        }
+
+        .neon-header {
+            padding: 3rem 1rem 2rem;
+        }
+
+        .neon-title {
+            font-size: 2rem;
+        }
+
+        .neon-subtitle {
+            font-size: 1rem;
+        }
+
+        .neon-about-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .neon-about-card {
+            padding: 2rem 1.5rem;
+        }
+    }
+
+    /* 無障礙支援 */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01s !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01s !important;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="cyber-grid"></div>
+
+    <!-- Header -->
+    <header class="neon-header">
+        <h1 class="neon-title glitch-text" data-text="NEON GALLERY">NEON GALLERY</h1>
+        <p class="neon-subtitle">欣賞可愛小熊貓的美麗瞬間，感受這些森林精靈的魅力</p>
+    </header>
+
+    <div class="neon-container">
+        <!-- Loading -->
+        <div id="loading" class="neon-loading">
+            <div class="neon-spinner"></div>
+            <p>載入中...</p>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div id="gallery-grid" class="neon-gallery-grid hidden">
+            <!-- Real Images -->
+            <div class="neon-gallery-item">
+                <img src="../../images/red-panda.jpg" alt="可愛的小熊貓" loading="lazy">
+            </div>
+            <div class="neon-gallery-item">
+                <img src="../../images/chinese-red-panda.webp" alt="中華小熊貓" loading="lazy">
+            </div>
+            <div class="neon-gallery-item">
+                <img src="../../images/himalayan-red-panda.webp" alt="喜馬拉雅小熊貓" loading="lazy">
+            </div>
+
+            <!-- Placeholder Cards -->
+            <div class="neon-placeholder neon-gallery-item">
+                <div class="neon-placeholder-content">
+                    <svg class="neon-placeholder-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                    </svg>
+                    <p class="neon-placeholder-title">更多圖片</p>
+                    <p class="neon-placeholder-desc">即將上線</p>
+                </div>
+            </div>
+
+            <div class="neon-placeholder neon-gallery-item">
+                <div class="neon-placeholder-content">
+                    <svg class="neon-placeholder-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p class="neon-placeholder-title">棲息地</p>
+                    <p class="neon-placeholder-desc">生態環境</p>
+                </div>
+            </div>
+
+            <div class="neon-placeholder neon-gallery-item">
+                <div class="neon-placeholder-content">
+                    <svg class="neon-placeholder-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                    </svg>
+                    <p class="neon-placeholder-title">保護行動</p>
+                    <p class="neon-placeholder-desc">愛護生態</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <section class="neon-about">
+            <h2 class="neon-about-title">DATA ANALYSIS</h2>
+            <div class="neon-about-grid">
+                <div class="neon-about-card">
+                    <h3 class="neon-about-card-title">外觀特徵</h3>
+                    <p class="neon-about-card-desc">
+                        紅棕色毛皮、環狀尾巴、圓耳朵，是森林中最可愛的動物之一
+                    </p>
+                </div>
+                <div class="neon-about-card">
+                    <h3 class="neon-about-card-title">生活習性</h3>
+                    <p class="neon-about-card-desc">
+                        主要生活在樹上，擅長攀爬，以竹葉和果實為主要食物
+                    </p>
+                </div>
+                <div class="neon-about-card">
+                    <h3 class="neon-about-card-title">保護狀況</h3>
+                    <p class="neon-about-card-desc">
+                        被列為易危物種，全球野生數量約2500隻，需要我們的保護
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Navigation Container -->
+    <div id="navbar-container"></div>
+
+    <script>
+    // 載入完成後顯示圖片
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('gallery-grid').classList.remove('hidden');
+            document.getElementById('gallery-grid').classList.add('neon-fade-in');
+        }, 500);
+    });
+    </script>
+
+    <script src="assets/js/navbar.js"></script>
+</body>
+</html>

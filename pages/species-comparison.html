@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小熊貓vs其他物種 - 物種比較</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#ec6d13",
+                    "background-light": "#f8f7f6",
+                    "background-dark": "#221810",
+                },
+                fontFamily: {
+                    "display": ["Epilogue"]
+                },
+                borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                animation: {
+                    'fade-in': 'fadeIn 0.5s ease-in-out',
+                    'slide-up': 'slideUp 0.3s ease-out',
+                }
+            },
+        },
+    }
+</script>
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    body {
+        min-height: max(884px, 100dvh);
+    }
+    .tab-content > div {
+        display: none;
+    }
+    .tab-content > div.active {
+        display: block;
+        animation: fade-in 0.3s ease-in-out;
+    }
+    .chart-bar {
+        transition: width 0.8s ease-out;
+    }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-background-dark dark:text-background-light">
+<div class="relative flex min-h-screen w-full flex-col justify-between overflow-x-hidden">
+<div class="flex-grow">
+
+<!-- Header -->
+<header class="sticky top-0 z-10 flex items-center justify-between bg-background-light/80 p-4 pb-3 backdrop-blur-sm dark:bg-background-dark/80">
+<button onclick="history.back()" class="text-background-dark dark:text-background-light hover:text-primary transition-colors">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+</svg>
+</button>
+<h1 class="text-lg font-bold">物種比較</h1>
+<div class="w-6"></div>
+</header>
+
+<main class="p-4">
+    <!-- 載入提示 -->
+    <div id="loading" class="text-center py-8">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        <p class="mt-2 text-sm">載入中...</p>
+    </div>
+
+    <!-- 主要內容 -->
+    <div id="main-content" class="hidden">
+        <!-- Tab 按鈕 -->
+        <div class="flex justify-around mb-6 overflow-x-auto">
+            <button class="tab-btn active px-3 py-2 rounded-lg bg-primary text-white font-semibold transition-all duration-200 hover:bg-primary/90 text-sm whitespace-nowrap" data-tab="overview">總覽</button>
+            <button class="tab-btn px-3 py-2 rounded-lg text-background-dark dark:text-background-light font-semibold hover:bg-primary/10 transition-all duration-200 text-sm whitespace-nowrap" data-tab="physical">體型</button>
+            <button class="tab-btn px-3 py-2 rounded-lg text-background-dark dark:text-background-light font-semibold hover:bg-primary/10 transition-all duration-200 text-sm whitespace-nowrap" data-tab="habitat">棲息地</button>
+            <button class="tab-btn px-3 py-2 rounded-lg text-background-dark dark:text-background-light font-semibold hover:bg-primary/10 transition-all duration-200 text-sm whitespace-nowrap" data-tab="diet">飲食</button>
+        </div>
+
+        <!-- Tab 內容 -->
+        <div class="tab-content">
+            <!-- 總覽標籤 -->
+            <div id="overview" class="active">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold mb-4 text-center text-primary">小熊貓 vs 其他動物</h2>
+                    <p class="text-center text-background-dark/70 dark:text-background-light/70 mb-6">
+                        探索小熊貓與大熊貓、浣熊、狐狸之間的異同
+                    </p>
+                </div>
+
+                <!-- 動物卡片網格 -->
+                <div id="animals-grid" class="grid grid-cols-2 gap-4 mb-6">
+                    <!-- 動物卡片會動態插入 -->
+                </div>
+
+                <!-- 重點比較 -->
+                <div class="bg-white dark:bg-zinc-800/20 rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-bold mb-4">🎯 重點比較</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium">體型最大：</span>
+                            <span id="largest-animal" class="text-primary font-bold"></span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium">攀爬最佳：</span>
+                            <span id="best-climber" class="text-primary font-bold"></span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium">最瀕危：</span>
+                            <span id="most-endangered" class="text-red-600 font-bold"></span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-medium">最雜食：</span>
+                            <span id="most-omnivorous" class="text-green-600 font-bold"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 體型標籤 -->
+            <div id="physical">
+                <section class="rounded-xl overflow-hidden bg-white dark:bg-zinc-800/20 mb-6 shadow-lg">
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold mb-4 text-primary">體型比較</h2>
+
+                        <!-- 重量比較 -->
+                        <div class="mb-6">
+                            <h3 class="font-semibold mb-3">體重 (公斤)</h3>
+                            <div id="weight-chart" class="space-y-3">
+                                <!-- 重量圖表會動態插入 -->
+                            </div>
+                        </div>
+
+                        <!-- 體長比較 -->
+                        <div class="mb-6">
+                            <h3 class="font-semibold mb-3">身長 (公分)</h3>
+                            <div id="length-chart" class="space-y-3">
+                                <!-- 體長圖表會動態插入 -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 棲息地標籤 -->
+            <div id="habitat">
+                <section class="rounded-xl overflow-hidden bg-white dark:bg-zinc-800/20 mb-6 shadow-lg">
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold mb-4 text-primary">棲息地比較</h2>
+                        <div id="habitat-comparison" class="space-y-4">
+                            <!-- 棲息地比較會動態插入 -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 飲食標籤 -->
+            <div id="diet">
+                <section class="rounded-xl overflow-hidden bg-white dark:bg-zinc-800/20 mb-6 shadow-lg">
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold mb-4 text-primary">飲食習性比較</h2>
+                        <div id="diet-comparison" class="space-y-6">
+                            <!-- 飲食比較會動態插入 -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- 趣味知識 -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 mb-6">
+            <h3 class="text-lg font-bold mb-4 text-blue-800 dark:text-blue-300">🤔 你知道嗎？</h3>
+            <div id="fun-facts" class="space-y-3">
+                <!-- 趣味知識會動態插入 -->
+            </div>
+        </div>
+    </div>
+</main>
+</div>
+
+<div id="navbar-container"></div>
+</div>
+
+<script>
+// Tab 切換功能
+const tabButtons = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content > div');
+
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // 移除所有按鈕的 active 狀態
+        tabButtons.forEach(btn => {
+            btn.classList.remove('active', 'bg-primary', 'text-white');
+            btn.classList.add('text-background-dark', 'dark:text-background-light');
+        });
+        tabContents.forEach(content => content.classList.remove('active'));
+
+        // 設置當前按鈕為 active
+        button.classList.add('active', 'bg-primary', 'text-white');
+        button.classList.remove('text-background-dark', 'dark:text-background-light');
+
+        // 顯示對應內容
+        const targetTab = button.getAttribute('data-tab');
+        document.getElementById(targetTab).classList.add('active');
+    });
+});
+
+let animalsData = null;
+
+// 載入動物資料
+async function loadAnimalsData() {
+    try {
+        const response = await fetch('../data/animals.json');
+        animalsData = await response.json();
+
+        renderOverview();
+        renderPhysicalComparison();
+        renderHabitatComparison();
+        renderDietComparison();
+
+        // 隱藏載入提示，顯示主要內容
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('main-content').classList.remove('hidden');
+
+    } catch (error) {
+        console.error('載入數據失敗:', error);
+        document.getElementById('loading').innerHTML = '<p class="text-red-500">載入失敗，請重新整理頁面</p>';
+    }
+}
+
+function renderOverview() {
+    const animalsGrid = document.getElementById('animals-grid');
+    const animals = animalsData.animals;
+
+    animalsGrid.innerHTML = '';
+
+    animals.forEach(animal => {
+        const card = document.createElement('div');
+        card.className = 'bg-white dark:bg-zinc-800/20 rounded-lg p-4 shadow-lg text-center';
+
+        // 動物圖片映射
+        const imageMap = {
+            '小熊貓': '../images/red-panda.jpg',
+            '大熊貓': '../images/panda.jpg',
+            '浣熊': '../images/raccoon.jpg',
+            '狐狸': '../images/fox.jpg'
+        };
+
+        card.innerHTML = `
+            <img src="${imageMap[animal.name] || '../images/red-panda.jpg'}" alt="${animal.name}" class="w-full h-24 object-cover rounded-lg mb-3">
+            <h3 class="font-bold text-lg mb-1">${animal.name}</h3>
+            <p class="text-sm text-background-dark/70 dark:text-background-light/70 mb-2">${animal.scientific_name}</p>
+            <div class="text-xs space-y-1">
+                <p><span class="font-medium">重量:</span> ${animal.physical_characteristics.weight_kg}kg</p>
+                <p><span class="font-medium">棲息地:</span> ${animal.habitat.environment}</p>
+                <p><span class="font-medium">保育:</span> ${animal.conservation_status}</p>
+            </div>
+        `;
+
+        animalsGrid.appendChild(card);
+    });
+
+    // 填入比較資料
+    const summary = animalsData.comparison_summary;
+    document.getElementById('largest-animal').textContent = summary.size_order[0];
+    document.getElementById('best-climber').textContent = summary.climbing_ability_ranking[0];
+    document.getElementById('most-endangered').textContent = summary.conservation_concern.highest_risk;
+    document.getElementById('most-omnivorous').textContent = summary.diet_specialization.most_generalized;
+}
+
+function renderPhysicalComparison() {
+    const weightChart = document.getElementById('weight-chart');
+    const lengthChart = document.getElementById('length-chart');
+    const animals = animalsData.animals;
+
+    // 重量比較
+    weightChart.innerHTML = '';
+    const maxWeight = Math.max(...animals.map(a => parseFloat(a.physical_characteristics.weight_kg.split('-')[1] || a.physical_characteristics.weight_kg)));
+
+    animals.forEach(animal => {
+        const weight = parseFloat(animal.physical_characteristics.weight_kg.split('-')[1] || animal.physical_characteristics.weight_kg);
+        const percentage = (weight / maxWeight) * 100;
+
+        const bar = document.createElement('div');
+        bar.className = 'flex items-center space-x-3';
+        bar.innerHTML = `
+            <div class="w-16 text-sm font-medium">${animal.name}</div>
+            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-4 relative">
+                <div class="chart-bar bg-gradient-to-r from-primary to-orange-600 h-4 rounded-full" style="width: 0%"></div>
+            </div>
+            <div class="w-16 text-sm text-right">${animal.physical_characteristics.weight_kg}kg</div>
+        `;
+        weightChart.appendChild(bar);
+
+        // 動畫效果
+        setTimeout(() => {
+            bar.querySelector('.chart-bar').style.width = `${percentage}%`;
+        }, 200);
+    });
+
+    // 體長比較
+    lengthChart.innerHTML = '';
+    const maxLength = Math.max(...animals.map(a => parseFloat(a.physical_characteristics.body_length_cm.split('-')[1] || a.physical_characteristics.body_length_cm)));
+
+    animals.forEach(animal => {
+        const length = parseFloat(animal.physical_characteristics.body_length_cm.split('-')[1] || animal.physical_characteristics.body_length_cm);
+        const percentage = (length / maxLength) * 100;
+
+        const bar = document.createElement('div');
+        bar.className = 'flex items-center space-x-3';
+        bar.innerHTML = `
+            <div class="w-16 text-sm font-medium">${animal.name}</div>
+            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-4 relative">
+                <div class="chart-bar bg-gradient-to-r from-green-500 to-emerald-600 h-4 rounded-full" style="width: 0%"></div>
+            </div>
+            <div class="w-16 text-sm text-right">${animal.physical_characteristics.body_length_cm}cm</div>
+        `;
+        lengthChart.appendChild(bar);
+
+        // 動畫效果
+        setTimeout(() => {
+            bar.querySelector('.chart-bar').style.width = `${percentage}%`;
+        }, 400);
+    });
+}
+
+function renderHabitatComparison() {
+    const habitatComparison = document.getElementById('habitat-comparison');
+    const animals = animalsData.animals;
+
+    habitatComparison.innerHTML = '';
+
+    animals.forEach(animal => {
+        const card = document.createElement('div');
+        card.className = 'bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20 rounded-lg p-4';
+        card.innerHTML = `
+            <h3 class="font-bold text-lg mb-2">${animal.name}</h3>
+            <div class="grid grid-cols-2 gap-2 text-sm">
+                <div><span class="font-medium">分佈:</span> ${animal.habitat.geographic_range}</div>
+                <div><span class="font-medium">環境:</span> ${animal.habitat.environment}</div>
+                <div><span class="font-medium">海拔:</span> ${animal.habitat.altitude_m}m</div>
+                <div><span class="font-medium">氣候:</span> ${animal.habitat.climate}</div>
+            </div>
+        `;
+        habitatComparison.appendChild(card);
+    });
+}
+
+function renderDietComparison() {
+    const dietComparison = document.getElementById('diet-comparison');
+    const animals = animalsData.animals;
+
+    dietComparison.innerHTML = '';
+
+    animals.forEach(animal => {
+        const card = document.createElement('div');
+        card.className = 'bg-white dark:bg-zinc-800/20 rounded-lg p-4 border border-gray-200 dark:border-gray-700';
+
+        let dietDetails = '';
+        if (animal.diet.food_percentage) {
+            dietDetails = Object.entries(animal.diet.food_percentage)
+                .map(([food, percentage]) => `${food}: ${percentage}%`)
+                .join(', ');
+        }
+
+        card.innerHTML = `
+            <h3 class="font-bold text-lg mb-3">${animal.name}</h3>
+            <div class="space-y-2 text-sm">
+                <p><span class="font-medium">主食:</span> ${animal.diet.primary_food}</p>
+                <p><span class="font-medium">類型:</span> ${animal.diet.diet_type}</p>
+                ${dietDetails ? `<p><span class="font-medium">比例:</span> ${dietDetails}</p>` : ''}
+            </div>
+        `;
+        dietComparison.appendChild(card);
+    });
+}
+
+function renderFunFacts() {
+    const funFacts = document.getElementById('fun-facts');
+    const animals = animalsData.animals;
+
+    funFacts.innerHTML = '';
+
+    // 收集所有有趣事實
+    const allFacts = [];
+    animals.forEach(animal => {
+        if (animal.interesting_facts) {
+            animal.interesting_facts.forEach(fact => {
+                allFacts.push(`${animal.name}：${fact}`);
+            });
+        }
+    });
+
+    // 隨機選擇3個事實
+    const selectedFacts = allFacts.sort(() => 0.5 - Math.random()).slice(0, 3);
+
+    selectedFacts.forEach(fact => {
+        const factElement = document.createElement('p');
+        factElement.className = 'text-sm text-blue-800 dark:text-blue-300';
+        factElement.textContent = fact;
+        funFacts.appendChild(factElement);
+    });
+}
+
+// 頁面載入完成後執行
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadAnimalsData();
+    renderFunFacts();
+});
+</script>
+
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/navbar.js"></script>
+</body>
+</html>

@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小熊貓亞種比較</title>
+<style>
+    :root {
+        --tech-black: #0a0a0a;
+        --tech-dark: #1a1a1a;
+        --tech-gray: #2a2a2a;
+        --tech-light: #3a3a3a;
+        --tech-white: #ffffff;
+        --tech-silver: #e5e7eb;
+        --tech-accent: #ec6d13;
+        --tech-blue: #0066cc;
+        --tech-green: #00ff88;
+        --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+        background: var(--tech-black);
+        color: var(--tech-white);
+        line-height: 1.6;
+        overflow-x: hidden;
+        padding-bottom: calc(120px + var(--mobile-safe-bottom));
+        min-height: 100vh;
+        font-weight: 400;
+    }
+
+    /* 科技網格背景 */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 20px 20px;
+        z-index: -1;
+    }
+
+    /* 簡潔頂部裝飾線 */
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--tech-accent);
+        z-index: 100;
+    }
+
+    /* 狀態指示器 */
+    .status-indicator {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        display: flex;
+        gap: 0.5rem;
+        z-index: 1000;
+    }
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--tech-green);
+        animation: statusBlink 2s infinite;
+    }
+
+    .status-dot:nth-child(2) {
+        background: var(--tech-blue);
+        animation-delay: 0.5s;
+    }
+
+    .status-dot:nth-child(3) {
+        background: var(--tech-accent);
+        animation-delay: 1s;
+    }
+
+    @keyframes statusBlink {
+        0%, 50% {
+            opacity: 1;
+        }
+        51%, 100% {
+            opacity: 0.3;
+        }
+    }
+
+    /* Header */
+    .tech-header {
+        position: sticky;
+        top: 3px;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(26, 26, 26, 0.95);
+        backdrop-filter: blur(12px);
+        padding: 1rem;
+        border-bottom: 1px solid var(--tech-gray);
+    }
+
+    .tech-back-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--tech-gray);
+        background: var(--tech-dark);
+        color: var(--tech-white);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 8px;
+    }
+
+    .tech-back-btn:hover {
+        background: var(--tech-accent);
+        border-color: var(--tech-accent);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(236, 109, 19, 0.3);
+    }
+
+    .tech-header-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--tech-white);
+        letter-spacing: -0.02em;
+    }
+
+    .tech-spacer {
+        width: 40px;
+    }
+
+    /* Main Container */
+    .tech-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* Loading */
+    .tech-loading {
+        text-align: center;
+        padding: 4rem 0;
+    }
+
+    .tech-spinner {
+        width: 32px;
+        height: 32px;
+        border: 2px solid var(--tech-gray);
+        border-top: 2px solid var(--tech-accent);
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Tab Navigation */
+    .tech-tabs {
+        display: flex;
+        gap: 0.5rem;
+        margin: 2rem 0;
+        padding: 0.5rem;
+        background: var(--tech-dark);
+        border: 1px solid var(--tech-gray);
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .tech-tab {
+        flex: 1;
+        padding: 1rem 0.5rem;
+        background: transparent;
+        border: none;
+        color: var(--tech-silver);
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 8px;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .tech-tab.active {
+        background: var(--tech-accent);
+        color: var(--tech-white);
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(236, 109, 19, 0.3);
+    }
+
+    .tech-tab:not(.active):hover {
+        background: var(--tech-gray);
+        color: var(--tech-white);
+    }
+
+    .tech-tab:active {
+        transform: scale(0.95);
+    }
+
+    /* Content Sections */
+    .tech-content {
+        margin: 2rem 0;
+    }
+
+    .tech-section {
+        display: none;
+        animation: techFadeIn 0.3s ease-in-out;
+    }
+
+    .tech-section.active {
+        display: block;
+    }
+
+    @keyframes techFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px) scale(0.98);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .tech-card {
+        background: var(--tech-dark);
+        border: 1px solid var(--tech-gray);
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        position: relative;
+    }
+
+    .tech-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--tech-accent), var(--tech-blue), var(--tech-green));
+        border-radius: 12px 12px 0 0;
+    }
+
+    .tech-card-header {
+        padding: 2rem;
+        border-bottom: 1px solid var(--tech-gray);
+        margin-top: 3px;
+    }
+
+    .tech-card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--tech-white);
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.02em;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .tech-card-title::before {
+        content: '▲';
+        color: var(--tech-accent);
+        font-size: 0.8rem;
+    }
+
+    .tech-card-content {
+        padding: 2rem;
+    }
+
+    /* Image Grid */
+    .tech-image-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .tech-image-container {
+        position: relative;
+        aspect-ratio: 1;
+        overflow: hidden;
+        border: 1px solid var(--tech-gray);
+        border-radius: 8px;
+        background: var(--tech-black);
+    }
+
+    .tech-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.3s ease;
+        filter: contrast(1.1) brightness(0.95);
+    }
+
+    .tech-image:hover {
+        transform: scale(1.05);
+        filter: contrast(1.2) brightness(1.05);
+    }
+
+    /* Info Grid */
+    .tech-info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .tech-info-item {
+        background: var(--tech-gray);
+        padding: 2rem 1.5rem;
+        border-radius: 8px;
+        border: 1px solid var(--tech-light);
+        position: relative;
+    }
+
+    .tech-info-item::before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: 1rem;
+        right: 1rem;
+        height: 3px;
+        background: var(--tech-accent);
+        border-radius: 0 0 4px 4px;
+    }
+
+    .tech-info-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--tech-white);
+        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
+        letter-spacing: -0.01em;
+    }
+
+    .tech-info-subtitle {
+        font-size: 0.8rem;
+        color: var(--tech-silver);
+        margin-bottom: 1.5rem;
+        font-style: italic;
+        opacity: 0.8;
+    }
+
+    .tech-info-details {
+        space-y: 1rem;
+    }
+
+    .tech-info-row {
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--tech-light);
+    }
+
+    .tech-info-row:last-child {
+        border-bottom: none;
+    }
+
+    .tech-info-label {
+        font-weight: 500;
+        color: var(--tech-white);
+    }
+
+    .tech-info-value {
+        color: var(--tech-silver);
+        font-weight: 400;
+    }
+
+    /* Distribution Cards */
+    .tech-distribution-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .tech-distribution-card {
+        background: var(--tech-gray);
+        border: 1px solid var(--tech-light);
+        padding: 2rem;
+        border-radius: 8px;
+        position: relative;
+    }
+
+    .tech-distribution-card::before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: 1rem;
+        right: 1rem;
+        height: 3px;
+        background: var(--tech-blue);
+        border-radius: 0 0 4px 4px;
+    }
+
+    .tech-distribution-title {
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        margin-top: 0.5rem;
+        color: var(--tech-white);
+        font-size: 1rem;
+    }
+
+    .tech-distribution-details {
+        space-y: 1rem;
+    }
+
+    .tech-distribution-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--tech-light);
+    }
+
+    .tech-distribution-row:last-child {
+        border-bottom: none;
+    }
+
+    /* Behavior Section */
+    .tech-behavior-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .tech-behavior-column {
+        background: var(--tech-gray);
+        padding: 2rem;
+        border-radius: 8px;
+        border: 1px solid var(--tech-light);
+        position: relative;
+    }
+
+    .tech-behavior-column::before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: 1rem;
+        right: 1rem;
+        height: 3px;
+        background: var(--tech-green);
+        border-radius: 0 0 4px 4px;
+    }
+
+    .tech-behavior-title {
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        margin-top: 0.5rem;
+        color: var(--tech-white);
+        font-size: 1rem;
+    }
+
+    .tech-behavior-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--tech-light);
+        font-size: 0.9rem;
+    }
+
+    .tech-behavior-item:last-child {
+        border-bottom: none;
+    }
+
+    /* Quiz Button */
+    .tech-quiz-section {
+        margin: 3rem 0;
+        text-align: center;
+    }
+
+    .tech-quiz-btn {
+        background: var(--tech-accent);
+        color: var(--tech-white);
+        padding: 1.2rem 2.5rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 12px rgba(236, 109, 19, 0.3);
+    }
+
+    .tech-quiz-btn:hover {
+        background: #d55a0e;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(236, 109, 19, 0.4);
+    }
+
+    .tech-quiz-description {
+        margin-top: 1rem;
+        font-size: 0.85rem;
+        color: var(--tech-silver);
+        font-weight: 400;
+    }
+
+    /* Hidden state */
+    .hidden {
+        display: none !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .tech-image-grid,
+        .tech-info-grid,
+        .tech-distribution-grid,
+        .tech-behavior-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .tech-container {
+            padding: 0 1rem;
+        }
+
+        .tech-card-header,
+        .tech-card-content {
+            padding: 1.5rem;
+        }
+
+        .tech-info-item,
+        .tech-distribution-card,
+        .tech-behavior-column {
+            padding: 1.5rem;
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- 狀態指示器 -->
+    <div class="status-indicator">
+        <div class="status-dot"></div>
+        <div class="status-dot"></div>
+        <div class="status-dot"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="tech-header">
+        <button onclick="history.back()" class="tech-back-btn">
+            <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24">
+                <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+            </svg>
+        </button>
+        <h1 class="tech-header-title">亞種差異</h1>
+        <div class="tech-spacer"></div>
+    </header>
+
+    <div class="tech-container">
+        <!-- Loading -->
+        <div id="loading" class="tech-loading">
+            <div class="tech-spinner"></div>
+            <p>載入中...</p>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main-content" class="hidden">
+            <!-- Tab Navigation -->
+            <div class="tech-tabs">
+                <button class="tech-tab active" data-tab="appearance">外觀</button>
+                <button class="tech-tab" data-tab="distribution">分佈</button>
+                <button class="tech-tab" data-tab="behavior">習性</button>
+            </div>
+
+            <!-- Content -->
+            <div class="tech-content">
+                <!-- Appearance Section -->
+                <div id="appearance" class="tech-section active">
+                    <div class="tech-card">
+                        <div class="tech-card-header">
+                            <h2 class="tech-card-title">外觀特徵</h2>
+                            <div class="tech-image-grid">
+                                <div class="tech-image-container">
+                                    <img id="chinese-image" alt="中華小熊貓" class="tech-image" />
+                                </div>
+                                <div class="tech-image-container">
+                                    <img id="himalayan-image" alt="喜馬拉雅小熊貓" class="tech-image" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tech-card-content">
+                            <div class="tech-info-grid">
+                                <div class="tech-info-item">
+                                    <h3 class="tech-info-title">中華小熊貓</h3>
+                                    <p class="tech-info-subtitle">Ailurus fulgens styani</p>
+                                    <div class="tech-info-details">
+                                        <div class="tech-info-row">
+                                            <span class="tech-info-label">體重：</span>
+                                            <span id="chinese-weight" class="tech-info-value"></span>
+                                        </div>
+                                        <div class="tech-info-row">
+                                            <span class="tech-info-label">毛色：</span>
+                                            <span id="chinese-color" class="tech-info-value"></span>
+                                        </div>
+                                        <div class="tech-info-row">
+                                            <span class="tech-info-label">尾紋：</span>
+                                            <span id="chinese-tail" class="tech-info-value"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tech-info-item">
+                                    <h3 class="tech-info-title">喜馬拉雅小熊貓</h3>
+                                    <p class="tech-info-subtitle">Ailurus fulgens fulgens</p>
+                                    <div class="tech-info-details">
+                                        <div class="tech-info-row">
+                                            <span class="tech-info-label">體重：</span>
+                                            <span id="himalayan-weight" class="tech-info-value"></span>
+                                        </div>
+                                        <div class="tech-info-row">
+                                            <span class="tech-info-label">毛色：</span>
+                                            <span id="himalayan-color" class="tech-info-value"></span>
+                                        </div>
+                                        <div class="tech-info-row">
+                                            <span class="tech-info-label">尾紋：</span>
+                                            <span id="himalayan-tail" class="tech-info-value"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Distribution Section -->
+                <div id="distribution" class="tech-section">
+                    <div class="tech-card">
+                        <div class="tech-card-header">
+                            <h2 class="tech-card-title">棲息地分佈</h2>
+                        </div>
+                        <div class="tech-card-content">
+                            <div class="tech-distribution-grid">
+                                <div class="tech-distribution-card">
+                                    <h4 class="tech-distribution-title">🇨🇳 中華小熊貓</h4>
+                                    <div class="tech-distribution-details">
+                                        <div class="tech-distribution-row">
+                                            <span class="tech-info-label">地區：</span>
+                                            <span id="chinese-location" class="tech-info-value"></span>
+                                        </div>
+                                        <div class="tech-distribution-row">
+                                            <span class="tech-info-label">海拔：</span>
+                                            <span id="chinese-elevation" class="tech-info-value"></span>
+                                        </div>
+                                        <div class="tech-distribution-row">
+                                            <span class="tech-info-label">氣候：</span>
+                                            <span id="chinese-climate" class="tech-info-value"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tech-distribution-card">
+                                    <h4 class="tech-distribution-title">🏔️ 喜馬拉雅小熊貓</h4>
+                                    <div class="tech-distribution-details">
+                                        <div class="tech-distribution-row">
+                                            <span class="tech-info-label">地區：</span>
+                                            <span id="himalayan-location" class="tech-info-value"></span>
+                                        </div>
+                                        <div class="tech-distribution-row">
+                                            <span class="tech-info-label">海拔：</span>
+                                            <span id="himalayan-elevation" class="tech-info-value"></span>
+                                        </div>
+                                        <div class="tech-distribution-row">
+                                            <span class="tech-info-label">氣候：</span>
+                                            <span id="himalayan-climate" class="tech-info-value"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Behavior Section -->
+                <div id="behavior" class="tech-section">
+                    <div class="tech-card">
+                        <div class="tech-card-header">
+                            <h2 class="tech-card-title">行為習性</h2>
+                        </div>
+                        <div class="tech-card-content">
+                            <div class="tech-behavior-grid">
+                                <div class="tech-behavior-column">
+                                    <h4 class="tech-behavior-title">🇨🇳 中華小熊貓</h4>
+                                    <div class="tech-behavior-item">
+                                        <span class="tech-info-label">活動時間：</span>
+                                        <span id="chinese-activity" class="tech-info-value"></span>
+                                    </div>
+                                    <div class="tech-behavior-item">
+                                        <span class="tech-info-label">社會性：</span>
+                                        <span id="chinese-social" class="tech-info-value"></span>
+                                    </div>
+                                    <div class="tech-behavior-item">
+                                        <span class="tech-info-label">攀爬：</span>
+                                        <span id="chinese-movement" class="tech-info-value"></span>
+                                    </div>
+                                </div>
+                                <div class="tech-behavior-column">
+                                    <h4 class="tech-behavior-title">🏔️ 喜馬拉雅小熊貓</h4>
+                                    <div class="tech-behavior-item">
+                                        <span class="tech-info-label">活動時間：</span>
+                                        <span id="himalayan-activity" class="tech-info-value"></span>
+                                    </div>
+                                    <div class="tech-behavior-item">
+                                        <span class="tech-info-label">社會性：</span>
+                                        <span id="himalayan-social" class="tech-info-value"></span>
+                                    </div>
+                                    <div class="tech-behavior-item">
+                                        <span class="tech-info-label">攀爬：</span>
+                                        <span id="himalayan-movement" class="tech-info-value"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Button -->
+            <div class="tech-quiz-section">
+                <button onclick="window.location.href='quiz.html'" class="tech-quiz-btn">
+                    🧩 開始測驗挑戰
+                </button>
+                <p class="tech-quiz-description">測試你是否真的了解兩個亞種的差異！</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="navbar-container"></div>
+
+    <script>
+    // Tab 切換功能
+    const tabButtons = document.querySelectorAll('.tech-tab');
+    const tabContents = document.querySelectorAll('.tech-section');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // 移除所有按鈕的 active 狀態
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // 設置當前按鈕為 active
+            button.classList.add('active');
+
+            // 顯示對應內容
+            const targetTab = button.getAttribute('data-tab');
+            document.getElementById(targetTab).classList.add('active');
+        });
+    });
+
+    // 載入 JSON 資料
+    async function loadSubspeciesData() {
+        try {
+            console.log('正在載入數據從:', '../../data/subspecies.json');
+            const response = await fetch('../../data/subspecies.json');
+
+            console.log('HTTP 狀態:', response.status);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            const chinese = data.subspecies.find(sub => sub.id === 'chinese');
+            const himalayan = data.subspecies.find(sub => sub.id === 'himalayan');
+
+            // 更新圖片（修正路徑）
+            const fixImagePath = (imagePath) => {
+                if (imagePath.startsWith('./images/')) {
+                    return imagePath.replace('./images/', '../../images/');
+                }
+                return imagePath;
+            };
+
+            document.getElementById('chinese-image').src = fixImagePath(chinese.image);
+            document.getElementById('himalayan-image').src = fixImagePath(himalayan.image);
+
+            // 更新外觀資訊
+            document.getElementById('chinese-weight').textContent = chinese.characteristics.body_size.weight;
+            document.getElementById('chinese-color').textContent = chinese.characteristics.appearance.fur_color;
+            document.getElementById('chinese-tail').textContent = chinese.characteristics.appearance.tail_rings;
+
+            document.getElementById('himalayan-weight').textContent = himalayan.characteristics.body_size.weight;
+            document.getElementById('himalayan-color').textContent = himalayan.characteristics.appearance.fur_color;
+            document.getElementById('himalayan-tail').textContent = himalayan.characteristics.appearance.tail_rings;
+
+            // 更新分佈資訊
+            document.getElementById('chinese-location').textContent = chinese.characteristics.habitat.location;
+            document.getElementById('chinese-elevation').textContent = chinese.characteristics.habitat.elevation;
+            document.getElementById('chinese-climate').textContent = chinese.characteristics.habitat.climate;
+
+            document.getElementById('himalayan-location').textContent = himalayan.characteristics.habitat.location;
+            document.getElementById('himalayan-elevation').textContent = himalayan.characteristics.habitat.elevation;
+            document.getElementById('himalayan-climate').textContent = himalayan.characteristics.habitat.climate;
+
+            // 更新行為資訊
+            document.getElementById('chinese-activity').textContent = chinese.characteristics.behavior.activity_pattern;
+            document.getElementById('chinese-social').textContent = chinese.characteristics.behavior.social;
+            document.getElementById('chinese-movement').textContent = chinese.characteristics.behavior.movement;
+
+            document.getElementById('himalayan-activity').textContent = himalayan.characteristics.behavior.activity_pattern;
+            document.getElementById('himalayan-social').textContent = himalayan.characteristics.behavior.social;
+            document.getElementById('himalayan-movement').textContent = himalayan.characteristics.behavior.movement;
+
+            // 隱藏載入提示，顯示主要內容
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+
+        } catch (error) {
+            console.error('載入數據失敗:', error);
+            document.getElementById('loading').innerHTML = '<p style="color: #ec6d13;">載入失敗，請重新整理頁面</p>';
+        }
+    }
+
+    // 頁面載入完成後執行
+    document.addEventListener('DOMContentLoaded', loadSubspeciesData);
+    </script>
+    <script src="assets/js/navbar.js"></script>
+</body>
+</html>

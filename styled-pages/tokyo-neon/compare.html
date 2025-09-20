@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小熊貓亞種比較</title>
+<style>
+    :root {
+        --neon-night: #0a0f1c;
+        --neon-pink: #ff1744;
+        --neon-cyan: #00e5ff;
+        --neon-white: #ffffff;
+        --neon-gray: #1a1f2e;
+        --neon-dark: #0d1117;
+        --neon-glow-pink: rgba(255, 23, 68, 0.6);
+        --neon-glow-cyan: rgba(0, 229, 255, 0.6);
+        --neon-orange: #ec6d13;
+        --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+        background: var(--neon-night);
+        color: var(--neon-white);
+        line-height: 1.5;
+        overflow-x: hidden;
+        padding-bottom: calc(120px + var(--mobile-safe-bottom));
+        min-height: 100vh;
+        position: relative;
+    }
+
+    /* 霓虹城市背景 */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:
+            radial-gradient(ellipse at 20% 20%, rgba(255, 23, 68, 0.12) 0%, transparent 60%),
+            radial-gradient(ellipse at 80% 80%, rgba(0, 229, 255, 0.08) 0%, transparent 60%),
+            linear-gradient(180deg, var(--neon-night) 0%, var(--neon-dark) 100%);
+        z-index: -2;
+    }
+
+    /* 賽博朋克網格 */
+    .cyber-grid {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background:
+            linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(0deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+        background-size: 30px 30px;
+        z-index: -1;
+        animation: cyber-pulse 6s ease-in-out infinite;
+    }
+
+    @keyframes cyber-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+
+    /* Header */
+    .neon-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(26, 31, 46, 0.9);
+        backdrop-filter: blur(12px);
+        padding: 1rem;
+        border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+    }
+
+    .neon-back-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgba(0, 229, 255, 0.3);
+        background: rgba(13, 17, 23, 0.8);
+        color: var(--neon-white);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+    }
+
+    .neon-back-btn:hover {
+        border-color: var(--neon-pink);
+        color: var(--neon-pink);
+        box-shadow: 0 0 20px rgba(255, 23, 68, 0.4);
+        transform: translateY(-2px);
+    }
+
+    .neon-header-title {
+        font-size: 1.125rem;
+        font-weight: 500;
+        color: var(--neon-white);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 0 0 10px var(--neon-cyan);
+    }
+
+    .neon-spacer {
+        width: 44px;
+    }
+
+    /* Main Container */
+    .neon-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Loading */
+    .neon-loading {
+        text-align: center;
+        padding: 4rem 0;
+    }
+
+    .neon-spinner {
+        width: 40px;
+        height: 40px;
+        border: 2px solid rgba(0, 229, 255, 0.2);
+        border-top: 2px solid var(--neon-pink);
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        animation: neonSpin 1s linear infinite;
+    }
+
+    @keyframes neonSpin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Tab Navigation */
+    .neon-tabs {
+        display: flex;
+        gap: 0;
+        margin: 2rem 0;
+        background: rgba(26, 31, 46, 0.8);
+        border: 1px solid rgba(0, 229, 255, 0.3);
+        border-radius: 12px;
+        padding: 0.5rem;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    }
+
+    .neon-tab {
+        flex: 1;
+        padding: 1rem;
+        background: none;
+        border: none;
+        color: var(--neon-white);
+        font-weight: 500;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 8px;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+    }
+
+    .neon-tab.active {
+        background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+        color: var(--neon-night);
+        box-shadow:
+            0 0 20px var(--neon-glow-pink),
+            inset 0 0 20px rgba(255, 255, 255, 0.2);
+        transform: scale(1.02);
+        text-shadow: none;
+    }
+
+    .neon-tab:not(.active) {
+        text-shadow: 0 0 5px var(--neon-cyan);
+    }
+
+    .neon-tab:not(.active):hover {
+        background: rgba(0, 229, 255, 0.1);
+        color: var(--neon-cyan);
+    }
+
+    .neon-tab:active {
+        transform: scale(0.98);
+    }
+
+    /* Content Sections */
+    .neon-content {
+        margin: 2rem 0;
+    }
+
+    .neon-section {
+        display: none;
+        animation: neon-fade-in 0.6s ease-out;
+    }
+
+    .neon-section.active {
+        display: block;
+    }
+
+    @keyframes neon-fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            filter: blur(2px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+    }
+
+    .neon-card {
+        background: rgba(26, 31, 46, 0.9);
+        border-radius: 24px;
+        margin-bottom: 2rem;
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(0, 229, 255, 0.3);
+        box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.5),
+            0 0 20px rgba(0, 229, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .neon-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+        animation: neon-scan 2s linear infinite;
+    }
+
+    @keyframes neon-scan {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    .neon-card-header {
+        padding: 2rem;
+        border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+        margin-top: 2px;
+    }
+
+    .neon-card-title {
+        font-size: 1.3rem;
+        font-weight: 300;
+        color: var(--neon-cyan);
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow:
+            0 0 10px var(--neon-cyan),
+            0 0 20px var(--neon-cyan);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .neon-card-title::before {
+        content: '//';
+        color: var(--neon-pink);
+        font-size: 1rem;
+    }
+
+    .neon-card-title::after {
+        content: '//';
+        color: var(--neon-pink);
+        font-size: 1rem;
+    }
+
+    .neon-card-content {
+        padding: 2rem;
+    }
+
+    /* Image Grid */
+    .neon-image-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .neon-image-container {
+        position: relative;
+        aspect-ratio: 1;
+        overflow: hidden;
+        border: 2px solid rgba(0, 229, 255, 0.3);
+        border-radius: 12px;
+        background: rgba(13, 17, 23, 0.8);
+        box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+    }
+
+    .neon-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.3s ease;
+        filter: contrast(1.1) saturate(1.2);
+    }
+
+    .neon-image:hover {
+        transform: scale(1.05);
+        filter: contrast(1.2) saturate(1.3) brightness(1.1);
+    }
+
+    .neon-image-label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+        color: var(--neon-night);
+        padding: 0.75rem;
+        text-align: center;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Info Grid */
+    .neon-info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .neon-info-item {
+        background: rgba(13, 17, 23, 0.8);
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid rgba(0, 229, 255, 0.3);
+        box-shadow:
+            0 4px 16px rgba(0, 0, 0, 0.3),
+            0 0 15px rgba(0, 229, 255, 0.1);
+        position: relative;
+        text-align: center;
+    }
+
+    .neon-info-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--neon-pink), transparent);
+    }
+
+    .neon-info-title {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: var(--neon-pink);
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 0 0 10px var(--neon-pink);
+    }
+
+    .neon-info-subtitle {
+        font-size: 0.8rem;
+        color: var(--neon-cyan);
+        margin-bottom: 1.5rem;
+        font-style: italic;
+        opacity: 0.8;
+        text-shadow: 0 0 5px var(--neon-cyan);
+    }
+
+    .neon-info-details {
+        space-y: 1rem;
+    }
+
+    .neon-info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .neon-info-row:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
+    .neon-info-label {
+        font-weight: 500;
+        color: var(--neon-white);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 0.85rem;
+    }
+
+    .neon-info-value {
+        color: var(--neon-cyan);
+        font-weight: 300;
+        text-shadow: 0 0 5px var(--neon-cyan);
+    }
+
+    /* Distribution Cards */
+    .neon-distribution-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .neon-distribution-card {
+        background: rgba(13, 17, 23, 0.8);
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid rgba(0, 229, 255, 0.3);
+        box-shadow:
+            0 4px 16px rgba(0, 0, 0, 0.3),
+            0 0 15px rgba(0, 229, 255, 0.1);
+        position: relative;
+    }
+
+    .neon-distribution-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+    }
+
+    .neon-distribution-title {
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        color: var(--neon-pink);
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 0 0 10px var(--neon-pink);
+    }
+
+    .neon-distribution-details {
+        space-y: 1rem;
+    }
+
+    .neon-distribution-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+    }
+
+    .neon-distribution-row:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
+    /* Behavior Section */
+    .neon-behavior-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .neon-behavior-column {
+        background: rgba(13, 17, 23, 0.8);
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid rgba(255, 23, 68, 0.3);
+        box-shadow:
+            0 4px 16px rgba(0, 0, 0, 0.3),
+            0 0 15px rgba(255, 23, 68, 0.1);
+        position: relative;
+    }
+
+    .neon-behavior-column::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--neon-pink), transparent);
+    }
+
+    .neon-behavior-title {
+        font-weight: 500;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: var(--neon-pink);
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 0 0 10px var(--neon-pink);
+    }
+
+    .neon-behavior-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .neon-behavior-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
+    /* Quiz Button */
+    .neon-quiz-section {
+        margin: 3rem 0;
+        text-align: center;
+    }
+
+    .neon-quiz-btn {
+        background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+        color: var(--neon-night);
+        padding: 1.25rem 2.5rem;
+        border: none;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow:
+            0 0 20px var(--neon-glow-pink),
+            inset 0 0 20px rgba(255, 255, 255, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .neon-quiz-btn:hover {
+        transform: translateY(-2px);
+        box-shadow:
+            0 0 30px var(--neon-glow-cyan),
+            inset 0 0 30px rgba(255, 255, 255, 0.3);
+    }
+
+    .neon-quiz-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    .neon-quiz-btn:hover::before {
+        left: 100%;
+    }
+
+    .neon-quiz-description {
+        margin-top: 1rem;
+        font-size: 0.85rem;
+        color: var(--neon-white);
+        opacity: 0.8;
+    }
+
+    /* Glitch effect */
+    .glitch-text {
+        position: relative;
+    }
+
+    .glitch-text::before,
+    .glitch-text::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .glitch-text::before {
+        animation: glitch-1 0.5s infinite linear alternate-reverse;
+        color: var(--neon-pink);
+        z-index: -1;
+    }
+
+    .glitch-text::after {
+        animation: glitch-2 0.5s infinite linear alternate-reverse;
+        color: var(--neon-cyan);
+        z-index: -2;
+    }
+
+    @keyframes glitch-1 {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-2px); }
+    }
+
+    @keyframes glitch-2 {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(2px); }
+    }
+
+    /* Hidden state */
+    .hidden {
+        display: none !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .neon-image-grid,
+        .neon-info-grid,
+        .neon-distribution-grid,
+        .neon-behavior-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .neon-container {
+            padding: 0 1rem;
+        }
+
+        .neon-card-header,
+        .neon-card-content {
+            padding: 1.5rem;
+        }
+
+        .neon-info-item,
+        .neon-distribution-card,
+        .neon-behavior-column {
+            padding: 1.5rem;
+        }
+    }
+
+    /* 無障礙支援 */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01s !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01s !important;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="cyber-grid"></div>
+
+    <!-- Header -->
+    <header class="neon-header">
+        <button onclick="history.back()" class="neon-back-btn">
+            <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24">
+                <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+            </svg>
+        </button>
+        <h1 class="neon-header-title glitch-text" data-text="SUBSPECIES DATA">SUBSPECIES DATA</h1>
+        <div class="neon-spacer"></div>
+    </header>
+
+    <div class="neon-container">
+        <!-- Loading -->
+        <div id="loading" class="neon-loading">
+            <div class="neon-spinner"></div>
+            <p>載入中...</p>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main-content" class="hidden">
+            <!-- Tab Navigation -->
+            <div class="neon-tabs">
+                <button class="neon-tab active" data-tab="appearance">DATA</button>
+                <button class="neon-tab" data-tab="distribution">ZONE</button>
+                <button class="neon-tab" data-tab="behavior">SYSTEM</button>
+            </div>
+
+            <!-- Content -->
+            <div class="neon-content">
+                <!-- Appearance Section -->
+                <div id="appearance" class="neon-section active">
+                    <div class="neon-card">
+                        <div class="neon-card-header">
+                            <h2 class="neon-card-title">生物數據分析</h2>
+                            <div class="neon-image-grid">
+                                <div class="neon-image-container">
+                                    <img id="chinese-image" alt="中華小熊貓" class="neon-image" />
+                                    <div class="neon-image-label">CHINESE TYPE</div>
+                                </div>
+                                <div class="neon-image-container">
+                                    <img id="himalayan-image" alt="喜馬拉雅小熊貓" class="neon-image" />
+                                    <div class="neon-image-label">HIMALAYAN TYPE</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="neon-card-content">
+                            <div class="neon-info-grid">
+                                <div class="neon-info-item">
+                                    <h3 class="neon-info-title">🇨🇳 CHINESE DATA</h3>
+                                    <p class="neon-info-subtitle">Ailurus fulgens styani</p>
+                                    <div class="neon-info-details">
+                                        <div class="neon-info-row">
+                                            <span class="neon-info-label">MASS</span>
+                                            <span id="chinese-weight" class="neon-info-value"></span>
+                                        </div>
+                                        <div class="neon-info-row">
+                                            <span class="neon-info-label">COLOR</span>
+                                            <span id="chinese-color" class="neon-info-value"></span>
+                                        </div>
+                                        <div class="neon-info-row">
+                                            <span class="neon-info-label">RINGS</span>
+                                            <span id="chinese-tail" class="neon-info-value"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="neon-info-item">
+                                    <h3 class="neon-info-title">🏔️ HIMALAYAN DATA</h3>
+                                    <p class="neon-info-subtitle">Ailurus fulgens fulgens</p>
+                                    <div class="neon-info-details">
+                                        <div class="neon-info-row">
+                                            <span class="neon-info-label">MASS</span>
+                                            <span id="himalayan-weight" class="neon-info-value"></span>
+                                        </div>
+                                        <div class="neon-info-row">
+                                            <span class="neon-info-label">COLOR</span>
+                                            <span id="himalayan-color" class="neon-info-value"></span>
+                                        </div>
+                                        <div class="neon-info-row">
+                                            <span class="neon-info-label">RINGS</span>
+                                            <span id="himalayan-tail" class="neon-info-value"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Distribution Section -->
+                <div id="distribution" class="neon-section">
+                    <div class="neon-card">
+                        <div class="neon-card-header">
+                            <h2 class="neon-card-title">地理區域掃描</h2>
+                        </div>
+                        <div class="neon-card-content">
+                            <div class="neon-distribution-grid">
+                                <div class="neon-distribution-card">
+                                    <h4 class="neon-distribution-title">🇨🇳 CHINESE ZONE</h4>
+                                    <div class="neon-distribution-details">
+                                        <div class="neon-distribution-row">
+                                            <span class="neon-info-label">COORDS</span>
+                                            <span id="chinese-location" class="neon-info-value"></span>
+                                        </div>
+                                        <div class="neon-distribution-row">
+                                            <span class="neon-info-label">ALTITUDE</span>
+                                            <span id="chinese-elevation" class="neon-info-value"></span>
+                                        </div>
+                                        <div class="neon-distribution-row">
+                                            <span class="neon-info-label">CLIMATE</span>
+                                            <span id="chinese-climate" class="neon-info-value"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="neon-distribution-card">
+                                    <h4 class="neon-distribution-title">🏔️ HIMALAYAN ZONE</h4>
+                                    <div class="neon-distribution-details">
+                                        <div class="neon-distribution-row">
+                                            <span class="neon-info-label">COORDS</span>
+                                            <span id="himalayan-location" class="neon-info-value"></span>
+                                        </div>
+                                        <div class="neon-distribution-row">
+                                            <span class="neon-info-label">ALTITUDE</span>
+                                            <span id="himalayan-elevation" class="neon-info-value"></span>
+                                        </div>
+                                        <div class="neon-distribution-row">
+                                            <span class="neon-info-label">CLIMATE</span>
+                                            <span id="himalayan-climate" class="neon-info-value"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Behavior Section -->
+                <div id="behavior" class="neon-section">
+                    <div class="neon-card">
+                        <div class="neon-card-header">
+                            <h2 class="neon-card-title">行為系統解析</h2>
+                        </div>
+                        <div class="neon-card-content">
+                            <div class="neon-behavior-grid">
+                                <div class="neon-behavior-column">
+                                    <h4 class="neon-behavior-title">🇨🇳 CHINESE SYSTEM</h4>
+                                    <div class="neon-behavior-item">
+                                        <span class="neon-info-label">ACTIVE</span>
+                                        <span id="chinese-activity" class="neon-info-value"></span>
+                                    </div>
+                                    <div class="neon-behavior-item">
+                                        <span class="neon-info-label">SOCIAL</span>
+                                        <span id="chinese-social" class="neon-info-value"></span>
+                                    </div>
+                                    <div class="neon-behavior-item">
+                                        <span class="neon-info-label">MOTION</span>
+                                        <span id="chinese-movement" class="neon-info-value"></span>
+                                    </div>
+                                </div>
+                                <div class="neon-behavior-column">
+                                    <h4 class="neon-behavior-title">🏔️ HIMALAYAN SYSTEM</h4>
+                                    <div class="neon-behavior-item">
+                                        <span class="neon-info-label">ACTIVE</span>
+                                        <span id="himalayan-activity" class="neon-info-value"></span>
+                                    </div>
+                                    <div class="neon-behavior-item">
+                                        <span class="neon-info-label">SOCIAL</span>
+                                        <span id="himalayan-social" class="neon-info-value"></span>
+                                    </div>
+                                    <div class="neon-behavior-item">
+                                        <span class="neon-info-label">MOTION</span>
+                                        <span id="himalayan-movement" class="neon-info-value"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Button -->
+            <div class="neon-quiz-section">
+                <button onclick="window.location.href='quiz.html'" class="neon-quiz-btn">
+                    🧩 START CHALLENGE
+                </button>
+                <p class="neon-quiz-description">測試你是否真的了解兩個亞種的差異！</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="navbar-container"></div>
+
+    <script>
+    // Tab 切換功能
+    const tabButtons = document.querySelectorAll('.neon-tab');
+    const tabContents = document.querySelectorAll('.neon-section');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // 移除所有按鈕的 active 狀態
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // 設置當前按鈕為 active
+            button.classList.add('active');
+
+            // 顯示對應內容
+            const targetTab = button.getAttribute('data-tab');
+            document.getElementById(targetTab).classList.add('active');
+        });
+    });
+
+    // 載入 JSON 資料
+    async function loadSubspeciesData() {
+        try {
+            console.log('正在載入數據從:', '../../data/subspecies.json');
+            const response = await fetch('../../data/subspecies.json');
+
+            console.log('HTTP 狀態:', response.status);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            const chinese = data.subspecies.find(sub => sub.id === 'chinese');
+            const himalayan = data.subspecies.find(sub => sub.id === 'himalayan');
+
+            // 更新圖片（修正路徑）
+            const fixImagePath = (imagePath) => {
+                if (imagePath.startsWith('./images/')) {
+                    return imagePath.replace('./images/', '../../images/');
+                }
+                return imagePath;
+            };
+
+            document.getElementById('chinese-image').src = fixImagePath(chinese.image);
+            document.getElementById('himalayan-image').src = fixImagePath(himalayan.image);
+
+            // 更新外觀資訊
+            document.getElementById('chinese-weight').textContent = chinese.characteristics.body_size.weight;
+            document.getElementById('chinese-color').textContent = chinese.characteristics.appearance.fur_color;
+            document.getElementById('chinese-tail').textContent = chinese.characteristics.appearance.tail_rings;
+
+            document.getElementById('himalayan-weight').textContent = himalayan.characteristics.body_size.weight;
+            document.getElementById('himalayan-color').textContent = himalayan.characteristics.appearance.fur_color;
+            document.getElementById('himalayan-tail').textContent = himalayan.characteristics.appearance.tail_rings;
+
+            // 更新分佈資訊
+            document.getElementById('chinese-location').textContent = chinese.characteristics.habitat.location;
+            document.getElementById('chinese-elevation').textContent = chinese.characteristics.habitat.elevation;
+            document.getElementById('chinese-climate').textContent = chinese.characteristics.habitat.climate;
+
+            document.getElementById('himalayan-location').textContent = himalayan.characteristics.habitat.location;
+            document.getElementById('himalayan-elevation').textContent = himalayan.characteristics.habitat.elevation;
+            document.getElementById('himalayan-climate').textContent = himalayan.characteristics.habitat.climate;
+
+            // 更新行為資訊
+            document.getElementById('chinese-activity').textContent = chinese.characteristics.behavior.activity_pattern;
+            document.getElementById('chinese-social').textContent = chinese.characteristics.behavior.social;
+            document.getElementById('chinese-movement').textContent = chinese.characteristics.behavior.movement;
+
+            document.getElementById('himalayan-activity').textContent = himalayan.characteristics.behavior.activity_pattern;
+            document.getElementById('himalayan-social').textContent = himalayan.characteristics.behavior.social;
+            document.getElementById('himalayan-movement').textContent = himalayan.characteristics.behavior.movement;
+
+            // 隱藏載入提示，顯示主要內容
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+
+        } catch (error) {
+            console.error('載入數據失敗:', error);
+            document.getElementById('loading').innerHTML = '<p style="color: #ec6d13;">載入失敗，請重新整理頁面</p>';
+        }
+    }
+
+    // 頁面載入完成後執行
+    document.addEventListener('DOMContentLoaded', loadSubspeciesData);
+    </script>
+    <script src="assets/js/navbar.js"></script>
+</body>
+</html>

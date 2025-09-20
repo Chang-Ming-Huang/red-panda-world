@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小熊貓亞種比較</title>
+<style>
+    :root {
+        --flow-sage: #9caf88;
+        --flow-moss: #7a8b6c;
+        --flow-cream: #f7f5f1;
+        --flow-sand: #ede7db;
+        --flow-earth: #8b7355;
+        --flow-bark: #6b4e3d;
+        --flow-forest: #3e4a3a;
+        --red-panda-orange: #ec6d13;
+        --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+        background: var(--flow-cream);
+        color: var(--flow-forest);
+        line-height: 1.7;
+        overflow-x: hidden;
+        padding-bottom: calc(120px + var(--mobile-safe-bottom));
+        min-height: 100vh;
+        font-weight: 400;
+    }
+
+    /* 有機流動背景 */
+    .flow-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+    }
+
+    .flow-shape {
+        position: absolute;
+        background: var(--flow-sage);
+        opacity: 0.1;
+        border-radius: 50% 40% 60% 30%;
+    }
+
+    .flow-shape:nth-child(1) {
+        width: 300px;
+        height: 200px;
+        top: 15%;
+        right: -5%;
+        animation: flowFloat 25s infinite ease-in-out;
+        transform: rotate(15deg);
+    }
+
+    .flow-shape:nth-child(2) {
+        width: 250px;
+        height: 180px;
+        bottom: 20%;
+        left: -8%;
+        background: var(--flow-moss);
+        animation: flowFloat 30s infinite ease-in-out reverse;
+        transform: rotate(-20deg);
+    }
+
+    .flow-shape:nth-child(3) {
+        width: 180px;
+        height: 140px;
+        top: 50%;
+        left: 50%;
+        background: var(--flow-earth);
+        opacity: 0.08;
+        animation: flowFloat 35s infinite ease-in-out;
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    @keyframes flowFloat {
+        0%, 100% {
+            transform: translate(0, 0) rotate(0deg) scale(1);
+        }
+        33% {
+            transform: translate(-20px, -15px) rotate(5deg) scale(1.05);
+        }
+        66% {
+            transform: translate(15px, -25px) rotate(-3deg) scale(0.95);
+        }
+    }
+
+    /* Header */
+    .flow-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(247, 245, 241, 0.95);
+        backdrop-filter: blur(12px);
+        padding: 1rem;
+        border-bottom: 1px solid var(--flow-sage);
+        border-bottom-style: dashed;
+    }
+
+    .flow-back-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border: none;
+        background: none;
+        color: var(--flow-forest);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 50%;
+        border: 2px solid transparent;
+    }
+
+    .flow-back-btn:hover {
+        background: var(--flow-sand);
+        border-color: var(--flow-sage);
+        color: var(--red-panda-orange);
+    }
+
+    .flow-header-title {
+        font-size: 1.125rem;
+        font-weight: 500;
+        color: var(--flow-forest);
+        letter-spacing: 0.02em;
+    }
+
+    .flow-spacer {
+        width: 44px;
+    }
+
+    /* Main Container */
+    .flow-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* Loading */
+    .flow-loading {
+        text-align: center;
+        padding: 4rem 0;
+    }
+
+    .flow-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid var(--flow-sand);
+        border-top: 3px solid var(--red-panda-orange);
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        animation: spin 1.5s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Tab Navigation */
+    .flow-tabs {
+        display: flex;
+        gap: 0.5rem;
+        margin: 2rem 0;
+        background: var(--flow-sand);
+        border: 2px solid var(--flow-sage);
+        border-radius: 25px;
+        padding: 0.5rem;
+        box-shadow: 0 4px 12px rgba(156, 175, 136, 0.15);
+    }
+
+    .flow-tab {
+        flex: 1;
+        padding: 1rem;
+        background: none;
+        border: none;
+        color: var(--flow-moss);
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 20px;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .flow-tab.active {
+        background: var(--flow-sage);
+        color: var(--flow-cream);
+        box-shadow: 0 2px 8px rgba(156, 175, 136, 0.3);
+        transform: translateY(-1px);
+    }
+
+    .flow-tab:not(.active):hover {
+        background: rgba(156, 175, 136, 0.2);
+        color: var(--flow-forest);
+    }
+
+    /* Content Sections */
+    .flow-content {
+        margin: 2rem 0;
+    }
+
+    .flow-section {
+        display: none;
+        animation: flowFadeIn 0.4s ease-out;
+    }
+
+    .flow-section.active {
+        display: block;
+    }
+
+    @keyframes flowFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(15px) scale(0.98);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .flow-card {
+        background: var(--flow-cream);
+        border: 2px solid var(--flow-sage);
+        border-radius: 25px;
+        margin-bottom: 2rem;
+        overflow: hidden;
+        box-shadow: 0 6px 20px rgba(156, 175, 136, 0.15);
+        position: relative;
+    }
+
+    .flow-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--flow-sage), var(--red-panda-orange), var(--flow-moss));
+        border-radius: 23px 23px 0 0;
+    }
+
+    .flow-card-header {
+        padding: 2.5rem 2rem 1.5rem;
+        border-bottom: 2px dashed var(--flow-sage);
+    }
+
+    .flow-card-title {
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: var(--flow-forest);
+        margin-bottom: 1.5rem;
+        letter-spacing: 0.02em;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .flow-card-title::before {
+        content: '🌿';
+        font-size: 1.2rem;
+    }
+
+    .flow-card-content {
+        padding: 2rem;
+    }
+
+    /* Image Grid */
+    .flow-image-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .flow-image-container {
+        position: relative;
+        aspect-ratio: 1;
+        overflow: hidden;
+        border: 3px solid var(--flow-sage);
+        border-radius: 20px;
+        background: var(--flow-sand);
+    }
+
+    .flow-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.3s ease;
+        filter: sepia(10%) contrast(1.05) brightness(1.02);
+    }
+
+    .flow-image:hover {
+        transform: scale(1.05) rotate(1deg);
+        filter: sepia(20%) contrast(1.1) brightness(1.05);
+    }
+
+    /* Info Grid */
+    .flow-info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .flow-info-item {
+        background: var(--flow-sand);
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+        border: 2px solid var(--flow-sage);
+        position: relative;
+    }
+
+    .flow-info-item::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: 1rem;
+        right: 1rem;
+        height: 4px;
+        background: var(--red-panda-orange);
+        border-radius: 0 0 8px 8px;
+    }
+
+    .flow-info-title {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--flow-forest);
+        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
+        letter-spacing: 0.02em;
+    }
+
+    .flow-info-subtitle {
+        font-size: 0.85rem;
+        color: var(--flow-moss);
+        margin-bottom: 1.5rem;
+        font-style: italic;
+        font-weight: 400;
+    }
+
+    .flow-info-details {
+        space-y: 1rem;
+    }
+
+    .flow-info-row {
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px dashed rgba(156, 175, 136, 0.3);
+    }
+
+    .flow-info-row:last-child {
+        border-bottom: none;
+    }
+
+    .flow-info-label {
+        font-weight: 500;
+        color: var(--flow-forest);
+    }
+
+    .flow-info-value {
+        color: var(--flow-moss);
+        font-weight: 400;
+    }
+
+    /* Distribution Cards */
+    .flow-distribution-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .flow-distribution-card {
+        background: var(--flow-sand);
+        border: 2px solid var(--flow-sage);
+        padding: 2rem;
+        border-radius: 20px;
+        position: relative;
+    }
+
+    .flow-distribution-card::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: 1rem;
+        right: 1rem;
+        height: 4px;
+        background: var(--flow-moss);
+        border-radius: 0 0 8px 8px;
+    }
+
+    .flow-distribution-title {
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        margin-top: 0.5rem;
+        color: var(--flow-forest);
+        font-size: 1.1rem;
+    }
+
+    .flow-distribution-details {
+        space-y: 1rem;
+    }
+
+    .flow-distribution-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+        padding: 0.5rem 0;
+        border-bottom: 1px dashed rgba(156, 175, 136, 0.3);
+    }
+
+    .flow-distribution-row:last-child {
+        border-bottom: none;
+    }
+
+    /* Behavior Section */
+    .flow-behavior-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .flow-behavior-column {
+        background: var(--flow-sand);
+        padding: 2rem;
+        border-radius: 20px;
+        border: 2px solid var(--flow-sage);
+        position: relative;
+    }
+
+    .flow-behavior-column::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: 1rem;
+        right: 1rem;
+        height: 4px;
+        background: var(--red-panda-orange);
+        border-radius: 0 0 8px 8px;
+    }
+
+    .flow-behavior-title {
+        font-weight: 500;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        margin-top: 0.5rem;
+        color: var(--flow-forest);
+        font-size: 1.1rem;
+    }
+
+    .flow-behavior-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem 0;
+        border-bottom: 1px dashed rgba(156, 175, 136, 0.3);
+        font-size: 0.95rem;
+    }
+
+    .flow-behavior-item:last-child {
+        border-bottom: none;
+    }
+
+    /* Quiz Button */
+    .flow-quiz-section {
+        margin: 3rem 0;
+        text-align: center;
+    }
+
+    .flow-quiz-btn {
+        background: linear-gradient(135deg, var(--flow-sage), var(--red-panda-orange));
+        color: var(--flow-cream);
+        padding: 1.5rem 3rem;
+        border: none;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        letter-spacing: 0.5px;
+        box-shadow: 0 6px 20px rgba(156, 175, 136, 0.3);
+    }
+
+    .flow-quiz-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(156, 175, 136, 0.4);
+    }
+
+    .flow-quiz-description {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: var(--flow-moss);
+        font-weight: 400;
+    }
+
+    /* Hidden state */
+    .hidden {
+        display: none !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .flow-image-grid,
+        .flow-info-grid,
+        .flow-distribution-grid,
+        .flow-behavior-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .flow-container {
+            padding: 0 1rem;
+        }
+
+        .flow-card-header,
+        .flow-card-content {
+            padding: 1.5rem;
+        }
+
+        .flow-info-item,
+        .flow-distribution-card,
+        .flow-behavior-column {
+            padding: 1.5rem;
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- 有機流動背景 -->
+    <div class="flow-bg">
+        <div class="flow-shape"></div>
+        <div class="flow-shape"></div>
+        <div class="flow-shape"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="flow-header">
+        <button onclick="history.back()" class="flow-back-btn">
+            <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24">
+                <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+            </svg>
+        </button>
+        <h1 class="flow-header-title">亞種差異</h1>
+        <div class="flow-spacer"></div>
+    </header>
+
+    <div class="flow-container">
+        <!-- Loading -->
+        <div id="loading" class="flow-loading">
+            <div class="flow-spinner"></div>
+            <p>載入中...</p>
+        </div>
+
+        <!-- Main Content -->
+        <div id="main-content" class="hidden">
+            <!-- Tab Navigation -->
+            <div class="flow-tabs">
+                <button class="flow-tab active" data-tab="appearance">外觀</button>
+                <button class="flow-tab" data-tab="distribution">分佈</button>
+                <button class="flow-tab" data-tab="behavior">習性</button>
+            </div>
+
+            <!-- Content -->
+            <div class="flow-content">
+                <!-- Appearance Section -->
+                <div id="appearance" class="flow-section active">
+                    <div class="flow-card">
+                        <div class="flow-card-header">
+                            <h2 class="flow-card-title">外觀特徵</h2>
+                            <div class="flow-image-grid">
+                                <div class="flow-image-container">
+                                    <img id="chinese-image" alt="中華小熊貓" class="flow-image" />
+                                </div>
+                                <div class="flow-image-container">
+                                    <img id="himalayan-image" alt="喜馬拉雅小熊貓" class="flow-image" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flow-card-content">
+                            <div class="flow-info-grid">
+                                <div class="flow-info-item">
+                                    <h3 class="flow-info-title">中華小熊貓</h3>
+                                    <p class="flow-info-subtitle">Ailurus fulgens styani</p>
+                                    <div class="flow-info-details">
+                                        <div class="flow-info-row">
+                                            <span class="flow-info-label">體重：</span>
+                                            <span id="chinese-weight" class="flow-info-value"></span>
+                                        </div>
+                                        <div class="flow-info-row">
+                                            <span class="flow-info-label">毛色：</span>
+                                            <span id="chinese-color" class="flow-info-value"></span>
+                                        </div>
+                                        <div class="flow-info-row">
+                                            <span class="flow-info-label">尾紋：</span>
+                                            <span id="chinese-tail" class="flow-info-value"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flow-info-item">
+                                    <h3 class="flow-info-title">喜馬拉雅小熊貓</h3>
+                                    <p class="flow-info-subtitle">Ailurus fulgens fulgens</p>
+                                    <div class="flow-info-details">
+                                        <div class="flow-info-row">
+                                            <span class="flow-info-label">體重：</span>
+                                            <span id="himalayan-weight" class="flow-info-value"></span>
+                                        </div>
+                                        <div class="flow-info-row">
+                                            <span class="flow-info-label">毛色：</span>
+                                            <span id="himalayan-color" class="flow-info-value"></span>
+                                        </div>
+                                        <div class="flow-info-row">
+                                            <span class="flow-info-label">尾紋：</span>
+                                            <span id="himalayan-tail" class="flow-info-value"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Distribution Section -->
+                <div id="distribution" class="flow-section">
+                    <div class="flow-card">
+                        <div class="flow-card-header">
+                            <h2 class="flow-card-title">棲息地分佈</h2>
+                        </div>
+                        <div class="flow-card-content">
+                            <div class="flow-distribution-grid">
+                                <div class="flow-distribution-card">
+                                    <h4 class="flow-distribution-title">🇨🇳 中華小熊貓</h4>
+                                    <div class="flow-distribution-details">
+                                        <div class="flow-distribution-row">
+                                            <span class="flow-info-label">地區：</span>
+                                            <span id="chinese-location" class="flow-info-value"></span>
+                                        </div>
+                                        <div class="flow-distribution-row">
+                                            <span class="flow-info-label">海拔：</span>
+                                            <span id="chinese-elevation" class="flow-info-value"></span>
+                                        </div>
+                                        <div class="flow-distribution-row">
+                                            <span class="flow-info-label">氣候：</span>
+                                            <span id="chinese-climate" class="flow-info-value"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flow-distribution-card">
+                                    <h4 class="flow-distribution-title">🏔️ 喜馬拉雅小熊貓</h4>
+                                    <div class="flow-distribution-details">
+                                        <div class="flow-distribution-row">
+                                            <span class="flow-info-label">地區：</span>
+                                            <span id="himalayan-location" class="flow-info-value"></span>
+                                        </div>
+                                        <div class="flow-distribution-row">
+                                            <span class="flow-info-label">海拔：</span>
+                                            <span id="himalayan-elevation" class="flow-info-value"></span>
+                                        </div>
+                                        <div class="flow-distribution-row">
+                                            <span class="flow-info-label">氣候：</span>
+                                            <span id="himalayan-climate" class="flow-info-value"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Behavior Section -->
+                <div id="behavior" class="flow-section">
+                    <div class="flow-card">
+                        <div class="flow-card-header">
+                            <h2 class="flow-card-title">行為習性</h2>
+                        </div>
+                        <div class="flow-card-content">
+                            <div class="flow-behavior-grid">
+                                <div class="flow-behavior-column">
+                                    <h4 class="flow-behavior-title">🇨🇳 中華小熊貓</h4>
+                                    <div class="flow-behavior-item">
+                                        <span class="flow-info-label">活動時間：</span>
+                                        <span id="chinese-activity" class="flow-info-value"></span>
+                                    </div>
+                                    <div class="flow-behavior-item">
+                                        <span class="flow-info-label">社會性：</span>
+                                        <span id="chinese-social" class="flow-info-value"></span>
+                                    </div>
+                                    <div class="flow-behavior-item">
+                                        <span class="flow-info-label">攀爬：</span>
+                                        <span id="chinese-movement" class="flow-info-value"></span>
+                                    </div>
+                                </div>
+                                <div class="flow-behavior-column">
+                                    <h4 class="flow-behavior-title">🏔️ 喜馬拉雅小熊貓</h4>
+                                    <div class="flow-behavior-item">
+                                        <span class="flow-info-label">活動時間：</span>
+                                        <span id="himalayan-activity" class="flow-info-value"></span>
+                                    </div>
+                                    <div class="flow-behavior-item">
+                                        <span class="flow-info-label">社會性：</span>
+                                        <span id="himalayan-social" class="flow-info-value"></span>
+                                    </div>
+                                    <div class="flow-behavior-item">
+                                        <span class="flow-info-label">攀爬：</span>
+                                        <span id="himalayan-movement" class="flow-info-value"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Button -->
+            <div class="flow-quiz-section">
+                <button onclick="window.location.href='quiz.html'" class="flow-quiz-btn">
+                    🧩 開始測驗挑戰
+                </button>
+                <p class="flow-quiz-description">測試你是否真的了解兩個亞種的差異！</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="navbar-container"></div>
+
+    <script>
+    // Tab 切換功能
+    const tabButtons = document.querySelectorAll('.flow-tab');
+    const tabContents = document.querySelectorAll('.flow-section');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // 移除所有按鈕的 active 狀態
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // 設置當前按鈕為 active
+            button.classList.add('active');
+
+            // 顯示對應內容
+            const targetTab = button.getAttribute('data-tab');
+            document.getElementById(targetTab).classList.add('active');
+        });
+    });
+
+    // 載入 JSON 資料
+    async function loadSubspeciesData() {
+        try {
+            console.log('正在載入數據從:', '../../data/subspecies.json');
+            const response = await fetch('../../data/subspecies.json');
+
+            console.log('HTTP 狀態:', response.status);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            const chinese = data.subspecies.find(sub => sub.id === 'chinese');
+            const himalayan = data.subspecies.find(sub => sub.id === 'himalayan');
+
+            // 更新圖片（修正路徑）
+            const fixImagePath = (imagePath) => {
+                if (imagePath.startsWith('./images/')) {
+                    return imagePath.replace('./images/', '../../images/');
+                }
+                return imagePath;
+            };
+
+            document.getElementById('chinese-image').src = fixImagePath(chinese.image);
+            document.getElementById('himalayan-image').src = fixImagePath(himalayan.image);
+
+            // 更新外觀資訊
+            document.getElementById('chinese-weight').textContent = chinese.characteristics.body_size.weight;
+            document.getElementById('chinese-color').textContent = chinese.characteristics.appearance.fur_color;
+            document.getElementById('chinese-tail').textContent = chinese.characteristics.appearance.tail_rings;
+
+            document.getElementById('himalayan-weight').textContent = himalayan.characteristics.body_size.weight;
+            document.getElementById('himalayan-color').textContent = himalayan.characteristics.appearance.fur_color;
+            document.getElementById('himalayan-tail').textContent = himalayan.characteristics.appearance.tail_rings;
+
+            // 更新分佈資訊
+            document.getElementById('chinese-location').textContent = chinese.characteristics.habitat.location;
+            document.getElementById('chinese-elevation').textContent = chinese.characteristics.habitat.elevation;
+            document.getElementById('chinese-climate').textContent = chinese.characteristics.habitat.climate;
+
+            document.getElementById('himalayan-location').textContent = himalayan.characteristics.habitat.location;
+            document.getElementById('himalayan-elevation').textContent = himalayan.characteristics.habitat.elevation;
+            document.getElementById('himalayan-climate').textContent = himalayan.characteristics.habitat.climate;
+
+            // 更新行為資訊
+            document.getElementById('chinese-activity').textContent = chinese.characteristics.behavior.activity_pattern;
+            document.getElementById('chinese-social').textContent = chinese.characteristics.behavior.social;
+            document.getElementById('chinese-movement').textContent = chinese.characteristics.behavior.movement;
+
+            document.getElementById('himalayan-activity').textContent = himalayan.characteristics.behavior.activity_pattern;
+            document.getElementById('himalayan-social').textContent = himalayan.characteristics.behavior.social;
+            document.getElementById('himalayan-movement').textContent = himalayan.characteristics.behavior.movement;
+
+            // 隱藏載入提示，顯示主要內容
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+
+        } catch (error) {
+            console.error('載入數據失敗:', error);
+            document.getElementById('loading').innerHTML = '<p style="color: #ec6d13;">載入失敗，請重新整理頁面</p>';
+        }
+    }
+
+    // 頁面載入完成後執行
+    document.addEventListener('DOMContentLoaded', loadSubspeciesData);
+    </script>
+    <script src="assets/js/navbar.js"></script>
+</body>
+</html>

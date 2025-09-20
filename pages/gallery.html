@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小熊貓圖片藝廊 - 小熊貓世界</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#ec6d13",
+                    "background-light": "#f8f7f6",
+                    "background-dark": "#221810",
+                },
+                fontFamily: {
+                    "display": ["Epilogue"]
+                },
+                borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                animation: {
+                    'fade-in': 'fadeIn 0.5s ease-in-out',
+                    'slide-up': 'slideUp 0.3s ease-out',
+                }
+            },
+        },
+    }
+</script>
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    body {
+        min-height: max(884px, 100dvh);
+        padding-bottom: 90px;
+    }
+    .image-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+    @media (max-width: 640px) {
+        .image-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+    }
+    .gallery-item {
+        aspect-ratio: 1;
+        overflow: hidden;
+        border-radius: 0.75rem;
+        transition: transform 0.2s ease;
+    }
+    .gallery-item:hover {
+        transform: scale(1.02);
+    }
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="container mx-auto px-4 py-8">
+    <!-- 頁面標題 -->
+    <div class="text-center mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-background-dark dark:text-background-light mb-4">
+            小熊貓圖片藝廊
+        </h1>
+        <p class="text-lg text-background-dark/70 dark:text-background-light/70 max-w-2xl mx-auto">
+            欣賞可愛小熊貓的美麗瞬間，感受這些森林精靈的魅力
+        </p>
+    </div>
+
+    <!-- 載入提示 -->
+    <div id="loading" class="text-center py-8">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        <p class="text-background-dark/50 dark:text-background-light/50 mt-4">載入中...</p>
+    </div>
+
+    <!-- 圖片網格 -->
+    <div id="gallery-grid" class="image-grid hidden">
+        <!-- 小熊貓圖片 -->
+        <div class="gallery-item">
+            <img src="../images/red-panda.jpg" alt="可愛的小熊貓" loading="lazy">
+        </div>
+        <div class="gallery-item">
+            <img src="../images/chinese-red-panda.webp" alt="中華小熊貓" loading="lazy">
+        </div>
+        <div class="gallery-item">
+            <img src="../images/himalayan-red-panda.webp" alt="喜馬拉雅小熊貓" loading="lazy">
+        </div>
+
+        <!-- 佔位圖片，展示更多內容 -->
+        <div class="gallery-item bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+            <div class="text-center">
+                <svg class="w-12 h-12 mx-auto mb-2 text-primary/50" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                </svg>
+                <p class="text-sm text-primary/70">更多圖片</p>
+                <p class="text-xs text-primary/50">即將上線</p>
+            </div>
+        </div>
+
+        <div class="gallery-item bg-gradient-to-br from-primary/15 to-primary/3 flex items-center justify-center">
+            <div class="text-center">
+                <svg class="w-12 h-12 mx-auto mb-2 text-primary/50" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="text-sm text-primary/70">棲息地</p>
+                <p class="text-xs text-primary/50">生態環境</p>
+            </div>
+        </div>
+
+        <div class="gallery-item bg-gradient-to-br from-primary/10 to-primary/2 flex items-center justify-center">
+            <div class="text-center">
+                <svg class="w-12 h-12 mx-auto mb-2 text-primary/50" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                </svg>
+                <p class="text-sm text-primary/70">保護行動</p>
+                <p class="text-xs text-primary/50">愛護生態</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 圖片資訊 -->
+    <div class="mt-12 text-center">
+        <h2 class="text-2xl font-bold text-background-dark dark:text-background-light mb-6">
+            關於小熊貓
+        </h2>
+        <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div class="card p-6">
+                <h3 class="font-bold text-lg mb-3 text-primary">外觀特徵</h3>
+                <p class="text-background-dark/70 dark:text-background-light/70">
+                    紅棕色毛皮、環狀尾巴、圓耳朵，是森林中最可愛的動物之一
+                </p>
+            </div>
+            <div class="card p-6">
+                <h3 class="font-bold text-lg mb-3 text-primary">生活習性</h3>
+                <p class="text-background-dark/70 dark:text-background-light/70">
+                    主要生活在樹上，擅長攀爬，以竹葉和果實為主要食物
+                </p>
+            </div>
+            <div class="card p-6">
+                <h3 class="font-bold text-lg mb-3 text-primary">保護狀況</h3>
+                <p class="text-background-dark/70 dark:text-background-light/70">
+                    被列為易危物種，全球野生數量約2500隻，需要我們的保護
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 導覽列容器 -->
+<div id="navbar-container"></div>
+
+<script>
+// 載入完成後顯示圖片
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('gallery-grid').classList.remove('hidden');
+        document.getElementById('gallery-grid').classList.add('animate-fade-in');
+    }, 500);
+});
+</script>
+
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/navbar.js"></script>
+</body>
+</html>

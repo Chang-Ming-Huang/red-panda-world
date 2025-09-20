@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小熊貓亞種測驗 - Tokyo Neon</title>
+<style>
+    :root {
+        --neon-black: #000000;
+        --neon-dark: #0a0a0a;
+        --neon-gray: #1a1a1a;
+        --neon-blue: #00ffff;
+        --neon-cyan: #00e5ff;
+        --neon-pink: #ff0080;
+        --neon-purple: #8000ff;
+        --neon-green: #00ff80;
+        --neon-yellow: #ffff00;
+        --neon-orange: #ff8000;
+        --neon-white: #ffffff;
+        --cyber-silver: #b0b0b0;
+        --neon-success: #00ff80;
+        --neon-error: #ff0040;
+        --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        font-family: 'Courier New', 'SF Mono', monospace;
+        background: var(--neon-black);
+        color: var(--neon-white);
+        line-height: 1.6;
+        overflow-x: hidden;
+        padding-bottom: calc(120px + var(--mobile-safe-bottom));
+        min-height: 100vh;
+        font-weight: 400;
+        position: relative;
+    }
+
+    /* 賽博朋克網格背景 */
+    .cyber-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+    }
+
+    .grid-cyber {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image:
+            linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+        background-size: 50px 50px;
+        animation: gridPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes gridPulse {
+        0%, 100% {
+            opacity: 0.3;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.6;
+            transform: scale(1.02);
+        }
+    }
+
+    .neon-line {
+        position: absolute;
+        height: 2px;
+        background: linear-gradient(90deg,
+            transparent,
+            var(--neon-blue),
+            var(--neon-pink),
+            var(--neon-purple),
+            transparent);
+        animation: neonScan 6s linear infinite;
+    }
+
+    .neon-line:nth-child(2) {
+        top: 15%;
+        left: 0;
+        width: 100%;
+        animation-delay: 0s;
+    }
+
+    .neon-line:nth-child(3) {
+        top: 45%;
+        left: 0;
+        width: 100%;
+        animation-delay: -2s;
+    }
+
+    .neon-line:nth-child(4) {
+        top: 75%;
+        left: 0;
+        width: 100%;
+        animation-delay: -4s;
+    }
+
+    @keyframes neonScan {
+        0% {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+    }
+
+    .cyber-particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--neon-blue);
+        border-radius: 50%;
+        animation: particleFloat 8s linear infinite;
+        box-shadow: 0 0 10px currentColor;
+    }
+
+    .cyber-particle:nth-child(5) {
+        top: 20%;
+        left: 10%;
+        color: var(--neon-blue);
+        animation-delay: 0s;
+    }
+
+    .cyber-particle:nth-child(6) {
+        top: 40%;
+        left: 80%;
+        color: var(--neon-pink);
+        animation-delay: -2s;
+    }
+
+    .cyber-particle:nth-child(7) {
+        top: 70%;
+        left: 30%;
+        color: var(--neon-purple);
+        animation-delay: -4s;
+    }
+
+    .cyber-particle:nth-child(8) {
+        top: 60%;
+        left: 70%;
+        color: var(--neon-green);
+        animation-delay: -6s;
+    }
+
+    @keyframes particleFloat {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    .neon-container {
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .neon-header {
+        position: sticky;
+        top: 0;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(20px);
+        z-index: 10;
+        border-bottom: 2px solid var(--neon-blue);
+        margin-bottom: 32px;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    }
+
+    .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 24px 16px;
+    }
+
+    .back-button {
+        background: var(--neon-dark);
+        border: 2px solid var(--neon-blue);
+        color: var(--neon-blue);
+        cursor: pointer;
+        padding: 12px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .back-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .back-button:hover::before {
+        left: 100%;
+    }
+
+    .back-button:hover {
+        color: var(--neon-white);
+        background: var(--neon-blue);
+        box-shadow: 0 0 20px var(--neon-blue);
+        transform: scale(1.1);
+    }
+
+    .header-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--neon-white);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 0 0 10px var(--neon-pink);
+    }
+
+    .neon-card {
+        background: linear-gradient(145deg, var(--neon-dark), var(--neon-gray));
+        border-radius: 16px;
+        box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.8),
+            0 0 0 2px var(--neon-blue);
+        margin-bottom: 24px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .neon-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg,
+            var(--neon-blue),
+            var(--neon-pink),
+            var(--neon-purple),
+            var(--neon-blue));
+        animation: neonFlow 3s linear infinite;
+    }
+
+    @keyframes neonFlow {
+        0% {
+            background-position: 0% 0%;
+        }
+        100% {
+            background-position: 100% 0%;
+        }
+    }
+
+    .neon-card-inner {
+        padding: 32px;
+    }
+
+    .loading-container {
+        text-align: center;
+        padding: 64px 32px;
+    }
+
+    .neon-spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid transparent;
+        border-top: 3px solid var(--neon-blue);
+        border-right: 3px solid var(--neon-pink);
+        border-bottom: 3px solid var(--neon-purple);
+        border-left: 3px solid var(--neon-green);
+        border-radius: 50%;
+        animation: neonSpin 1s linear infinite;
+        margin: 0 auto 16px;
+        position: relative;
+    }
+
+    .neon-spinner::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        right: 2px;
+        bottom: 2px;
+        border: 1px solid var(--neon-yellow);
+        border-radius: 50%;
+        opacity: 0.6;
+        animation: neonSpin 0.8s linear infinite reverse;
+    }
+
+    @keyframes neonSpin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .quiz-start {
+        text-align: center;
+        padding: 48px 32px;
+    }
+
+    .quiz-title {
+        font-size: 32px;
+        font-weight: 900;
+        color: var(--neon-white);
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        text-shadow:
+            0 0 5px var(--neon-pink),
+            0 0 10px var(--neon-pink),
+            0 0 20px var(--neon-pink),
+            0 0 40px var(--neon-pink);
+        animation: neonGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes neonGlow {
+        from {
+            text-shadow:
+                0 0 5px var(--neon-pink),
+                0 0 10px var(--neon-pink),
+                0 0 20px var(--neon-pink),
+                0 0 40px var(--neon-pink);
+        }
+        to {
+            text-shadow:
+                0 0 2px var(--neon-pink),
+                0 0 5px var(--neon-pink),
+                0 0 10px var(--neon-pink),
+                0 0 20px var(--neon-pink);
+        }
+    }
+
+    .quiz-subtitle {
+        font-size: 16px;
+        color: var(--neon-blue);
+        margin-bottom: 40px;
+        line-height: 1.6;
+        text-shadow: 0 0 5px var(--neon-blue);
+    }
+
+    .quiz-rules {
+        background: var(--neon-gray);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 40px;
+        text-align: left;
+        border: 2px solid var(--neon-purple);
+        position: relative;
+        box-shadow: 0 0 20px rgba(128, 0, 255, 0.3);
+    }
+
+    .quiz-rules::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink), var(--neon-purple));
+        animation: ruleGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes ruleGlow {
+        0%, 100% {
+            opacity: 0.6;
+            transform: scaleX(0.8);
+        }
+        50% {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+    }
+
+    .rules-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--neon-white);
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+    }
+
+    .rules-title::before {
+        content: '▶';
+        color: var(--neon-purple);
+        margin-right: 8px;
+        animation: neonPulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes neonPulse {
+        0%, 100% {
+            opacity: 0.6;
+            transform: scale(1);
+            filter: drop-shadow(0 0 5px currentColor);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+    }
+
+    .rules-list {
+        list-style: none;
+    }
+
+    .rules-list li {
+        font-size: 14px;
+        color: var(--neon-blue);
+        margin-bottom: 8px;
+        padding-left: 20px;
+        position: relative;
+        text-shadow: 0 0 3px var(--neon-blue);
+    }
+
+    .rules-list li::before {
+        content: '●';
+        color: var(--neon-green);
+        position: absolute;
+        left: 0;
+        animation: neonPulse 2s ease-in-out infinite;
+        animation-delay: calc(var(--i) * 0.3s);
+    }
+
+    .rules-list li:nth-child(1) { --i: 0; }
+    .rules-list li:nth-child(2) { --i: 1; }
+    .rules-list li:nth-child(3) { --i: 2; }
+    .rules-list li:nth-child(4) { --i: 3; }
+
+    .start-button {
+        background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+        color: var(--neon-white);
+        border: 2px solid var(--neon-pink);
+        border-radius: 12px;
+        padding: 16px 32px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-family: 'Courier New', monospace;
+    }
+
+    .start-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .start-button:hover::before {
+        left: 100%;
+    }
+
+    .start-button:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow:
+            0 0 20px var(--neon-pink),
+            0 0 40px var(--neon-pink),
+            0 8px 24px rgba(255, 0, 128, 0.4);
+    }
+
+    .progress-section {
+        margin-bottom: 24px;
+    }
+
+    .progress-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+
+    .progress-label {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--neon-white);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .progress-counter {
+        font-size: 14px;
+        color: var(--neon-green);
+        font-family: 'Courier New', monospace;
+        text-shadow: 0 0 5px var(--neon-green);
+    }
+
+    .progress-track {
+        width: 100%;
+        height: 6px;
+        background: var(--neon-gray);
+        border-radius: 3px;
+        overflow: hidden;
+        border: 1px solid var(--neon-blue);
+        position: relative;
+    }
+
+    .progress-track::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg,
+            rgba(0, 255, 255, 0.1),
+            rgba(255, 0, 128, 0.1),
+            rgba(0, 255, 255, 0.1));
+        animation: progressGlow 2s ease-in-out infinite;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+        border-radius: 3px;
+        transition: width 0.5s ease;
+        width: 0%;
+        position: relative;
+        box-shadow: 0 0 10px var(--neon-blue);
+    }
+
+    .progress-bar::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -10px;
+        width: 10px;
+        height: 100%;
+        background: linear-gradient(90deg, var(--neon-pink), transparent);
+        border-radius: 0 3px 3px 0;
+    }
+
+    @keyframes progressGlow {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 0.7; }
+    }
+
+    .question-card {
+        margin-bottom: 24px;
+    }
+
+    .question-category {
+        display: inline-block;
+        background: var(--neon-gray);
+        color: var(--neon-yellow);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        border: 1px solid var(--neon-yellow);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 0 0 5px var(--neon-yellow);
+        box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
+    }
+
+    .question-text {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--neon-white);
+        margin-bottom: 24px;
+        line-height: 1.6;
+    }
+
+    .options-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .option-btn {
+        background: var(--neon-gray);
+        border: 2px solid var(--neon-blue);
+        border-radius: 12px;
+        padding: 16px 20px;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 16px;
+        color: var(--neon-white);
+        position: relative;
+        overflow: hidden;
+        font-family: inherit;
+    }
+
+    .option-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .option-btn:hover::before {
+        left: 100%;
+    }
+
+    .option-btn:hover {
+        border-color: var(--neon-pink);
+        color: var(--neon-pink);
+        background: linear-gradient(145deg, var(--neon-dark), var(--neon-gray));
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px rgba(255, 0, 128, 0.4);
+    }
+
+    .option-btn.selected {
+        border-color: var(--neon-pink);
+        color: var(--neon-pink);
+        background: linear-gradient(145deg, rgba(255, 0, 128, 0.1), var(--neon-gray));
+        box-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
+    }
+
+    .option-btn.correct {
+        background: linear-gradient(135deg, rgba(0, 255, 128, 0.2), rgba(0, 255, 128, 0.1));
+        border-color: var(--neon-success);
+        color: var(--neon-success);
+        box-shadow: 0 0 20px rgba(0, 255, 128, 0.5);
+    }
+
+    .option-btn.incorrect {
+        background: linear-gradient(135deg, rgba(255, 0, 64, 0.2), rgba(255, 0, 64, 0.1));
+        border-color: var(--neon-error);
+        color: var(--neon-error);
+        box-shadow: 0 0 20px rgba(255, 0, 64, 0.5);
+    }
+
+    .option-btn:disabled {
+        cursor: not-allowed;
+    }
+
+    .explanation-card {
+        background: var(--neon-gray);
+        border: 2px solid var(--neon-purple);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 24px;
+        position: relative;
+        box-shadow: 0 0 20px rgba(128, 0, 255, 0.3);
+    }
+
+    .explanation-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue), var(--neon-purple));
+        animation: explanationGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes explanationGlow {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+    }
+
+    .explanation-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--neon-purple);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        text-shadow: 0 0 5px var(--neon-purple);
+    }
+
+    .explanation-title::before {
+        content: '◎';
+        margin-right: 8px;
+        animation: neonPulse 2s ease-in-out infinite;
+    }
+
+    .explanation-text {
+        font-size: 15px;
+        color: var(--neon-white);
+        line-height: 1.6;
+    }
+
+    .next-button-container {
+        text-align: center;
+    }
+
+    .next-button {
+        background: linear-gradient(45deg, var(--neon-orange), var(--neon-yellow));
+        color: var(--neon-black);
+        border: 2px solid var(--neon-orange);
+        border-radius: 12px;
+        padding: 14px 28px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-family: 'Courier New', monospace;
+    }
+
+    .next-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .next-button:hover::before {
+        left: 100%;
+    }
+
+    .next-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px var(--neon-orange);
+    }
+
+    .results-container {
+        text-align: center;
+        padding: 48px 32px;
+    }
+
+    .result-emoji {
+        font-size: 64px;
+        margin-bottom: 16px;
+        animation: neonCelebrate 1s ease-out;
+        filter: drop-shadow(0 0 20px var(--neon-pink));
+    }
+
+    @keyframes neonCelebrate {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0) rotate(0deg) scale(1);
+        }
+        10% {
+            transform: translateY(-10px) rotate(-5deg) scale(1.1);
+        }
+        30% {
+            transform: translateY(-15px) rotate(5deg) scale(1.15);
+        }
+        40% {
+            transform: translateY(-20px) rotate(-3deg) scale(1.12);
+        }
+        60% {
+            transform: translateY(-10px) rotate(3deg) scale(1.05);
+        }
+        70% {
+            transform: translateY(-5px) rotate(-2deg) scale(1.03);
+        }
+    }
+
+    .result-title {
+        font-size: 28px;
+        font-weight: 900;
+        color: var(--neon-white);
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: -0.5px;
+        text-shadow: 0 0 10px var(--neon-pink);
+    }
+
+    .result-message {
+        font-size: 16px;
+        color: var(--neon-blue);
+        margin-bottom: 32px;
+        line-height: 1.6;
+        text-shadow: 0 0 5px var(--neon-blue);
+    }
+
+    .score-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .score-item {
+        background: var(--neon-gray);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        border: 2px solid;
+        position: relative;
+    }
+
+    .score-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        opacity: 0.8;
+    }
+
+    .score-item.correct {
+        border-color: var(--neon-success);
+        box-shadow: 0 0 20px rgba(0, 255, 128, 0.3);
+    }
+
+    .score-item.correct::before {
+        background: linear-gradient(90deg, transparent, var(--neon-success), transparent);
+    }
+
+    .score-item.incorrect {
+        border-color: var(--neon-error);
+        box-shadow: 0 0 20px rgba(255, 0, 64, 0.3);
+    }
+
+    .score-item.incorrect::before {
+        background: linear-gradient(90deg, transparent, var(--neon-error), transparent);
+    }
+
+    .score-number {
+        font-size: 24px;
+        font-weight: 900;
+        margin-bottom: 4px;
+        font-family: 'Courier New', monospace;
+    }
+
+    .score-item.correct .score-number {
+        color: var(--neon-success);
+        text-shadow: 0 0 10px var(--neon-success);
+    }
+
+    .score-item.incorrect .score-number {
+        color: var(--neon-error);
+        text-shadow: 0 0 10px var(--neon-error);
+    }
+
+    .score-label {
+        font-size: 14px;
+        color: var(--neon-white);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .final-score {
+        background: var(--neon-gray);
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 32px;
+        border: 2px solid var(--neon-pink);
+        box-shadow: 0 0 30px rgba(255, 0, 128, 0.4);
+        position: relative;
+    }
+
+    .final-score::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink), var(--neon-purple), var(--neon-blue));
+        animation: finalGlow 3s linear infinite;
+    }
+
+    @keyframes finalGlow {
+        0% { background-position: 0% 0%; }
+        100% { background-position: 100% 0%; }
+    }
+
+    .final-score-number {
+        font-size: 36px;
+        font-weight: 900;
+        color: var(--neon-pink);
+        margin-bottom: 4px;
+        font-family: 'Courier New', monospace;
+        text-shadow:
+            0 0 5px var(--neon-pink),
+            0 0 10px var(--neon-pink),
+            0 0 20px var(--neon-pink);
+    }
+
+    .final-score-label {
+        font-size: 14px;
+        color: var(--neon-white);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .action-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .action-button {
+        padding: 16px 24px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid;
+        position: relative;
+        overflow: hidden;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-family: 'Courier New', monospace;
+    }
+
+    .action-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .action-button:hover::before {
+        left: 100%;
+    }
+
+    .action-button.primary {
+        background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+        color: var(--neon-white);
+        border-color: var(--neon-pink);
+    }
+
+    .action-button.primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px var(--neon-pink);
+    }
+
+    .action-button.secondary {
+        background: var(--neon-gray);
+        color: var(--neon-blue);
+        border-color: var(--neon-blue);
+    }
+
+    .action-button.secondary:hover {
+        color: var(--neon-white);
+        background: var(--neon-blue);
+        transform: translateY(-1px);
+        box-shadow: 0 0 15px var(--neon-blue);
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    /* Mobile Navigation Styles */
+    .navbar-fixed {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(20px);
+        border-top: 2px solid var(--neon-blue);
+        padding-bottom: var(--mobile-safe-bottom);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    }
+</style>
+</head>
+<body>
+<div class="cyber-bg">
+    <div class="grid-cyber"></div>
+    <div class="neon-line"></div>
+    <div class="neon-line"></div>
+    <div class="neon-line"></div>
+    <div class="cyber-particle"></div>
+    <div class="cyber-particle"></div>
+    <div class="cyber-particle"></div>
+    <div class="cyber-particle"></div>
+</div>
+
+<div class="neon-header">
+    <div class="header-content">
+        <button class="back-button" onclick="goBack()">
+            <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor">
+                <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+            </svg>
+        </button>
+        <h1 class="header-title">QUIZ_MODULE.EXE</h1>
+        <div style="width: 44px;"></div>
+    </div>
+</div>
+
+<div class="neon-container">
+    <!-- 載入畫面 -->
+    <div id="loading" class="neon-card">
+        <div class="loading-container">
+            <div class="neon-spinner"></div>
+            <p style="color: var(--neon-blue); text-shadow: 0 0 5px var(--neon-blue);">LOADING QUIZ DATA...</p>
+        </div>
+    </div>
+
+    <!-- 測驗開始畫面 -->
+    <div id="quiz-start" class="neon-card hidden">
+        <div class="quiz-start">
+            <h1 class="quiz-title">🐾 小熊貓亞種測驗</h1>
+            <p class="quiz-subtitle">
+                測試你對中華小熊貓和喜馬拉雅小熊貓的了解程度！
+            </p>
+            <div class="quiz-rules">
+                <h3 class="rules-title">SYSTEM_PARAMETERS</h3>
+                <ul class="rules-list">
+                    <li>共 <span id="total-questions" style="font-weight: 700; color: var(--neon-pink); text-shadow: 0 0 5px var(--neon-pink);"></span> 道題目</li>
+                    <li>每題選擇後會立即顯示答案解釋</li>
+                    <li>答對 <span id="passing-score" style="font-weight: 700; color: var(--neon-pink); text-shadow: 0 0 5px var(--neon-pink);"></span> 題以上算通過</li>
+                    <li>完成後會給你專屬的成績評價</li>
+                </ul>
+            </div>
+            <button class="start-button" onclick="startQuiz()">
+                🚀 INITIALIZE QUIZ
+            </button>
+        </div>
+    </div>
+
+    <!-- 測驗進行中 -->
+    <div id="quiz-content" class="hidden">
+        <!-- 進度條 -->
+        <div class="progress-section">
+            <div class="progress-header">
+                <span class="progress-label">PROGRESS</span>
+                <span class="progress-counter">
+                    <span id="current-question">1</span> / <span id="total-questions-display"></span>
+                </span>
+            </div>
+            <div class="progress-track">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+        </div>
+
+        <!-- 問題卡片 -->
+        <div class="neon-card question-card">
+            <div class="neon-card-inner">
+                <div class="question-category" id="question-category"></div>
+                <h2 class="question-text" id="question-text"></h2>
+                <div id="options-container" class="options-container">
+                    <!-- 選項會動態插入 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 答案解釋 -->
+        <div id="explanation" class="explanation-card hidden">
+            <h3 class="explanation-title">💡 DATA_ANALYSIS</h3>
+            <p id="explanation-text" class="explanation-text"></p>
+        </div>
+
+        <!-- 下一題按鈕 -->
+        <div id="next-button-container" class="next-button-container hidden">
+            <button class="next-button" onclick="nextQuestion()">
+                NEXT_QUERY →
+            </button>
+        </div>
+    </div>
+
+    <!-- 結果頁面 -->
+    <div id="quiz-results" class="neon-card hidden">
+        <div class="results-container">
+            <div id="result-emoji" class="result-emoji"></div>
+            <h2 id="result-title" class="result-title"></h2>
+            <p id="result-message" class="result-message"></p>
+
+            <!-- 成績統計 -->
+            <div class="score-grid">
+                <div class="score-item correct">
+                    <div class="score-number" id="correct-count">0</div>
+                    <div class="score-label">CORRECT</div>
+                </div>
+                <div class="score-item incorrect">
+                    <div class="score-number" id="incorrect-count">0</div>
+                    <div class="score-label">INCORRECT</div>
+                </div>
+            </div>
+
+            <div class="final-score">
+                <div class="final-score-number" id="final-score">0%</div>
+                <div class="final-score-label">TOTAL_SCORE</div>
+            </div>
+
+            <!-- 操作按鈕 -->
+            <div class="action-buttons">
+                <button class="action-button primary" onclick="restartQuiz()">
+                    🔄 RESTART_QUIZ
+                </button>
+                <button class="action-button secondary" onclick="window.location.href='compare.html'">
+                    📚 RETURN_TO_STUDY
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="navbar-container"></div>
+
+<script>
+let quizData = null;
+let currentQuestionIndex = 0;
+let userAnswers = [];
+let score = 0;
+
+// 載入測驗資料
+async function loadQuizData() {
+    try {
+        const response = await fetch('../../data/quiz.json');
+        quizData = await response.json();
+
+        // 更新開始頁面資訊
+        document.getElementById('total-questions').textContent = quizData.quiz_info.total_questions;
+        document.getElementById('passing-score').textContent = quizData.quiz_info.passing_score;
+        document.getElementById('total-questions-display').textContent = quizData.quiz_info.total_questions;
+
+        // 隱藏載入畫面，顯示開始頁面
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('quiz-start').classList.remove('hidden');
+    } catch (error) {
+        console.error('載入測驗失敗:', error);
+        document.getElementById('loading').innerHTML = '<div class="loading-container"><p style="color: var(--neon-error); text-shadow: 0 0 5px var(--neon-error);">LOADING FAILED - SYSTEM ERROR</p></div>';
+    }
+}
+
+// 開始測驗
+function startQuiz() {
+    document.getElementById('quiz-start').classList.add('hidden');
+    document.getElementById('quiz-content').classList.remove('hidden');
+    currentQuestionIndex = 0;
+    userAnswers = [];
+    score = 0;
+    showQuestion();
+}
+
+// 顯示問題
+function showQuestion() {
+    const question = quizData.questions[currentQuestionIndex];
+    const category = quizData.categories[question.category];
+
+    // 更新進度
+    const progress = ((currentQuestionIndex + 1) / quizData.questions.length) * 100;
+    document.getElementById('progress-bar').style.width = progress + '%';
+    document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+
+    // 更新問題內容
+    document.getElementById('question-category').textContent = category.name;
+    document.getElementById('question-text').textContent = question.question;
+
+    // 清除選項
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+
+    // 添加選項
+    question.options.forEach((option, index) => {
+        const optionButton = document.createElement('button');
+        optionButton.className = 'option-btn';
+        optionButton.textContent = option.text;
+        optionButton.onclick = () => selectOption(index, option.correct);
+        optionsContainer.appendChild(optionButton);
+    });
+
+    // 隱藏解釋和下一題按鈕
+    document.getElementById('explanation').classList.add('hidden');
+    document.getElementById('next-button-container').classList.add('hidden');
+}
+
+// 選擇選項
+function selectOption(selectedIndex, isCorrect) {
+    const question = quizData.questions[currentQuestionIndex];
+    userAnswers.push({
+        questionId: question.id,
+        selectedIndex: selectedIndex,
+        correct: isCorrect
+    });
+
+    if (isCorrect) {
+        score++;
+    }
+
+    // 顯示答案狀態
+    const options = document.querySelectorAll('.option-btn');
+    options.forEach((btn, index) => {
+        btn.disabled = true;
+        btn.onclick = null;
+
+        if (question.options[index].correct) {
+            btn.classList.add('correct');
+        } else if (index === selectedIndex && !isCorrect) {
+            btn.classList.add('incorrect');
+        }
+    });
+
+    // 顯示解釋
+    document.getElementById('explanation-text').textContent = question.explanation;
+    document.getElementById('explanation').classList.remove('hidden');
+
+    // 顯示下一題按鈕或完成按鈕
+    const nextButtonContainer = document.getElementById('next-button-container');
+    const nextButton = nextButtonContainer.querySelector('button');
+
+    if (currentQuestionIndex < quizData.questions.length - 1) {
+        nextButton.textContent = 'NEXT_QUERY →';
+        nextButton.onclick = nextQuestion;
+    } else {
+        nextButton.textContent = 'VIEW_RESULTS 🎉';
+        nextButton.onclick = showResults;
+    }
+
+    nextButtonContainer.classList.remove('hidden');
+}
+
+// 下一題
+function nextQuestion() {
+    currentQuestionIndex++;
+    showQuestion();
+}
+
+// 顯示結果
+function showResults() {
+    document.getElementById('quiz-content').classList.add('hidden');
+    document.getElementById('quiz-results').classList.remove('hidden');
+
+    const percentage = Math.round((score / quizData.questions.length) * 100);
+    const correctCount = score;
+    const incorrectCount = quizData.questions.length - score;
+
+    // 確定評級
+    let feedback = null;
+    for (const [key, value] of Object.entries(quizData.score_feedback)) {
+        const [min, max] = value.score_range;
+        if (score >= min && score <= max) {
+            feedback = value;
+            break;
+        }
+    }
+
+    if (!feedback) {
+        feedback = quizData.score_feedback.needs_improvement;
+    }
+
+    // 更新結果顯示
+    document.getElementById('result-emoji').textContent = feedback.emoji;
+    document.getElementById('result-title').textContent = feedback.title;
+    document.getElementById('result-message').textContent = feedback.message;
+    document.getElementById('correct-count').textContent = correctCount;
+    document.getElementById('incorrect-count').textContent = incorrectCount;
+    document.getElementById('final-score').textContent = percentage + '%';
+}
+
+// 重新開始測驗
+function restartQuiz() {
+    document.getElementById('quiz-results').classList.add('hidden');
+    document.getElementById('quiz-start').classList.remove('hidden');
+    currentQuestionIndex = 0;
+    userAnswers = [];
+    score = 0;
+}
+
+// 返回上一頁
+function goBack() {
+    if (document.getElementById('quiz-content').classList.contains('hidden') &&
+        document.getElementById('quiz-results').classList.contains('hidden')) {
+        // 在開始頁面，返回比較頁面
+        window.location.href = 'compare.html';
+    } else {
+        // 在測驗中，詢問是否確定離開
+        if (confirm('確定要離開測驗嗎？進度將會丟失。')) {
+            window.location.href = 'compare.html';
+        }
+    }
+}
+
+// 頁面載入完成後執行
+document.addEventListener('DOMContentLoaded', loadQuizData);
+</script>
+<script src="assets/js/navbar.js"></script>
+</body>
+</html>

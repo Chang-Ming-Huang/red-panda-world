@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@modelcontextprotocol/server-playwright"],
+      "env": {
+        "PLAYWRIGHT_PROJECT_DIR": "/mnt/c/Users/TIM_PC/Desktop/red_panda"
+      }
+    }
+  }
+}

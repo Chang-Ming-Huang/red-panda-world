@@ -1,0 +1,132 @@
+{
+  "metadata": {
+    "title": "小熊貓亞種比較",
+    "description": "中華小熊貓與喜馬拉雅小熊貓的詳細比較",
+    "last_updated": "2024-09-19"
+  },
+  "subspecies": [
+    {
+      "id": "chinese",
+      "name": "中華小熊貓",
+      "english_name": "Chinese Red Panda",
+      "scientific_name": "Ailurus fulgens styani",
+      "image": "./images/chinese-red-panda.webp",
+      "description": "體型較大的亞種，毛色深紅棕色，主要分布在中國南部山區。面部白色標記明顯，尾巴環紋較多且清晰。",
+      "characteristics": {
+        "body_size": {
+          "weight": "4.2-6.2kg",
+          "description": "較大體型"
+        },
+        "appearance": {
+          "fur_color": "深紅棕色",
+          "tail_rings": "7-9個清晰環紋",
+          "face_markings": "白色標記明顯且對稱",
+          "skull": "較寬大"
+        },
+        "habitat": {
+          "location": "中國南部 (四川南部、雲南、貴州)",
+          "elevation": "1500-4300m",
+          "climate": "亞熱帶高山氣候",
+          "forest_type": "針闊混交林"
+        },
+        "behavior": {
+          "activity_pattern": "晨昏性為主",
+          "social": "領域性較強",
+          "movement": "謹慎型攀爬",
+          "communication": "低頻叫聲、頻繁氣味標記"
+        }
+      },
+      "conservation": {
+        "population": "約2500隻以下",
+        "threats": ["森林砍伐", "棲息地破碎化", "人類活動干擾"],
+        "protection": "溫帶森林保護、人工繁殖計畫"
+      }
+    },
+    {
+      "id": "himalayan",
+      "name": "喜馬拉雅小熊貓",
+      "english_name": "Himalayan Red Panda",
+      "scientific_name": "Ailurus fulgens fulgens",
+      "image": "./images/himalayan-red-panda.webp",
+      "description": "體型較小的亞種，毛色淺金紅色，分布在喜馬拉雅山脈西部。體型纖細，適應高海拔環境。",
+      "characteristics": {
+        "body_size": {
+          "weight": "3.0-4.8kg",
+          "description": "較小體型"
+        },
+        "appearance": {
+          "fur_color": "淺金紅色",
+          "tail_rings": "5-7個較模糊環紋",
+          "face_markings": "白色標記較為柔和",
+          "skull": "較窄小"
+        },
+        "habitat": {
+          "location": "喜馬拉雅山脈 (尼泊爾、印度、不丹、緬甸北部)",
+          "elevation": "2200-4800m",
+          "climate": "高山寒溫帶氣候",
+          "forest_type": "針葉林和高山灌叢"
+        },
+        "behavior": {
+          "activity_pattern": "日間活動更多",
+          "social": "較為寬容",
+          "movement": "敏捷型攀爬",
+          "communication": "高頻叫聲、豐富身體語言"
+        }
+      },
+      "conservation": {
+        "population": "約2000隻以下",
+        "threats": ["極端氣候變化", "高海拔棲息地退化", "人畜衝突"],
+        "protection": "高山生態系統保護、氣候變化監測"
+      }
+    }
+  ],
+  "comparisons": {
+    "physical": {
+      "size_difference": "中華小熊貓比喜馬拉雅小熊貓大20-25%",
+      "color_contrast": "中華：深紅棕色 vs 喜馬拉雅：淺金紅色",
+      "tail_markings": "中華：7-9個清晰環紋 vs 喜馬拉雅：5-7個模糊環紋",
+      "facial_features": "中華：明顯對稱白斑 vs 喜馬拉雅：柔和白斑"
+    },
+    "habitat": {
+      "altitude": "中華：1500-4300m vs 喜馬拉雅：2200-4800m",
+      "climate": "中華：溫和亞熱帶 vs 喜馬拉雅：極端高山氣候",
+      "environment": "中華：針闊混交林 vs 喜馬拉雅：針葉林和高山灌叢"
+    },
+    "behavior": {
+      "activity": "中華：主要晨昏活動 vs 喜馬拉雅：增加日間活動",
+      "social": "中華：強領域性 vs 喜馬拉雅：較為寬容",
+      "movement": "中華：謹慎攀爬 vs 喜馬拉雅：敏捷攀爬",
+      "migration": "中華：固定棲息 vs 喜馬拉雅：季節性海拔遷移"
+    }
+  },
+  "identification_guide": {
+    "quick_tips": [
+      {
+        "feature": "體型大小",
+        "chinese": "較大 (如小型犬)",
+        "himalayan": "較小 (如貓咪)"
+      },
+      {
+        "feature": "毛色",
+        "chinese": "深紅棕色",
+        "himalayan": "淺金紅色"
+      },
+      {
+        "feature": "尾巴環紋",
+        "chinese": "多而清晰 (7-9個)",
+        "himalayan": "少而模糊 (5-7個)"
+      },
+      {
+        "feature": "分布地區",
+        "chinese": "中國境內",
+        "himalayan": "其他國家"
+      }
+    ]
+  },
+  "genetic_info": {
+    "divergence_time": "22-24萬年前開始分化",
+    "genetic_difference": "基因序列差異約2.2%",
+    "current_status": "可能為兩個不同物種",
+    "gene_flow": "目前兩群體間幾乎無基因交流"
+  }
+}

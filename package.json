@@ -1,0 +1,27 @@
+{
+  "name": "red_panda",
+  "version": "1.0.0",
+  "description": "一個專門介紹小熊貓亞種差異的互動式網站，適合手機瀏覽。",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test --config=config/playwright.config.js",
+    "test:mobile": "playwright test --config=config/playwright.config.js --project='Mobile Chrome' --project='Mobile Safari'",
+    "test:mobile-only": "playwright test --config=config/playwright.config.js --project='Mobile Chrome'",
+    "test:headed": "playwright test --config=config/playwright.config.js --headed",
+    "test:ui": "playwright test --config=config/playwright.config.js --ui",
+    "test:debug": "playwright test --config=config/playwright.config.js --debug",
+    "test:report": "playwright show-report",
+    "start": "python3 server.py",
+    "dev": "python3 server.py --host 0.0.0.0",
+    "validate": "python3 scripts/test_json.py"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.18.1",
+    "@playwright/test": "^1.55.0",
+    "playwright": "^1.55.0"
+  }
+}

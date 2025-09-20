@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小熊貓世界 - 探索可愛的森林精靈</title>
+<style>
+    :root {
+        --tech-black: #0a0a0a;
+        --tech-dark: #1a1a1a;
+        --tech-gray: #2a2a2a;
+        --tech-light: #3a3a3a;
+        --tech-white: #ffffff;
+        --tech-silver: #e5e7eb;
+        --tech-accent: #ec6d13;
+        --tech-blue: #0066cc;
+        --tech-green: #00ff88;
+        --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+        background: var(--tech-black);
+        color: var(--tech-white);
+        line-height: 1.6;
+        overflow-x: hidden;
+        padding-bottom: calc(120px + var(--mobile-safe-bottom));
+        min-height: 100vh;
+        font-weight: 400;
+    }
+
+    /* 科技網格背景 */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 20px 20px;
+        z-index: -1;
+    }
+
+    /* 簡潔頂部裝飾線 */
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--tech-accent);
+        z-index: 100;
+    }
+
+    /* Header */
+    .premium-header {
+        text-align: center;
+        padding: 4rem 2rem 3rem;
+        background: var(--tech-dark);
+        border-bottom: 1px solid var(--tech-gray);
+    }
+
+    .premium-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--tech-white);
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+    }
+
+    .premium-subtitle {
+        font-size: 0.9rem;
+        color: var(--tech-silver);
+        font-weight: 400;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    /* Main Container */
+    .premium-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* Hero Section */
+    .premium-hero {
+        margin: 4rem 0;
+        background: var(--tech-dark);
+        border: 1px solid var(--tech-gray);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .premium-hero-image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        filter: contrast(1.1) brightness(0.95);
+    }
+
+    .premium-hero-content {
+        padding: 3rem 2rem;
+        text-align: center;
+    }
+
+    .premium-hero-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--tech-white);
+        margin-bottom: 1rem;
+        letter-spacing: -0.01em;
+    }
+
+    .premium-hero-description {
+        font-size: 0.95rem;
+        color: var(--tech-silver);
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+
+    .premium-button {
+        background: var(--tech-accent);
+        color: var(--tech-white);
+        padding: 1.2rem 2rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 12px rgba(236, 109, 19, 0.3);
+    }
+
+    .premium-button:hover {
+        background: #d55a0e;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(236, 109, 19, 0.4);
+    }
+
+    /* Feature Cards */
+    .premium-features {
+        margin: 4rem 0;
+    }
+
+    .premium-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .premium-card {
+        background: var(--tech-gray);
+        border: 1px solid var(--tech-light);
+        border-radius: 12px;
+        padding: 2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .premium-card:hover {
+        transform: translateY(-4px);
+        background: var(--tech-light);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .premium-card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .premium-card-icon {
+        width: 48px;
+        height: 48px;
+        background: var(--tech-black);
+        border: 1px solid var(--tech-gray);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        font-size: 1.5rem;
+    }
+
+    .premium-card-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--tech-white);
+    }
+
+    .premium-card-subtitle {
+        font-size: 0.8rem;
+        color: var(--tech-accent);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .premium-card-description {
+        font-size: 0.95rem;
+        color: var(--tech-silver);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .premium-card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid var(--tech-light);
+        padding-top: 1rem;
+    }
+
+    .premium-badge {
+        font-size: 0.75rem;
+        color: var(--tech-accent);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .premium-arrow {
+        color: var(--tech-accent);
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    /* Quick Info */
+    .premium-info {
+        margin: 4rem 0;
+        background: var(--tech-gray);
+        border: 1px solid var(--tech-light);
+        border-radius: 12px;
+        padding: 2rem;
+    }
+
+    .premium-info-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--tech-white);
+        margin-bottom: 2rem;
+        text-align: center;
+        border-bottom: 1px solid var(--tech-light);
+        padding-bottom: 1rem;
+    }
+
+    .premium-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .premium-stat {
+        padding: 1.5rem 1rem;
+        background: var(--tech-black);
+        border: 1px solid var(--tech-gray);
+        border-radius: 8px;
+    }
+
+    .premium-stat-number {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--tech-accent);
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .premium-stat-label {
+        font-size: 0.8rem;
+        color: var(--tech-silver);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 1.4;
+    }
+
+    /* Conservation Message */
+    .premium-conservation {
+        margin: 4rem 0;
+        background: var(--tech-gray);
+        border: 1px solid var(--tech-light);
+        border-left: 4px solid var(--tech-accent);
+        border-radius: 12px;
+        padding: 2rem;
+    }
+
+    .premium-conservation-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .premium-conservation-icon {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+    }
+
+    .premium-conservation-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--tech-white);
+    }
+
+    .premium-conservation-text {
+        font-size: 0.95rem;
+        color: var(--tech-silver);
+        line-height: 1.6;
+    }
+
+    /* 狀態指示器 */
+    .status-indicator {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        display: flex;
+        gap: 0.5rem;
+        z-index: 1000;
+    }
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--tech-green);
+        animation: statusBlink 2s infinite;
+    }
+
+    .status-dot:nth-child(2) {
+        background: var(--tech-blue);
+        animation-delay: 0.5s;
+    }
+
+    .status-dot:nth-child(3) {
+        background: var(--tech-accent);
+        animation-delay: 1s;
+    }
+
+    @keyframes statusBlink {
+        0%, 50% {
+            opacity: 1;
+        }
+        51%, 100% {
+            opacity: 0.3;
+        }
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+        .premium-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .premium-stats {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- 狀態指示器 -->
+    <div class="status-indicator">
+        <div class="status-dot"></div>
+        <div class="status-dot"></div>
+        <div class="status-dot"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="premium-header">
+        <h1 class="premium-title">小熊貓世界</h1>
+        <p class="premium-subtitle">探索・學習・保護</p>
+    </header>
+
+    <div class="premium-container">
+        <!-- Hero Section -->
+        <section class="premium-hero">
+            <img src="../../images/red-panda.jpg" alt="小熊貓" class="premium-hero-image">
+            <div class="premium-hero-content">
+                <h2 class="premium-hero-title">小熊貓</h2>
+                <p class="premium-hero-description">
+                    探索這些迷人森林精靈的奇妙世界，了解牠們的習性、棲息地和保護現況。
+                </p>
+                <a href="compare.html" class="premium-button">開始探索</a>
+            </div>
+        </section>
+
+        <!-- Feature Cards -->
+        <section class="premium-features">
+            <div class="premium-grid">
+                <div class="premium-card" onclick="window.location.href='compare.html'">
+                    <div class="premium-card-header">
+                        <div class="premium-card-icon">🐾</div>
+                        <div>
+                            <div class="premium-card-title">亞種比較</div>
+                            <div class="premium-card-subtitle">了解差異</div>
+                        </div>
+                    </div>
+                    <p class="premium-card-description">
+                        深入了解中華小熊貓和喜馬拉雅小熊貓之間的外觀、分佈和行為差異。
+                    </p>
+                    <div class="premium-card-footer">
+                        <span class="premium-badge">外觀・分佈・習性</span>
+                        <span class="premium-arrow">→</span>
+                    </div>
+                </div>
+
+                <div class="premium-card" onclick="window.location.href='species-comparison.html'">
+                    <div class="premium-card-header">
+                        <div class="premium-card-icon">🔍</div>
+                        <div>
+                            <div class="premium-card-title">物種比較</div>
+                            <div class="premium-card-subtitle">跨物種對比</div>
+                        </div>
+                    </div>
+                    <p class="premium-card-description">
+                        比較小熊貓與大熊貓、浣熊等相似動物的特徵和習性差異。
+                    </p>
+                    <div class="premium-card-footer">
+                        <span class="premium-badge">多物種對比</span>
+                        <span class="premium-arrow">→</span>
+                    </div>
+                </div>
+
+                <div class="premium-card" onclick="window.location.href='quiz.html'">
+                    <div class="premium-card-header">
+                        <div class="premium-card-icon">🧩</div>
+                        <div>
+                            <div class="premium-card-title">知識測驗</div>
+                            <div class="premium-card-subtitle">挑戰自己</div>
+                        </div>
+                    </div>
+                    <p class="premium-card-description">
+                        通過有趣的測驗來檢驗你對小熊貓亞種知識的掌握程度。
+                    </p>
+                    <div class="premium-card-footer">
+                        <span class="premium-badge">8題測驗</span>
+                        <span class="premium-arrow">→</span>
+                    </div>
+                </div>
+
+                <div class="premium-card" onclick="window.location.href='gallery.html'">
+                    <div class="premium-card-header">
+                        <div class="premium-card-icon">📸</div>
+                        <div>
+                            <div class="premium-card-title">圖片藝廊</div>
+                            <div class="premium-card-subtitle">視覺饗宴</div>
+                        </div>
+                    </div>
+                    <p class="premium-card-description">
+                        欣賞精美的小熊貓照片，感受牠們的可愛與魅力。
+                    </p>
+                    <div class="premium-card-footer">
+                        <span class="premium-badge">高清圖片</span>
+                        <span class="premium-arrow">→</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Info -->
+        <section class="premium-info">
+            <h3 class="premium-info-title">小熊貓小檔案</h3>
+            <div class="premium-stats">
+                <div class="premium-stat">
+                    <span class="premium-stat-number">2</span>
+                    <span class="premium-stat-label">已知亞種</span>
+                </div>
+                <div class="premium-stat">
+                    <span class="premium-stat-number">4500</span>
+                    <span class="premium-stat-label">野生數量（隻）</span>
+                </div>
+                <div class="premium-stat">
+                    <span class="premium-stat-number">2200-4800</span>
+                    <span class="premium-stat-label">棲息海拔（公尺）</span>
+                </div>
+                <div class="premium-stat">
+                    <span class="premium-stat-number">95%</span>
+                    <span class="premium-stat-label">竹子飲食比例</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conservation Message -->
+        <section class="premium-conservation">
+            <div class="premium-conservation-header">
+                <span class="premium-conservation-icon">⚠️</span>
+                <h3 class="premium-conservation-title">保護現況</h3>
+            </div>
+            <p class="premium-conservation-text">
+                小熊貓目前被列為瀕危物種，野生數量不足5000隻。棲息地破壞、氣候變化和人類活動是牠們面臨的主要威脅。
+                我們每個人都可以透過支持保護組織、減少碳足跡等方式來幫助保護這些可愛的生物。
+            </p>
+        </section>
+    </div>
+
+    <!-- Navigation Container -->
+    <div id="navbar-container"></div>
+
+    <script src="assets/js/navbar.js"></script>
+</body>
+</html>

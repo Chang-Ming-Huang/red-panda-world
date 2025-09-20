@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小熊貓世界 - 探索可愛的森林精靈</title>
+<style>
+    :root {
+        --flow-sage: #9caf88;
+        --flow-moss: #7a8471;
+        --flow-cream: #f7f5f1;
+        --flow-white: #ffffff;
+        --flow-earth: #8b7355;
+        --flow-stone: #a8a090;
+        --flow-bark: #6b5b47;
+        --red-panda-orange: #ec6d13;
+        --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        font-family: 'Georgia', 'Times New Roman', serif;
+        background: var(--flow-cream);
+        color: var(--flow-bark);
+        line-height: 1.7;
+        overflow-x: hidden;
+        padding-bottom: calc(120px + var(--mobile-safe-bottom));
+        min-height: 100vh;
+    }
+
+    /* 有機流動背景 */
+    .flow-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+    }
+
+    .flow-shape {
+        position: absolute;
+        background: var(--flow-sage);
+        opacity: 0.08;
+        border-radius: 60% 40% 60% 40%;
+    }
+
+    .flow-shape:nth-child(1) {
+        width: 300px;
+        height: 200px;
+        top: 5%;
+        right: -10%;
+        animation: organicFlow 25s infinite ease-in-out;
+    }
+
+    .flow-shape:nth-child(2) {
+        width: 250px;
+        height: 180px;
+        top: 50%;
+        left: -8%;
+        background: var(--flow-moss);
+        animation: organicFlow 30s infinite ease-in-out reverse;
+    }
+
+    .flow-shape:nth-child(3) {
+        width: 200px;
+        height: 150px;
+        bottom: 10%;
+        right: 5%;
+        background: var(--flow-earth);
+        animation: organicFlow 35s infinite ease-in-out;
+    }
+
+    @keyframes organicFlow {
+        0%, 100% {
+            border-radius: 60% 40% 60% 40%;
+            transform: rotate(0deg) scale(1);
+        }
+        25% {
+            border-radius: 40% 60% 50% 50%;
+            transform: rotate(90deg) scale(1.1);
+        }
+        50% {
+            border-radius: 70% 30% 70% 30%;
+            transform: rotate(180deg) scale(0.9);
+        }
+        75% {
+            border-radius: 50% 50% 40% 60%;
+            transform: rotate(270deg) scale(1.05);
+        }
+    }
+
+    /* Header */
+    .flow-header {
+        text-align: center;
+        padding: 4rem 2rem 3rem;
+        background: var(--flow-white);
+        border-bottom: 1px solid var(--flow-stone);
+        position: relative;
+    }
+
+    .flow-header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 8px;
+        background: var(--flow-sage);
+        clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+    }
+
+    .flow-title {
+        font-size: 2.2rem;
+        font-weight: 400;
+        color: var(--flow-bark);
+        margin-bottom: 1rem;
+        letter-spacing: 0.01em;
+    }
+
+    .flow-subtitle {
+        font-size: 1rem;
+        color: var(--flow-moss);
+        font-style: italic;
+        letter-spacing: 0.5px;
+    }
+
+    /* Main Container */
+    .flow-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* Hero Section */
+    .flow-hero {
+        margin: 4rem 0;
+        background: var(--flow-white);
+        border: 1px solid var(--flow-stone);
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        border-radius: 25px 10px 25px 10px;
+    }
+
+    .flow-hero-image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+
+    .flow-hero-content {
+        padding: 3rem 2rem;
+        text-align: center;
+    }
+
+    .flow-hero-title {
+        font-size: 1.8rem;
+        font-weight: 400;
+        color: var(--flow-bark);
+        margin-bottom: 1rem;
+        font-family: 'Georgia', serif;
+    }
+
+    .flow-hero-description {
+        font-size: 0.95rem;
+        color: var(--flow-moss);
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+
+    .flow-button {
+        background: var(--flow-sage);
+        color: var(--flow-white);
+        padding: 1.2rem 2rem;
+        border: 2px solid var(--flow-moss);
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        font-family: 'Georgia', serif;
+        border-radius: 30px 15px 30px 15px;
+        box-shadow: 0 4px 12px rgba(156, 175, 136, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .flow-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.3);
+        transition: left 0.5s ease;
+    }
+
+    .flow-button:hover::before {
+        left: 100%;
+    }
+
+    .flow-button:hover {
+        background: var(--red-panda-orange);
+        border-color: var(--flow-moss);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(156, 175, 136, 0.4);
+    }
+
+    /* Feature Cards */
+    .flow-features {
+        margin: 4rem 0;
+    }
+
+    .flow-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .flow-card {
+        background: var(--flow-white);
+        border: 1px solid var(--flow-stone);
+        padding: 2.5rem 2rem;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        border-radius: 25px 10px 25px 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .flow-card:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 12px 30px rgba(156, 175, 136, 0.2);
+    }
+
+    .flow-card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .flow-card-icon {
+        width: 48px;
+        height: 48px;
+        background: var(--flow-cream);
+        border: 2px solid var(--flow-sage);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        font-size: 1.5rem;
+        border-radius: 20px 8px 20px 8px;
+    }
+
+    .flow-card-title {
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: var(--flow-bark);
+        font-family: 'Georgia', serif;
+    }
+
+    .flow-card-subtitle {
+        font-size: 0.8rem;
+        color: var(--flow-moss);
+        font-style: italic;
+    }
+
+    .flow-card-description {
+        font-size: 0.95rem;
+        color: var(--flow-moss);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .flow-card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 2px solid var(--flow-sage);
+        padding-top: 1rem;
+    }
+
+    .flow-badge {
+        font-size: 0.75rem;
+        color: var(--flow-moss);
+        font-style: italic;
+        font-family: 'Georgia', serif;
+    }
+
+    .flow-arrow {
+        color: var(--red-panda-orange);
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    /* Quick Info */
+    .flow-info {
+        margin: 4rem 0;
+        background: var(--flow-cream);
+        border: 2px solid var(--flow-sage);
+        padding: 2.5rem 2rem;
+        box-shadow: 0 4px 12px rgba(156, 175, 136, 0.2);
+        border-radius: 20px 8px 20px 8px;
+    }
+
+    .flow-info-title {
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: var(--flow-bark);
+        margin-bottom: 2rem;
+        text-align: center;
+        font-family: 'Georgia', serif;
+        border-bottom: 2px solid var(--flow-sage);
+        padding-bottom: 1rem;
+    }
+
+    .flow-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .flow-stat {
+        padding: 1.5rem 1rem;
+        background: var(--flow-white);
+        border-left: 4px solid var(--flow-sage);
+        border-radius: 0 15px 15px 0;
+    }
+
+    .flow-stat-number {
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: var(--flow-bark);
+        display: block;
+        margin-bottom: 0.5rem;
+        font-family: 'Georgia', serif;
+    }
+
+    .flow-stat-label {
+        font-size: 0.8rem;
+        color: var(--flow-moss);
+        line-height: 1.4;
+    }
+
+    /* Conservation Message */
+    .flow-conservation {
+        margin: 4rem 0;
+        background: var(--flow-white);
+        border: 2px solid var(--flow-sage);
+        border-left: 4px solid var(--red-panda-orange);
+        padding: 2.5rem 2rem;
+        border-radius: 20px 8px 20px 8px;
+    }
+
+    .flow-conservation-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .flow-conservation-icon {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+    }
+
+    .flow-conservation-title {
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: var(--flow-bark);
+        font-family: 'Georgia', serif;
+    }
+
+    .flow-conservation-text {
+        font-size: 0.95rem;
+        color: var(--flow-moss);
+        line-height: 1.6;
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+        .flow-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .flow-stats {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- 有機流動背景 -->
+    <div class="flow-bg">
+        <div class="flow-shape"></div>
+        <div class="flow-shape"></div>
+        <div class="flow-shape"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="flow-header">
+        <h1 class="flow-title">小熊貓世界</h1>
+        <p class="flow-subtitle">探索・學習・保護</p>
+    </header>
+
+    <div class="flow-container">
+        <!-- Hero Section -->
+        <section class="flow-hero">
+            <img src="../../images/red-panda.jpg" alt="小熊貓" class="flow-hero-image">
+            <div class="flow-hero-content">
+                <h2 class="flow-hero-title">小熊貓</h2>
+                <p class="flow-hero-description">
+                    探索這些迷人森林精靈的奇妙世界，了解牠們的習性、棲息地和保護現況。
+                </p>
+                <a href="compare.html" class="flow-button">開始探索</a>
+            </div>
+        </section>
+
+        <!-- Feature Cards -->
+        <section class="flow-features">
+            <div class="flow-grid">
+                <div class="flow-card" onclick="window.location.href='compare.html'">
+                    <div class="flow-card-header">
+                        <div class="flow-card-icon">🐾</div>
+                        <div>
+                            <div class="flow-card-title">亞種比較</div>
+                            <div class="flow-card-subtitle">了解差異</div>
+                        </div>
+                    </div>
+                    <p class="flow-card-description">
+                        深入了解中華小熊貓和喜馬拉雅小熊貓之間的外觀、分佈和行為差異。
+                    </p>
+                    <div class="flow-card-footer">
+                        <span class="flow-badge">外觀・分佈・習性</span>
+                        <span class="flow-arrow">→</span>
+                    </div>
+                </div>
+
+                <div class="flow-card" onclick="window.location.href='species-comparison.html'">
+                    <div class="flow-card-header">
+                        <div class="flow-card-icon">🔍</div>
+                        <div>
+                            <div class="flow-card-title">物種比較</div>
+                            <div class="flow-card-subtitle">跨物種對比</div>
+                        </div>
+                    </div>
+                    <p class="flow-card-description">
+                        比較小熊貓與大熊貓、浣熊等相似動物的特徵和習性差異。
+                    </p>
+                    <div class="flow-card-footer">
+                        <span class="flow-badge">多物種對比</span>
+                        <span class="flow-arrow">→</span>
+                    </div>
+                </div>
+
+                <div class="flow-card" onclick="window.location.href='quiz.html'">
+                    <div class="flow-card-header">
+                        <div class="flow-card-icon">🧩</div>
+                        <div>
+                            <div class="flow-card-title">知識測驗</div>
+                            <div class="flow-card-subtitle">挑戰自己</div>
+                        </div>
+                    </div>
+                    <p class="flow-card-description">
+                        通過有趣的測驗來檢驗你對小熊貓亞種知識的掌握程度。
+                    </p>
+                    <div class="flow-card-footer">
+                        <span class="flow-badge">8題測驗</span>
+                        <span class="flow-arrow">→</span>
+                    </div>
+                </div>
+
+                <div class="flow-card" onclick="window.location.href='gallery.html'">
+                    <div class="flow-card-header">
+                        <div class="flow-card-icon">📸</div>
+                        <div>
+                            <div class="flow-card-title">圖片藝廊</div>
+                            <div class="flow-card-subtitle">視覺饗宴</div>
+                        </div>
+                    </div>
+                    <p class="flow-card-description">
+                        欣賞精美的小熊貓照片，感受牠們的可愛與魅力。
+                    </p>
+                    <div class="flow-card-footer">
+                        <span class="flow-badge">高清圖片</span>
+                        <span class="flow-arrow">→</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Info -->
+        <section class="flow-info">
+            <h3 class="flow-info-title">小熊貓小檔案</h3>
+            <div class="flow-stats">
+                <div class="flow-stat">
+                    <span class="flow-stat-number">2</span>
+                    <span class="flow-stat-label">已知亞種</span>
+                </div>
+                <div class="flow-stat">
+                    <span class="flow-stat-number">4500</span>
+                    <span class="flow-stat-label">野生數量（隻）</span>
+                </div>
+                <div class="flow-stat">
+                    <span class="flow-stat-number">2200-4800</span>
+                    <span class="flow-stat-label">棲息海拔（公尺）</span>
+                </div>
+                <div class="flow-stat">
+                    <span class="flow-stat-number">95%</span>
+                    <span class="flow-stat-label">竹子飲食比例</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conservation Message -->
+        <section class="flow-conservation">
+            <div class="flow-conservation-header">
+                <span class="flow-conservation-icon">⚠️</span>
+                <h3 class="flow-conservation-title">保護現況</h3>
+            </div>
+            <p class="flow-conservation-text">
+                小熊貓目前被列為瀕危物種，野生數量不足5000隻。棲息地破壞、氣候變化和人類活動是牠們面臨的主要威脅。
+                我們每個人都可以透過支持保護組織、減少碳足跡等方式來幫助保護這些可愛的生物。
+            </p>
+        </section>
+    </div>
+
+    <!-- Navigation Container -->
+    <div id="navbar-container"></div>
+
+    <script src="assets/js/navbar.js"></script>
+</body>
+</html>
