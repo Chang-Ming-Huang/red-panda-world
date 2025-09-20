@@ -378,11 +378,15 @@
         <div class="status-dot"></div>
     </div>
 
-    <!-- Header -->
-    <header class="premium-header">
-        <h1 class="premium-title">小熊貓世界</h1>
-        <p class="premium-subtitle">探索・學習・保護</p>
-    </header>
+    <!-- Back Button -->
+    <button onclick="window.location.href='../../index.html'"
+            style="position: absolute; top: 20px; left: 20px; z-index: 30; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(8px); border: 1px solid rgba(236, 109, 19, 0.3); border-radius: 12px; cursor: pointer; transition: all 0.3s ease;"
+            onmouseover="this.style.background='rgba(255, 255, 255, 0.12)'; this.style.borderColor='rgba(236, 109, 19, 0.5)'"
+            onmouseout="this.style.background='rgba(255, 255, 255, 0.08)'; this.style.borderColor='rgba(236, 109, 19, 0.3)'">
+        <svg style="width: 20px; height: 20px; color: #ec6d13;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+    </button>
 
     <div class="premium-container">
         <!-- Hero Section -->

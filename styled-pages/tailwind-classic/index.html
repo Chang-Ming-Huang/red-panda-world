@@ -47,15 +47,15 @@
 <div class="relative flex min-h-screen w-full flex-col justify-between overflow-x-hidden">
 <div class="flex-grow">
 
-<!-- Header -->
-<header class="relative z-10 flex items-center justify-between p-4 pb-6">
-<div class="flex-1 text-center">
-<h1 class="text-3xl font-extrabold leading-tight text-gradient">小熊貓世界</h1>
-<p class="text-xs uppercase tracking-wide text-primary mt-1">探索・學習・保護</p>
-</div>
-</header>
+<!-- Back Button -->
+<button onclick="window.location.href='../../index.html'"
+        class="absolute top-4 left-4 z-20 flex items-center justify-center w-10 h-10 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl hover:bg-white/20 hover:border-primary/30 transition-all duration-200 group">
+    <svg class="w-5 h-5 text-primary group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+    </svg>
+</button>
 
-<main class="px-4 pb-8">
+<main class="px-4 pb-8 pt-16">
     <!-- Hero Section -->
     <div class="relative mb-8 h-80 w-full overflow-hidden rounded-2xl shadow-2xl hero-gradient">
         <img alt="可愛的小熊貓" class="absolute h-full w-full object-cover" src="../../images/red-panda.jpg" />

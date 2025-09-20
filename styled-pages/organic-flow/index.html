@@ -13,7 +13,7 @@
         --flow-earth: #8b7355;
         --flow-stone: #a8a090;
         --flow-bark: #6b5b47;
-        --red-panda-orange: #ec6d13;
+        --flow-forest: #5a7c65;
         --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
@@ -209,7 +209,7 @@
     }
 
     .flow-button:hover {
-        background: var(--red-panda-orange);
+        background: var(--flow-forest);
         border-color: var(--flow-moss);
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(156, 175, 136, 0.4);
@@ -296,7 +296,7 @@
     }
 
     .flow-arrow {
-        color: var(--red-panda-orange);
+        color: var(--flow-forest);
         font-size: 1.2rem;
         font-weight: bold;
     }
@@ -356,7 +356,7 @@
         margin: 4rem 0;
         background: var(--flow-white);
         border: 2px solid var(--flow-sage);
-        border-left: 4px solid var(--red-panda-orange);
+        border-left: 4px solid var(--flow-forest);
         padding: 2.5rem 2rem;
         border-radius: 20px 8px 20px 8px;
     }
@@ -405,11 +405,13 @@
         <div class="flow-shape"></div>
     </div>
 
-    <!-- Header -->
-    <header class="flow-header">
-        <h1 class="flow-title">小熊貓世界</h1>
-        <p class="flow-subtitle">探索・學習・保護</p>
-    </header>
+    <!-- Back Button -->
+    <button onclick="window.location.href='../../index.html'"
+            style="position: absolute; top: 20px; left: 20px; z-index: 20; display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(8px); border: 1px solid rgba(139, 188, 158, 0.3); border-radius: 16px; cursor: pointer; transition: all 0.3s ease;">
+        <svg style="width: 20px; height: 20px; color: #5a7c65;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+    </button>
 
     <div class="flow-container">
         <!-- Hero Section -->
