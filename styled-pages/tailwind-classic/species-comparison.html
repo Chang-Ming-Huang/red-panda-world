@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="../../assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/styles.css">
 <script id="tailwind-config">
     tailwind.config = {
         darkMode: "class",
@@ -250,14 +250,14 @@ function renderOverview() {
 
         // 動物圖片映射
         const imageMap = {
-            '小熊貓': '../images/red-panda.jpg',
-            '大熊貓': '../images/panda.jpg',
-            '浣熊': '../images/raccoon.jpg',
-            '狐狸': '../images/fox.jpg'
+            '小熊貓': '../../images/red-panda.jpg',
+            '大熊貓': '../../images/panda.jpg',
+            '浣熊': '../../images/raccoon.jpg',
+            '狐狸': '../../images/fox.jpg'
         };
 
         card.innerHTML = `
-            <img src="${imageMap[animal.name] || '../images/red-panda.jpg'}" alt="${animal.name}" class="w-full h-24 object-cover rounded-lg mb-3">
+            <img src="${imageMap[animal.name] || '../../images/red-panda.jpg'}" alt="${animal.name}" class="w-full h-24 object-cover rounded-lg mb-3">
             <h3 class="font-bold text-lg mb-1">${animal.name}</h3>
             <p class="text-sm text-background-dark/70 dark:text-background-light/70 mb-2">${animal.scientific_name}</p>
             <div class="text-xs space-y-1">
@@ -419,7 +419,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 </script>
 
-<script src="../assets/js/common.js"></script>
 <script src="assets/js/navbar.js"></script>
 </body>
 </html>

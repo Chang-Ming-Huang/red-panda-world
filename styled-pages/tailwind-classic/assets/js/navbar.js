@@ -11,7 +11,6 @@ const PAGE_MAP = {
     'species-comparison.html': 'species',
     'quiz.html': 'quiz',
     'gallery.html': 'gallery',
-    'map.html': 'gallery' // map.html 也歸類為藝廊
 };
 
 /**

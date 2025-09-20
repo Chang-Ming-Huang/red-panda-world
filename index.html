@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小熊貓世界 - 風格選擇</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec6d13",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#221810",
+                    },
+                    fontFamily: {
+                        "display": ["Epilogue"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8f7f6 0%, #e8e5e1 100%);
+        }
+        .style-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(236, 109, 19, 0.1);
+        }
+        .style-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(236, 109, 19, 0.2);
+            border-color: rgba(236, 109, 19, 0.3);
+        }
+        .hero-panda {
+            background: linear-gradient(135deg, rgba(236, 109, 19, 0.1), rgba(249, 115, 22, 0.1));
+            border-radius: 50%;
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="font-display">
+    <div class="min-h-screen flex flex-col justify-center items-center p-4">
+        <!-- Hero Section -->
+        <div class="text-center mb-12 animate-fade-in">
+            <div class="hero-panda w-32 h-32 mx-auto mb-6 flex items-center justify-center">
+                <span class="text-6xl">🐾</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-background-dark mb-4">
+                小熊貓世界
+            </h1>
+            <p class="text-xl md:text-2xl text-primary font-medium mb-2">
+                探索・學習・保護
+            </p>
+            <p class="text-background-dark/70 max-w-md mx-auto">
+                選擇你喜歡的視覺風格，開始探索可愛小熊貓的世界
+            </p>
+        </div>
+
+        <!-- Style Selection Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full animate-slide-up">
+            <!-- Tailwind Classic -->
+            <div class="style-card p-8 rounded-2xl cursor-pointer" onclick="window.location.href='styled-pages/tailwind-classic/index.html'">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center mr-4">
+                        <span class="text-2xl">🎨</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-background-dark">經典風格</h3>
+                        <p class="text-sm text-background-dark/60">Tailwind Classic</p>
+                    </div>
+                </div>
+                <p class="text-background-dark/70 mb-4">
+                    簡潔清爽的現代設計，注重內容與功能性的完美平衡
+                </p>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full">簡約・實用</span>
+                    <span class="text-primary font-bold">→</span>
+                </div>
+            </div>
+
+            <!-- Organic Flow -->
+            <div class="style-card p-8 rounded-2xl cursor-pointer" onclick="window.location.href='styled-pages/organic-flow/index.html'">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mr-4">
+                        <span class="text-2xl">🌿</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-background-dark">自然有機</h3>
+                        <p class="text-sm text-background-dark/60">Organic Flow</p>
+                    </div>
+                </div>
+                <p class="text-background-dark/70 mb-4">
+                    受大自然啟發的流動設計，溫馨的配色與圓潤的造型
+                </p>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full">自然・溫馨</span>
+                    <span class="text-primary font-bold">→</span>
+                </div>
+            </div>
+
+            <!-- Premium Charcoal -->
+            <div class="style-card p-8 rounded-2xl cursor-pointer" onclick="window.location.href='styled-pages/premium-charcoal/index.html'">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-gray-500/10 rounded-lg flex items-center justify-center mr-4">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-background-dark">高科技暗色</h3>
+                        <p class="text-sm text-background-dark/60">Premium Charcoal</p>
+                    </div>
+                </div>
+                <p class="text-background-dark/70 mb-4">
+                    專業的暗色主題，具有科技感的介面與精緻的視覺效果
+                </p>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full">科技・專業</span>
+                    <span class="text-primary font-bold">→</span>
+                </div>
+            </div>
+
+            <!-- Tokyo Neon -->
+            <div class="style-card p-8 rounded-2xl cursor-pointer" onclick="window.location.href='styled-pages/tokyo-neon/index.html'">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-pink-500/10 rounded-lg flex items-center justify-center mr-4">
+                        <span class="text-2xl">🌃</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-background-dark">東京霓虹</h3>
+                        <p class="text-sm text-background-dark/60">Tokyo Neon</p>
+                    </div>
+                </div>
+                <p class="text-background-dark/70 mb-4">
+                    充滿活力的賽博朋克風格，霓虹色彩與未來感的視覺體驗
+                </p>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full">霓虹・未來</span>
+                    <span class="text-primary font-bold">→</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Info -->
+        <div class="mt-12 text-center animate-fade-in">
+            <p class="text-sm text-background-dark/50 mb-2">
+                🐾 了解中華小熊貓與喜馬拉雅小熊貓的差異
+            </p>
+            <p class="text-xs text-background-dark/40">
+                互動式學習體驗 • 多媒體內容 • 知識測驗
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 添加進入動畫延遲效果
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.style-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('animate-fade-in');
+            });
+        });
+
+        // 鍵盤導航支援
+        document.addEventListener('keydown', (e) => {
+            const cards = document.querySelectorAll('.style-card');
+
+            if (e.key >= '1' && e.key <= '4') {
+                const index = parseInt(e.key) - 1;
+                if (cards[index]) {
+                    cards[index].click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

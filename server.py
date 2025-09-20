@@ -21,10 +21,10 @@ class CustomHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
     def do_GET(self):
         """處理 GET 請求，支援根路徑重定向"""
-        # 根路徑重定向到 pages/index.html
-        if self.path == '/' or self.path == '/index.html':
+        # 根路徑重定向到根目錄的 index.html（風格選擇頁面）
+        if self.path == '/':
             self.send_response(302)
-            self.send_header('Location', '/pages/index.html')
+            self.send_header('Location', '/index.html')
             self.end_headers()
             return
 
@@ -81,8 +81,8 @@ def start_server(port=None, host=DEFAULT_HOST, auto_open=True):
     """啟動開發伺服器"""
 
     # 檢查是否在正確的目錄
-    if not os.path.exists('pages/index.html'):
-        print("❌ 錯誤：找不到 pages/index.html")
+    if not os.path.exists('index.html'):
+        print("❌ 錯誤：找不到 index.html")
         print("請確保你在包含網站檔案的目錄中執行此腳本")
         return
 
@@ -109,11 +109,11 @@ def start_server(port=None, host=DEFAULT_HOST, auto_open=True):
             print(f"📁 目錄：{os.getcwd()}")
             print("=" * 40)
             print("📱 功能頁面：")
-            print(f"   主頁：{server_url}/")
-            print(f"   亞種比較：{server_url}/pages/compare.html")
-            print(f"   知識測驗：{server_url}/pages/quiz.html")
-            print(f"   圖片藝廊：{server_url}/pages/gallery.html")
-            print(f"   分佈地圖：{server_url}/pages/map.html")
+            print(f"   風格選擇：{server_url}/")
+            print(f"   經典風格：{server_url}/styled-pages/tailwind-classic/")
+            print(f"   自然有機：{server_url}/styled-pages/organic-flow/")
+            print(f"   高科技暗色：{server_url}/styled-pages/premium-charcoal/")
+            print(f"   東京霓虹：{server_url}/styled-pages/tokyo-neon/")
             print("=" * 40)
             print("⏹️  按 Ctrl+C 停止伺服器")
             print()
