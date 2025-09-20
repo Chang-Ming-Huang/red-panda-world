@@ -244,8 +244,8 @@ tabButtons.forEach(button => {
 // 載入 JSON 資料
 async function loadSubspeciesData() {
     try {
-        console.log('正在載入數據從:', '../data/subspecies.json');
-        const response = await fetch('../data/subspecies.json');
+        console.log('正在載入數據從:', '../../data/subspecies.json');
+        const response = await fetch('../../data/subspecies.json');
 
         console.log('HTTP 狀態:', response.status);
         if (!response.ok) {
@@ -308,6 +308,6 @@ async function loadSubspeciesData() {
 // 頁面載入完成後執行
 document.addEventListener('DOMContentLoaded', loadSubspeciesData);
 </script>
-<script src="../assets/js/navbar.js"></script>
+<script src="assets/js/navbar.js"></script>
 </body>
 </html>

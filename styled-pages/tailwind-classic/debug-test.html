@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Debug Test - 小熊貓網站</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="stylesheet" href="../../assets/css/styles.css">
 </head>
 <body class="bg-gray-100 p-8">
 
@@ -62,7 +62,7 @@ async function testDataLoad() {
     try {
         updateStatus('data-status', '正在載入 subspecies.json...', true);
 
-        const response = await fetch('../data/subspecies.json');
+        const response = await fetch('../../data/subspecies.json');
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
         }
