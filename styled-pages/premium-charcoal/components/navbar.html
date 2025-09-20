@@ -104,21 +104,6 @@
     max-width: 85px;
 }
 
-/* Active 狀態頂部指示條 */
-.tech-nav-item::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--tech-accent), var(--tech-blue));
-    border-radius: 0 0 3px 3px;
-    transition: all 0.3s ease;
-    opacity: 0;
-}
-
 .tech-nav-item:hover {
     color: var(--tech-accent);
     transform: translateY(-2px);
@@ -128,11 +113,7 @@
     color: var(--tech-accent);
 }
 
-.tech-nav-item.active::before {
-    width: 40px;
-    opacity: 1;
-    box-shadow: 0 2px 8px rgba(236, 109, 19, 0.4);
-}
+/* Active 狀態（移除頂部指示條，僅保留顏色變化） */
 
 
 .tech-nav-icon {
@@ -181,28 +162,7 @@
     100% { left: 100%; }
 }
 
-/* Status indicators */
-.tech-nav-item.active .tech-nav-icon {
-    position: relative;
-}
-
-.tech-nav-item.active .tech-nav-icon::after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    right: -2px;
-    width: 6px;
-    height: 6px;
-    background: var(--tech-green);
-    border-radius: 50%;
-    box-shadow: 0 0 6px var(--tech-green);
-    animation: statusPulse 2s infinite;
-}
-
-@keyframes statusPulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
+/* Status indicators (移除狀態圓點，保持簡潔設計) */
 
 /* Responsive */
 @media (max-width: 640px) {

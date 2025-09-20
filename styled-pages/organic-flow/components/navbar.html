@@ -167,26 +167,7 @@
     color: var(--red-panda-orange);
 }
 
-/* Active 狀態頂部指示條 */
-.flow-nav-item::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 3px;
-    background: var(--red-panda-orange);
-    border-radius: 0 0 3px 3px;
-    transition: all 0.3s ease;
-    opacity: 0;
-}
-
-.flow-nav-item.active::before {
-    width: 40px;
-    opacity: 1;
-    box-shadow: 0 2px 8px rgba(236, 109, 19, 0.4);
-}
+/* Active 狀態（移除頂部指示條，僅保留顏色變化） */
 
 
 .flow-nav-icon {
