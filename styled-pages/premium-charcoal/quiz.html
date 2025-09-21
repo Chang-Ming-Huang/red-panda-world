@@ -1175,6 +1175,18 @@
             gap: 8px;
         }
     }
+    /* Explanation Section Mobile Optimization */
+    @media (max-width: 768px) {
+        .explanation-section {
+            margin: var(--mobile-space-md) 0;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .explanation-section {
+            margin: var(--mobile-space-sm) 0;
+        }
+    }
 </style>
 </head>
 <body>
@@ -1202,28 +1214,24 @@
             <!-- Quiz 主題區域 -->
             <div class="quiz-header-section">
                 <h2 class="quiz-main-title">小熊貓亞種知識測驗</h2>
-                <p class="quiz-subtitle">測試你對中華和喜馬拉雅小熊貓的了解程度</p>
+                <p class="quiz-subtitle">測試你對小熊貓的了解程度</p>
             </div>
 
             <!-- 統計資訊卡片 -->
             <div class="quiz-stats-grid">
                 <div class="stat-card">
-                    <div class="stat-icon">📋</div>
                     <div class="stat-value" id="total-questions-stat"></div>
                     <div class="stat-label">題目</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon">⏱️</div>
                     <div class="stat-value">3-5</div>
                     <div class="stat-label">分鐘</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon">🎯</div>
                     <div class="stat-value" id="passing-score-stat"></div>
                     <div class="stat-label">通過分數</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon">🏆</div>
                     <div class="stat-value">中級</div>
                     <div class="stat-label">難度</div>
                 </div>
@@ -1232,13 +1240,13 @@
             <div class="quiz-rules">
                 <h3 class="rules-title">QUIZ PARAMETERS</h3>
                 <ul class="rules-list">
-                    <li>每題選擇後會立即顯示答案解釋</li>
+                    <li>作答後會顯示解說</li>
                     <li>答對 <span id="passing-score" style="font-weight: 600; color: var(--charcoal-accent);"></span> 題以上算通過</li>
-                    <li>完成後會給你專屬的成績評價</li>
+                    <li>完成會給成績評價</li>
                 </ul>
             </div>
             <button class="start-button" onclick="startQuiz()">
-                🚀 INITIALIZE QUIZ SYSTEM
+                🚀 START QUIZ
             </button>
         </div>
     </div>
