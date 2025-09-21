@@ -661,6 +661,13 @@
             gap: 0.5rem;
         }
     }
+    /* Title Flexbox Layout */
+    .tech-distribution-title,
+    .tech-behavior-title {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
 </style>
 </head>
 <body>
@@ -749,7 +756,7 @@
                         <div class="tech-card-content">
                             <div class="tech-distribution-grid">
                                 <div class="tech-distribution-card">
-                                    <h4 class="tech-distribution-title">🇨🇳 中華小熊貓</h4>
+                                    <h4 class="tech-distribution-title"><span class="icon">🇨🇳</span><span class="text">中華小熊貓</span></h4>
                                     <div class="tech-distribution-details">
                                         <div class="tech-distribution-row">
                                             <span class="tech-info-label">地區：</span>
@@ -766,7 +773,7 @@
                                     </div>
                                 </div>
                                 <div class="tech-distribution-card">
-                                    <h4 class="tech-distribution-title">🏔️ 喜馬拉雅小熊貓</h4>
+                                    <h4 class="tech-distribution-title"><span class="icon">🏔️</span><span class="text">喜馬拉雅小熊貓</span></h4>
                                     <div class="tech-distribution-details">
                                         <div class="tech-distribution-row">
                                             <span class="tech-info-label">地區：</span>
@@ -796,7 +803,7 @@
                         <div class="tech-card-content">
                             <div class="tech-behavior-grid">
                                 <div class="tech-behavior-column">
-                                    <h4 class="tech-behavior-title">🇨🇳 中華小熊貓</h4>
+                                    <h4 class="tech-behavior-title"><span class="icon">🇨🇳</span><span class="text">中華小熊貓</span></h4>
                                     <div class="tech-behavior-item">
                                         <span class="tech-info-label">活動時間：</span>
                                         <span id="chinese-activity" class="tech-info-value"></span>
@@ -811,7 +818,7 @@
                                     </div>
                                 </div>
                                 <div class="tech-behavior-column">
-                                    <h4 class="tech-behavior-title">🏔️ 喜馬拉雅小熊貓</h4>
+                                    <h4 class="tech-behavior-title"><span class="icon">🏔️</span><span class="text">喜馬拉雅小熊貓</span></h4>
                                     <div class="tech-behavior-item">
                                         <span class="tech-info-label">活動時間：</span>
                                         <span id="himalayan-activity" class="tech-info-value"></span>
