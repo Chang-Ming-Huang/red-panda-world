@@ -15,7 +15,7 @@
         "distinctive_features": ["環狀尾巴", "面部白色標記", "半可縮爪子"]
       },
       "habitat": {
-        "geographic_range": "中國南部、尼泊爾、印度、緬甸",
+        "geographic_range": "中國南部、尼泊爾",
         "environment": "溫帶森林",
         "altitude_m": "2200-4800",
         "climate": "涼爽潮濕"
@@ -121,7 +121,7 @@
         "geographic_range": "北美洲",
         "environment": "森林、濕地、城市",
         "altitude_m": "0-3000",
-        "climate": "溫帶到亞熱帶"
+        "climate": "溫帶亞熱帶"
       },
       "behavior": {
         "activity_pattern": "夜行性",
