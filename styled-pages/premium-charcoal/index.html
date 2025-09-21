@@ -97,7 +97,7 @@
     /* Hero Section - Magazine Style */
     .premium-hero-magazine {
         position: relative;
-        margin: 4rem 0;
+        margin: 5rem 0 4rem;
         height: 400px;
         border-radius: 12px;
         overflow: hidden;
@@ -145,36 +145,29 @@
     }
 
     .premium-hero-title {
-        font-size: 2.8rem;
+        font-size: 2.5rem;
         font-weight: 700;
         color: white;
-        margin-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
         letter-spacing: -0.02em;
         line-height: 1.2;
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
-    .premium-hero-subtitle {
-        font-size: 1.2rem;
-        color: rgba(255, 255, 255, 0.9);
-        font-weight: 500;
-        margin-bottom: 1rem;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-    }
-
     .premium-hero-description {
         font-size: 1rem;
-        color: rgba(255, 255, 255, 0.8);
-        margin-bottom: 2rem;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 300;
+        margin-bottom: 1.5rem;
         line-height: 1.6;
         max-width: 600px;
+        opacity: 0.9;
     }
 
     .premium-button {
         background: var(--tech-accent);
         color: var(--tech-white);
-        padding: 1.5rem 2.5rem;
+        padding: 0.75rem 2rem;
         border: none;
         border-radius: 8px;
         font-weight: 600;
@@ -182,10 +175,11 @@
         cursor: pointer;
         transition: all 0.3s ease;
         text-decoration: none;
-        display: inline-block;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         box-shadow: 0 4px 12px rgba(236, 109, 19, 0.3);
+        height: 48px;
         min-height: 48px;
     }
 
@@ -210,7 +204,7 @@
         background: var(--tech-gray);
         border: 1px solid var(--tech-light);
         border-radius: 12px;
-        padding: 2.5rem;
+        padding: 2rem;
         cursor: pointer;
         transition: all 0.3s ease;
         min-height: 48px;
@@ -287,11 +281,11 @@
 
     /* Quick Info */
     .premium-info {
-        margin: 4rem 0;
+        margin: 2.5rem 0;
         background: var(--tech-gray);
         border: 1px solid var(--tech-light);
         border-radius: 12px;
-        padding: 2rem;
+        padding: 1.5rem;
     }
 
     .premium-info-title {
@@ -312,14 +306,14 @@
     }
 
     .premium-stat {
-        padding: 1.5rem 1rem;
+        padding: 2rem 1.5rem;
         background: var(--tech-black);
         border: 1px solid var(--tech-gray);
         border-radius: 8px;
     }
 
     .premium-stat-number {
-        font-size: 1.8rem;
+        font-size: 1.3rem;
         font-weight: 600;
         color: var(--tech-accent);
         display: block;
@@ -372,15 +366,11 @@
     @media (max-width: 768px) {
         .premium-hero-magazine {
             height: 320px;
-            margin: 2rem 0;
+            margin: 4rem 0 2rem;
         }
 
         .premium-hero-title {
-            font-size: 2.2rem;
-        }
-
-        .premium-hero-subtitle {
-            font-size: 1rem;
+            font-size: 2rem;
         }
 
         .premium-hero-description {
@@ -405,15 +395,6 @@
 </head>
 <body>
 
-    <!-- Back Button -->
-    <button onclick="window.location.href='../../index.html'"
-            style="position: absolute; top: 16px; left: 16px; z-index: 30; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(8px); border: 1px solid rgba(236, 109, 19, 0.3); border-radius: 12px; cursor: pointer; transition: all 0.3s ease;"
-            onmouseover="this.style.background='rgba(255, 255, 255, 0.12)'; this.style.borderColor='rgba(236, 109, 19, 0.5)'"
-            onmouseout="this.style.background='rgba(255, 255, 255, 0.08)'; this.style.borderColor='rgba(236, 109, 19, 0.3)'">
-        <svg style="width: 20px; height: 20px; color: #ec6d13;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-    </button>
 
     <div class="premium-container">
         <!-- Hero Section -->
@@ -421,10 +402,9 @@
             <img src="../../images/red-panda.jpg" alt="小熊貓" class="premium-hero-image">
             <div class="premium-hero-overlay"></div>
             <div class="premium-hero-content">
-                <h2 class="premium-hero-title">小熊貓世界</h2>
-                <p class="premium-hero-subtitle">探索・學習・保護</p>
+                <h2 class="premium-hero-title">小熊貓</h2>
                 <p class="premium-hero-description">
-                    探索這些迷人森林精靈的奇妙世界，了解牠們的習性、棲息地和保護現況。深入了解中華小熊貓與喜馬拉雅小熊貓的差異。
+                    探索這些迷人森林精靈的奇妙世界，了解牠們的習性、棲息地和保護現況。
                 </p>
                 <a href="compare.html" class="premium-button">開始探索 →</a>
             </div>
@@ -442,7 +422,7 @@
                         </div>
                     </div>
                     <p class="premium-card-description">
-                        深入了解中華小熊貓和喜馬拉雅小熊貓之間的外觀、分佈和行為差異。
+                        了解中華ㄧ和喜馬拉雅小熊貓的外觀、分佈和行為差異。
                     </p>
                     <div class="premium-card-footer">
                         <span class="premium-badge">外觀・分佈・習性</span>
@@ -521,7 +501,7 @@
                 </div>
                 <div class="premium-stat">
                     <span class="premium-stat-number">95%</span>
-                    <span class="premium-stat-label">竹子飲食比例</span>
+                    <span class="premium-stat-label">竹子飲食</span>
                 </div>
             </div>
         </section>
@@ -537,6 +517,19 @@
                 我們每個人都可以透過支持保護組織、減少碳足跡等方式來幫助保護這些可愛的生物。
             </p>
         </section>
+
+        <!-- Back Button -->
+        <div style="text-align: center; margin: 3rem 0 2rem;">
+            <button onclick="window.location.href='../../index.html'"
+                    style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 2rem; background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(8px); border: 1px solid rgba(236, 109, 19, 0.3); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; color: #ec6d13; font-weight: 600;"
+                    onmouseover="this.style.background='rgba(255, 255, 255, 0.12)'; this.style.borderColor='rgba(236, 109, 19, 0.5)'"
+                    onmouseout="this.style.background='rgba(255, 255, 255, 0.08)'; this.style.borderColor='rgba(236, 109, 19, 0.3)'">
+                <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                返回首頁
+            </button>
+        </div>
     </div>
 
     <!-- Navigation Container -->
