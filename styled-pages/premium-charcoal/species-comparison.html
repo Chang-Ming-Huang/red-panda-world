@@ -209,7 +209,7 @@
 
     /* Content Sections */
     .premium-content {
-        margin: var(--space-xl) 0;
+        margin: 0;
     }
 
     .premium-section {
@@ -713,7 +713,232 @@
         display: none !important;
     }
 
+    /* Dual Image Header Styles */
+    .dual-image-header {
+        margin-bottom: var(--mobile-space-md);
+    }
+
+    .dual-image-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-sm);
+        padding: var(--space-md);
+        margin-bottom: var(--mobile-space-md);
+    }
+
+    .image-block {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-xs);
+    }
+
+    .comparison-animal-image {
+        width: 100%;
+        max-width: 140px;
+        height: 85px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 2px solid var(--tech-accent);
+    }
+
+    .image-label {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--tech-accent);
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .vs-divider {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--tech-accent);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 0 var(--space-sm);
+        flex-shrink: 0;
+    }
+
+    /* Legacy comparison block styles (now unused) */
+    .comparison-animal-block {
+        background: linear-gradient(135deg, var(--tech-dark) 0%, var(--tech-gray) 100%);
+        border: 2px solid var(--tech-accent);
+        border-radius: 12px;
+        padding: var(--space-md);
+        margin-bottom: 2px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+
+    /* Comparison Table */
+    .comparison-table-container {
+        background: linear-gradient(135deg, var(--tech-gray), var(--tech-dark));
+        border: 2px solid var(--tech-accent);
+        border-radius: 12px;
+        padding: var(--space-lg);
+        margin-bottom: 2px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .comparison-table td {
+        padding: var(--space-md) var(--space-sm);
+        border-bottom: 1px solid var(--tech-light);
+        vertical-align: middle;
+    }
+
+    .comparison-table td:first-child,
+    .comparison-table td:nth-child(3) {
+        color: var(--tech-accent);
+        font-weight: 600;
+        font-size: 1rem;
+        text-align: center;
+        width: 35%;
+    }
+
+    .comparison-table td:nth-child(2) {
+        font-weight: 600;
+        color: var(--tech-white);
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 0.05em;
+        width: 30%;
+        text-align: center;
+    }
+
+    .comparison-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* Comparison Controls */
+    .comparison-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-lg);
+        margin: var(--space-lg) 0;
+        padding-bottom: var(--mobile-space-md);
+    }
+
+    .comparison-btn {
+        width: 60px;
+        height: 60px;
+        border: 2px solid var(--tech-accent);
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--tech-dark), var(--tech-gray));
+        color: var(--tech-accent);
+        font-size: 1.5rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+
+    .comparison-btn:hover {
+        background: var(--tech-accent);
+        color: var(--tech-black);
+        transform: scale(1.05);
+        box-shadow: 0 6px 16px rgba(236, 109, 19, 0.3);
+    }
+
+    .comparison-btn:active {
+        transform: scale(0.95);
+    }
+
+    .comparison-indicator {
+        font-size: 1.125rem;
+        color: var(--tech-accent);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        min-width: 60px;
+        text-align: center;
+    }
+
+    /* Smooth transitions for content changes */
+    .comparison-animal-block,
+    .comparison-table-container {
+        transition: all 0.3s ease;
+    }
+
+    .comparison-table td {
+        transition: all 0.2s ease;
+    }
+
+    .comparison-table td:hover {
+        background: rgba(236, 109, 19, 0.1);
+    }
+
+    /* Loading states */
+    .comparison-loading {
+        opacity: 0.6;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
     /* Responsive */
+    @media (max-width: 480px) {
+        .dual-image-container {
+            padding: var(--mobile-space-sm);
+            gap: var(--mobile-space-xs);
+        }
+
+        .comparison-animal-image {
+            max-width: 110px;
+            height: 70px;
+        }
+
+        .image-label {
+            font-size: 0.875rem;
+        }
+
+        .vs-divider {
+            font-size: 1.25rem;
+            padding: 0 var(--mobile-space-xs);
+        }
+
+        .comparison-animal-block {
+            padding: var(--mobile-space-sm);
+        }
+
+
+        .comparison-table td {
+            padding: var(--mobile-space-xs);
+            font-size: 0.8rem;
+        }
+
+        .comparison-table td:first-child {
+            font-size: 0.75rem;
+            width: 40%;
+        }
+
+        .comparison-btn {
+            width: 45px;
+            height: 45px;
+            font-size: 1.125rem;
+        }
+
+        .comparison-indicator {
+            font-size: 0.9rem;
+        }
+    }
+
     @media (max-width: 768px) {
         .premium-animals-grid {
             grid-template-columns: 1fr;
@@ -721,7 +946,7 @@
         }
 
         .premium-container {
-            padding: 0 var(--mobile-space-md);
+            padding: 0 var(--mobile-space-xs);
         }
 
         .premium-header {
@@ -793,34 +1018,51 @@
             font-size: 1.625rem;
         }
 
-        .premium-fact-item {
+        /* Comparison responsive styles */
+        .comparison-animal-block {
+            padding: var(--mobile-space-md);
+        }
+
+        .comparison-animal-image {
+            width: 160px;
+            height: 100px;
+        }
+
+
+        .comparison-table-container {
+            padding: var(--mobile-space-md);
+        }
+
+        .comparison-table td {
+            padding: var(--mobile-space-sm) var(--mobile-space-xs);
+            font-size: 0.9rem;
+        }
+
+        .comparison-table td:first-child {
+            font-size: 0.8rem;
+        }
+
+        .comparison-btn {
+            width: 50px;
+            height: 50px;
+            font-size: 1.25rem;
+        }
+
+        .comparison-controls {
+            gap: var(--mobile-space-md);
+        }
+
+        .comparison-indicator {
             font-size: 1rem;
-            padding: var(--space-md);
         }
 
-        .premium-diet-item {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: var(--space-xs);
-            padding: 1rem;
+        .comparison-table td:nth-child(2) {
+            width: 40%;
         }
 
-        .premium-habitat-item {
-            padding: 1.25rem;
-        }
-
-        .premium-animal-detail {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: var(--space-xs);
-            padding: 0.5rem 0;
-        }
-
-        .premium-summary-item {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.75rem;
-            text-align: left;
+        .comparison-table td:first-child,
+        .comparison-table td:nth-child(3) {
+            width: 30%;
         }
     }
 </style>
@@ -844,107 +1086,77 @@
                 <button class="premium-tab" data-tab="diet">飲食</button>
             </div>
 
+            <!-- Dual Image Header -->
+            <div class="dual-image-header">
+                <div class="dual-image-container">
+                    <div class="image-block left-image">
+                        <img src="../../images/red-panda.jpg" alt="小熊貓" class="comparison-animal-image">
+                        <div class="image-label">小熊貓</div>
+                    </div>
+                    <div class="vs-divider">VS</div>
+                    <div class="image-block right-image">
+                        <img id="main-comparison-image" src="../../images/panda.jpg" alt="大熊貓" class="comparison-animal-image">
+                        <div class="image-label" id="main-comparison-label">大熊貓</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Content -->
             <div class="premium-content">
                 <!-- Overview Section -->
                 <div id="overview" class="premium-section active">
-                    <div class="premium-card">
-                        <div class="premium-card-header">
-                            <h2 class="premium-card-title">小熊貓 vs 其他動物</h2>
-                            <p class="premium-card-subtitle">探索小熊貓與大熊貓、浣熊、狐狸之間的異同</p>
-                        </div>
-                        <div class="premium-card-content">
-                            <div id="animals-grid" class="premium-animals-grid">
-                                <!-- 動物卡片會動態插入 -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Summary -->
-                    <div class="premium-summary">
-                        <h3 class="premium-summary-title">重點比較</h3>
-                        <div class="premium-summary-grid">
-                            <div class="premium-summary-item">
-                                <span class="premium-summary-label">體型最大：</span>
-                                <span id="largest-animal" class="premium-summary-value"></span>
-                            </div>
-                            <div class="premium-summary-item">
-                                <span class="premium-summary-label">攀爬最佳：</span>
-                                <span id="best-climber" class="premium-summary-value"></span>
-                            </div>
-                            <div class="premium-summary-item">
-                                <span class="premium-summary-label">最瀕危：</span>
-                                <span id="most-endangered" class="premium-summary-value"></span>
-                            </div>
-                            <div class="premium-summary-item">
-                                <span class="premium-summary-label">最雜食：</span>
-                                <span id="most-omnivorous" class="premium-summary-value"></span>
-                            </div>
-                        </div>
+                    <!-- 比較表格 -->
+                    <div class="comparison-table-container">
+                        <table class="comparison-table">
+                            <tbody id="overview-comparison">
+                                <!-- 比較數據會動態插入 -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
                 <!-- Physical Section -->
                 <div id="physical" class="premium-section">
-                    <div class="premium-card">
-                        <div class="premium-card-header">
-                            <h2 class="premium-card-title">體型比較</h2>
-                        </div>
-                        <div class="premium-card-content">
-                            <!-- Weight Chart -->
-                            <div class="premium-chart-section">
-                                <h3 class="premium-summary-title">體重 (公斤)</h3>
-                                <div id="weight-chart" class="premium-chart">
-                                    <!-- 重量圖表會動態插入 -->
-                                </div>
-                            </div>
-
-                            <!-- Length Chart -->
-                            <div class="premium-chart-section" style="margin-top: 2rem;">
-                                <h3 class="premium-summary-title">身長 (公分)</h3>
-                                <div id="length-chart" class="premium-chart">
-                                    <!-- 體長圖表會動態插入 -->
-                                </div>
-                            </div>
-                        </div>
+                    <!-- 比較表格 -->
+                    <div class="comparison-table-container">
+                        <table class="comparison-table">
+                            <tbody id="physical-comparison">
+                                <!-- 比較數據會動態插入 -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
                 <!-- Habitat Section -->
                 <div id="habitat" class="premium-section">
-                    <div class="premium-card">
-                        <div class="premium-card-header">
-                            <h2 class="premium-card-title">棲息地比較</h2>
-                        </div>
-                        <div class="premium-card-content">
-                            <div id="habitat-comparison" class="premium-habitat-grid">
-                                <!-- 棲息地比較會動態插入 -->
-                            </div>
-                        </div>
+                    <!-- 比較表格 -->
+                    <div class="comparison-table-container">
+                        <table class="comparison-table">
+                            <tbody id="habitat-comparison">
+                                <!-- 比較數據會動態插入 -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
                 <!-- Diet Section -->
                 <div id="diet" class="premium-section">
-                    <div class="premium-card">
-                        <div class="premium-card-header">
-                            <h2 class="premium-card-title">飲食習性比較</h2>
-                        </div>
-                        <div class="premium-card-content">
-                            <div id="diet-comparison" class="premium-diet-grid">
-                                <!-- 飲食比較會動態插入 -->
-                            </div>
-                        </div>
+                    <!-- 比較表格 -->
+                    <div class="comparison-table-container">
+                        <table class="comparison-table">
+                            <tbody id="diet-comparison">
+                                <!-- 比較數據會動態插入 -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
 
-            <!-- Fun Facts -->
-            <div class="premium-facts">
-                <h3 class="premium-facts-title">你知道嗎？</h3>
-                <div id="fun-facts" class="premium-facts-list">
-                    <!-- 趣味知識會動態插入 -->
-                </div>
+            <!-- Comparison Controls at Bottom -->
+            <div class="comparison-controls">
+                <button class="comparison-btn" id="main-prev-animal">‹</button>
+                <span class="comparison-indicator" id="main-animal-indicator">1 / 3</span>
+                <button class="comparison-btn" id="main-next-animal">›</button>
             </div>
         </div>
     </div>
@@ -972,6 +1184,8 @@
     });
 
     let animalsData = null;
+    let currentAnimalIndex = 0; // 當前比較的動物索引 (0=大熊貓, 1=浣熊, 2=狐狸)
+    let comparisonAnimals = []; // 比較用的動物陣列
 
     // 載入動物資料
     async function loadAnimalsData() {
@@ -979,10 +1193,11 @@
             const response = await fetch('../../data/animals.json');
             animalsData = await response.json();
 
-            renderOverview();
-            renderPhysicalComparison();
-            renderHabitatComparison();
-            renderDietComparison();
+            // 設置比較動物陣列 (排除小熊貓)
+            comparisonAnimals = animalsData.animals.filter(animal => animal.name !== '小熊貓');
+
+            // 初始化所有比較內容
+            updateAllComparisons();
 
             // 隱藏載入提示，顯示主要內容
             document.getElementById('loading').classList.add('hidden');
@@ -994,220 +1209,204 @@
         }
     }
 
-    function renderOverview() {
-        const animalsGrid = document.getElementById('animals-grid');
-        const animals = animalsData.animals;
+    // 動物圖片映射
+    const imageMap = {
+        '小熊貓': '../../images/red-panda.jpg',
+        '大熊貓': '../../images/panda.jpg',
+        '浣熊': '../../images/raccoon.jpg',
+        '狐狸': '../../images/fox.jpg'
+    };
 
-        animalsGrid.innerHTML = '';
-
-        animals.forEach(animal => {
-            const card = document.createElement('div');
-            card.className = 'premium-animal-card';
-
-            // 動物圖片映射
-            const imageMap = {
-                '小熊貓': '../../images/red-panda.jpg',
-                '大熊貓': '../../images/panda.jpg',
-                '浣熊': '../../images/raccoon.jpg',
-                '狐狸': '../../images/fox.jpg'
-            };
-
-            card.innerHTML = `
-                <img src="${imageMap[animal.name] || '../../images/red-panda.jpg'}" alt="${animal.name}" class="premium-animal-image">
-                <h3 class="premium-animal-name">${animal.name}</h3>
-                <p class="premium-animal-scientific">${animal.scientific_name}</p>
-                <div class="premium-animal-details">
-                    <div class="premium-animal-detail">
-                        <span class="premium-animal-label">重量:</span>
-                        <span class="premium-animal-value">${animal.physical_characteristics.weight_kg}kg</span>
-                    </div>
-                    <div class="premium-animal-detail">
-                        <span class="premium-animal-label">棲息地:</span>
-                        <span class="premium-animal-value">${animal.habitat.environment}</span>
-                    </div>
-                    <div class="premium-animal-detail">
-                        <span class="premium-animal-label">保育:</span>
-                        <span class="premium-animal-value">${animal.conservation_status}</span>
-                    </div>
-                </div>
-            `;
-
-            animalsGrid.appendChild(card);
-        });
-
-        // 填入比較資料
-        const summary = animalsData.comparison_summary;
-        document.getElementById('largest-animal').textContent = summary.size_order[0];
-        document.getElementById('best-climber').textContent = summary.climbing_ability_ranking[0];
-        document.getElementById('most-endangered').textContent = summary.conservation_concern.highest_risk;
-        document.getElementById('most-omnivorous').textContent = summary.diet_specialization.most_generalized;
+    // 更新所有比較內容
+    function updateAllComparisons() {
+        updateMainImages();
+        updateOverviewComparison();
+        updatePhysicalComparison();
+        updateHabitatComparison();
+        updateDietComparison();
+        updateIndicators();
     }
 
-    function renderPhysicalComparison() {
-        const weightChart = document.getElementById('weight-chart');
-        const lengthChart = document.getElementById('length-chart');
-        const animals = animalsData.animals;
+    // 更新主要雙圖片區塊
+    function updateMainImages() {
+        const comparisonAnimal = comparisonAnimals[currentAnimalIndex];
 
-        // 重量比較
-        weightChart.innerHTML = '';
-        const maxWeight = Math.max(...animals.map(a => parseFloat(a.physical_characteristics.weight_kg.split('-')[1] || a.physical_characteristics.weight_kg)));
-
-        animals.forEach((animal, index) => {
-            const weight = parseFloat(animal.physical_characteristics.weight_kg.split('-')[1] || animal.physical_characteristics.weight_kg);
-            const percentage = (weight / maxWeight) * 100;
-
-            const row = document.createElement('div');
-            row.className = 'premium-chart-row';
-            row.innerHTML = `
-                <div class="premium-chart-label">${animal.name}</div>
-                <div class="premium-chart-bar-container">
-                    <div class="premium-chart-bar" style="width: 0%"></div>
-                </div>
-                <div class="premium-chart-value">${animal.physical_characteristics.weight_kg}kg</div>
-            `;
-            weightChart.appendChild(row);
-
-            // 動畫效果
-            setTimeout(() => {
-                row.querySelector('.premium-chart-bar').style.width = `${percentage}%`;
-            }, 300 + index * 150);
-        });
-
-        // 體長比較
-        lengthChart.innerHTML = '';
-        const maxLength = Math.max(...animals.map(a => parseFloat(a.physical_characteristics.body_length_cm.split('-')[1] || a.physical_characteristics.body_length_cm)));
-
-        animals.forEach((animal, index) => {
-            const length = parseFloat(animal.physical_characteristics.body_length_cm.split('-')[1] || animal.physical_characteristics.body_length_cm);
-            const percentage = (length / maxLength) * 100;
-
-            const row = document.createElement('div');
-            row.className = 'premium-chart-row';
-            row.innerHTML = `
-                <div class="premium-chart-label">${animal.name}</div>
-                <div class="premium-chart-bar-container">
-                    <div class="premium-chart-bar" style="width: 0%; background: linear-gradient(90deg, var(--tech-accent), var(--tech-accent));"></div>
-                </div>
-                <div class="premium-chart-value">${animal.physical_characteristics.body_length_cm}cm</div>
-            `;
-            lengthChart.appendChild(row);
-
-            // 動畫效果
-            setTimeout(() => {
-                row.querySelector('.premium-chart-bar').style.width = `${percentage}%`;
-            }, 600 + index * 150);
-        });
+        // 更新右側比較動物的圖片和標籤
+        document.getElementById('main-comparison-image').src = imageMap[comparisonAnimal.name];
+        document.getElementById('main-comparison-image').alt = comparisonAnimal.name;
+        document.getElementById('main-comparison-label').textContent = comparisonAnimal.name;
     }
 
-    function renderHabitatComparison() {
-        const habitatComparison = document.getElementById('habitat-comparison');
-        const animals = animalsData.animals;
+    // 更新總覽比較
+    function updateOverviewComparison() {
+        const redPanda = animalsData.animals.find(animal => animal.name === '小熊貓');
+        const comparisonAnimal = comparisonAnimals[currentAnimalIndex];
 
-        habitatComparison.innerHTML = '';
-
-        animals.forEach(animal => {
-            const card = document.createElement('div');
-            card.className = 'premium-habitat-card';
-            card.innerHTML = `
-                <h3 class="premium-habitat-title">${animal.name}</h3>
-                <div class="premium-habitat-details">
-                    <div class="premium-habitat-item">
-                        <div class="premium-animal-detail">
-                            <span class="premium-animal-label">分佈:</span>
-                            <span class="premium-animal-value">${animal.habitat.geographic_range}</span>
-                        </div>
-                    </div>
-                    <div class="premium-habitat-item">
-                        <div class="premium-animal-detail">
-                            <span class="premium-animal-label">環境:</span>
-                            <span class="premium-animal-value">${animal.habitat.environment}</span>
-                        </div>
-                    </div>
-                    <div class="premium-habitat-item">
-                        <div class="premium-animal-detail">
-                            <span class="premium-animal-label">海拔:</span>
-                            <span class="premium-animal-value">${animal.habitat.altitude_m}m</span>
-                        </div>
-                    </div>
-                    <div class="premium-habitat-item">
-                        <div class="premium-animal-detail">
-                            <span class="premium-animal-label">氣候:</span>
-                            <span class="premium-animal-value">${animal.habitat.climate}</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-            habitatComparison.appendChild(card);
-        });
+        // 更新比較表格
+        const tableBody = document.getElementById('overview-comparison');
+        tableBody.innerHTML = `
+            <tr>
+                <td>${redPanda.scientific_name}</td>
+                <td>學名</td>
+                <td>${comparisonAnimal.scientific_name}</td>
+            </tr>
+            <tr>
+                <td>${redPanda.conservation_status}</td>
+                <td>保育狀況</td>
+                <td>${comparisonAnimal.conservation_status}</td>
+            </tr>
+            <tr>
+                <td>${redPanda.behavior.activity_pattern}</td>
+                <td>活動模式</td>
+                <td>${comparisonAnimal.behavior.activity_pattern}</td>
+            </tr>
+            <tr>
+                <td>${redPanda.behavior.social_structure}</td>
+                <td>社會結構</td>
+                <td>${comparisonAnimal.behavior.social_structure}</td>
+            </tr>
+        `;
     }
 
-    function renderDietComparison() {
-        const dietComparison = document.getElementById('diet-comparison');
-        const animals = animalsData.animals;
+    // 更新體型比較
+    function updatePhysicalComparison() {
+        const redPanda = animalsData.animals.find(animal => animal.name === '小熊貓');
+        const comparisonAnimal = comparisonAnimals[currentAnimalIndex];
 
-        dietComparison.innerHTML = '';
-
-        animals.forEach(animal => {
-            const card = document.createElement('div');
-            card.className = 'premium-diet-card';
-
-            let dietDetails = '';
-            if (animal.diet.food_percentage) {
-                dietDetails = Object.entries(animal.diet.food_percentage)
-                    .map(([food, percentage]) => `${food}: ${percentage}%`)
-                    .join(', ');
-            }
-
-            card.innerHTML = `
-                <h3 class="premium-diet-title">${animal.name}</h3>
-                <div class="premium-diet-details">
-                    <div class="premium-diet-item">
-                        <span class="premium-animal-label">主食:</span>
-                        <span class="premium-animal-value">${animal.diet.primary_food}</span>
-                    </div>
-                    <div class="premium-diet-item">
-                        <span class="premium-animal-label">類型:</span>
-                        <span class="premium-animal-value">${animal.diet.diet_type}</span>
-                    </div>
-                    ${dietDetails ? `<div class="premium-diet-item"><span class="premium-animal-label">比例:</span><span class="premium-animal-value">${dietDetails}</span></div>` : ''}
-                </div>
-            `;
-            dietComparison.appendChild(card);
-        });
+        // 更新比較表格
+        const tableBody = document.getElementById('physical-comparison');
+        tableBody.innerHTML = `
+            <tr>
+                <td>${redPanda.physical_characteristics.weight_kg}kg</td>
+                <td>體重</td>
+                <td>${comparisonAnimal.physical_characteristics.weight_kg}kg</td>
+            </tr>
+            <tr>
+                <td>${redPanda.physical_characteristics.body_length_cm}cm</td>
+                <td>身長</td>
+                <td>${comparisonAnimal.physical_characteristics.body_length_cm}cm</td>
+            </tr>
+            <tr>
+                <td>${redPanda.physical_characteristics.tail_length_cm}cm</td>
+                <td>尾長</td>
+                <td>${comparisonAnimal.physical_characteristics.tail_length_cm}cm</td>
+            </tr>
+            <tr>
+                <td>${redPanda.physical_characteristics.height_cm}cm</td>
+                <td>身高</td>
+                <td>${comparisonAnimal.physical_characteristics.height_cm}cm</td>
+            </tr>
+            <tr>
+                <td>${redPanda.physical_characteristics.fur_color}</td>
+                <td>毛色</td>
+                <td>${comparisonAnimal.physical_characteristics.fur_color}</td>
+            </tr>
+        `;
     }
 
-    function renderFunFacts() {
-        const funFacts = document.getElementById('fun-facts');
-        const animals = animalsData.animals;
+    // 更新棲息地比較
+    function updateHabitatComparison() {
+        const redPanda = animalsData.animals.find(animal => animal.name === '小熊貓');
+        const comparisonAnimal = comparisonAnimals[currentAnimalIndex];
 
-        funFacts.innerHTML = '';
+        // 更新比較表格
+        const tableBody = document.getElementById('habitat-comparison');
+        tableBody.innerHTML = `
+            <tr>
+                <td>${redPanda.habitat.geographic_range}</td>
+                <td>地理分布</td>
+                <td>${comparisonAnimal.habitat.geographic_range}</td>
+            </tr>
+            <tr>
+                <td>${redPanda.habitat.environment}</td>
+                <td>棲息環境</td>
+                <td>${comparisonAnimal.habitat.environment}</td>
+            </tr>
+            <tr>
+                <td>${redPanda.habitat.altitude_m}m</td>
+                <td>海拔範圍</td>
+                <td>${comparisonAnimal.habitat.altitude_m}m</td>
+            </tr>
+            <tr>
+                <td>${redPanda.habitat.climate}</td>
+                <td>氣候偏好</td>
+                <td>${comparisonAnimal.habitat.climate}</td>
+            </tr>
+        `;
+    }
 
-        // 收集所有有趣事實
-        const allFacts = [];
-        animals.forEach(animal => {
-            if (animal.interesting_facts) {
-                animal.interesting_facts.forEach(fact => {
-                    allFacts.push(`${animal.name}：${fact}`);
-                });
-            }
-        });
+    // 更新飲食比較
+    function updateDietComparison() {
+        const redPanda = animalsData.animals.find(animal => animal.name === '小熊貓');
+        const comparisonAnimal = comparisonAnimals[currentAnimalIndex];
 
-        // 隨機選擇3個事實
-        const selectedFacts = allFacts.sort(() => 0.5 - Math.random()).slice(0, 3);
+        // 計算主要食物比例
+        let redPandaPrimary = '';
+        let comparisonPrimary = '';
 
-        selectedFacts.forEach(fact => {
-            const factElement = document.createElement('p');
-            factElement.className = 'premium-fact-item';
-            factElement.textContent = fact;
-            funFacts.appendChild(factElement);
-        });
+        if (redPanda.diet.food_percentage) {
+            const redPandaTop = Object.entries(redPanda.diet.food_percentage)
+                .sort(([,a], [,b]) => b - a)[0];
+            redPandaPrimary = `${redPanda.diet.primary_food} (${redPandaTop[1]}%)`;
+        } else {
+            redPandaPrimary = redPanda.diet.primary_food;
+        }
+
+        if (comparisonAnimal.diet.food_percentage) {
+            const comparisonTop = Object.entries(comparisonAnimal.diet.food_percentage)
+                .sort(([,a], [,b]) => b - a)[0];
+            comparisonPrimary = `${comparisonAnimal.diet.primary_food} (${comparisonTop[1]}%)`;
+        } else {
+            comparisonPrimary = comparisonAnimal.diet.primary_food;
+        }
+
+        // 更新比較表格
+        const tableBody = document.getElementById('diet-comparison');
+        tableBody.innerHTML = `
+            <tr>
+                <td>${redPandaPrimary}</td>
+                <td>主要食物</td>
+                <td>${comparisonPrimary}</td>
+            </tr>
+            <tr>
+                <td>${redPanda.diet.diet_type}</td>
+                <td>飲食類型</td>
+                <td>${comparisonAnimal.diet.diet_type}</td>
+            </tr>
+        `;
+    }
+
+    // 更新指示器
+    function updateIndicators() {
+        const indicator = `${currentAnimalIndex + 1} / ${comparisonAnimals.length}`;
+        document.getElementById('main-animal-indicator').textContent = indicator;
+    }
+
+    // 切換動物
+    function switchAnimal(direction) {
+        currentAnimalIndex += direction;
+
+        // 循環處理
+        if (currentAnimalIndex >= comparisonAnimals.length) {
+            currentAnimalIndex = 0;
+        } else if (currentAnimalIndex < 0) {
+            currentAnimalIndex = comparisonAnimals.length - 1;
+        }
+
+        updateAllComparisons();
     }
 
     // 頁面載入完成後執行
     document.addEventListener('DOMContentLoaded', async () => {
         await loadAnimalsData();
-        renderFunFacts();
+
+        // 綁定切換按鈕事件
+        document.getElementById('main-prev-animal').addEventListener('click', () => switchAnimal(-1));
+        document.getElementById('main-next-animal').addEventListener('click', () => switchAnimal(1));
     });
+
+    // 全局函數供HTML調用
+    window.switchAnimal = switchAnimal;
     </script>
 
     <script src="assets/js/navbar.js"></script>
