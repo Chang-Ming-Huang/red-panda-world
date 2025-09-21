@@ -64,25 +64,60 @@
             border-radius: 50%;
             animation: float 3s ease-in-out infinite;
         }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(236, 109, 19, 0.1), rgba(249, 115, 22, 0.1));
+        }
+        .magazine-hero {
+            position: relative;
+            overflow: hidden;
+        }
+        .magazine-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(236, 109, 19, 0.05), rgba(249, 115, 22, 0.05));
+            z-index: 1;
+        }
+        .magazine-hero img {
+            transition: transform 0.6s ease;
+        }
+        .magazine-hero:hover img {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body class="font-display">
-    <div class="min-h-screen flex flex-col justify-center items-center p-4">
+    <div class="min-h-screen flex flex-col p-4">
         <!-- Hero Section -->
-        <div class="text-center mb-12 animate-fade-in">
-            <div class="hero-panda w-32 h-32 mx-auto mb-6 flex items-center justify-center">
-                <span class="text-6xl">🐾</span>
+        <div class="magazine-hero relative mb-12 h-80 md:h-96 w-full max-w-6xl mx-auto overflow-hidden rounded-2xl shadow-2xl animate-fade-in">
+            <img alt="可愛的小熊貓" class="absolute h-full w-full object-cover" src="images/red-panda.jpg" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+            <div class="absolute inset-0 flex items-end p-6 md:p-8">
+                <div class="text-white">
+                    <h1 class="mb-3 md:mb-4 text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">小熊貓世界</h1>
+                    <p class="text-lg md:text-xl lg:text-2xl font-medium opacity-90 mb-2">
+                        探索・學習・保護
+                    </p>
+                    <p class="text-sm md:text-base font-light opacity-80 mb-6 md:mb-8 leading-relaxed max-w-2xl">
+                        選擇你喜歡的視覺風格，開始探索可愛小熊貓的世界。了解中華小熊貓與喜馬拉雅小熊貓的差異，學習牠們的習性與保護現況。
+                    </p>
+                </div>
             </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold text-background-dark mb-4">
-                小熊貓世界
-            </h1>
-            <p class="text-xl md:text-2xl text-primary font-medium mb-2">
-                探索・學習・保護
-            </p>
-            <p class="text-background-dark/70 max-w-md mx-auto">
-                選擇你喜歡的視覺風格，開始探索可愛小熊貓的世界
-            </p>
         </div>
+
+        <!-- Style Selection Section -->
+        <div class="flex-grow flex flex-col justify-center items-center">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-background-dark mb-4">
+                    選擇你的探索風格
+                </h2>
+                <p class="text-background-dark/70 max-w-md mx-auto">
+                    每種風格都提供獨特的視覺體驗和互動方式
+                </p>
+            </div>
 
         <!-- Style Selection Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full animate-slide-up">
@@ -165,6 +200,7 @@
                     <span class="text-primary font-bold">→</span>
                 </div>
             </div>
+        </div>
         </div>
 
         <!-- Footer Info -->

@@ -29,7 +29,7 @@
         color: var(--tech-white);
         line-height: 1.6;
         overflow-x: hidden;
-        padding-bottom: calc(120px + var(--mobile-safe-bottom));
+        padding-bottom: calc(120px + env(safe-area-inset-bottom));
         min-height: 100vh;
         font-weight: 400;
     }
@@ -61,42 +61,6 @@
         z-index: 100;
     }
 
-    /* 狀態指示器 */
-    .status-indicator {
-        position: fixed;
-        top: 1rem;
-        right: 1rem;
-        display: flex;
-        gap: 0.5rem;
-        z-index: 1000;
-    }
-
-    .status-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--tech-accent);
-        animation: statusBlink 2s infinite;
-    }
-
-    .status-dot:nth-child(2) {
-        background: var(--tech-accent);
-        animation-delay: 0.5s;
-    }
-
-    .status-dot:nth-child(3) {
-        background: var(--tech-accent);
-        animation-delay: 1s;
-    }
-
-    @keyframes statusBlink {
-        0%, 50% {
-            opacity: 1;
-        }
-        51%, 100% {
-            opacity: 0.3;
-        }
-    }
 
     /* Header */
     .tech-header {
@@ -488,12 +452,6 @@
 </style>
 </head>
 <body>
-    <!-- Status Indicators -->
-    <div class="status-indicator">
-        <div class="status-dot"></div>
-        <div class="status-dot"></div>
-        <div class="status-dot"></div>
-    </div>
 
     <div class="tech-container" style="padding-top: 1.5rem;">
         <!-- Loading -->
@@ -575,6 +533,6 @@
     });
     </script>
 
-    <script src="../../assets/js/navbar.js"></script>
+    <script src="assets/js/navbar.js"></script>
 </body>
 </html>

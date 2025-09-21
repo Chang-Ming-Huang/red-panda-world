@@ -24,7 +24,7 @@
           "skull": "較寬大"
         },
         "habitat": {
-          "location": "中國南部 (四川南部、雲南、貴州)",
+          "location": "中國四川、雲南、貴州",
           "elevation": "1500-4300m",
           "climate": "亞熱帶高山氣候",
           "forest_type": "針闊混交林"
@@ -61,7 +61,7 @@
           "skull": "較窄小"
         },
         "habitat": {
-          "location": "喜馬拉雅山脈 (尼泊爾、印度、不丹)",
+          "location": "喜馬拉雅山脈、尼泊爾",
           "elevation": "2200-4800m",
           "climate": "高山寒溫帶氣候",
           "forest_type": "針葉林和高山灌叢"
