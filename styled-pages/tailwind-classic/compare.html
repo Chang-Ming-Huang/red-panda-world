@@ -74,123 +74,279 @@
     <!-- 主要內容 -->
     <div id="main-content" class="hidden">
         <!-- Tab 按鈕 -->
-        <div class="flex justify-around mb-6">
-            <button class="tab-btn active px-4 py-2 rounded-lg bg-primary text-white font-semibold transition-all duration-200 hover:bg-primary/90" data-tab="appearance">外觀</button>
-            <button class="tab-btn px-4 py-2 rounded-lg text-background-dark dark:text-background-light font-semibold hover:bg-primary/10 transition-all duration-200" data-tab="distribution">分佈</button>
-            <button class="tab-btn px-4 py-2 rounded-lg text-background-dark dark:text-background-light font-semibold hover:bg-primary/10 transition-all duration-200" data-tab="behavior">習性</button>
+        <div class="flex justify-around mb-8 gap-2">
+            <button class="tab-btn active px-6 py-3 rounded-lg bg-primary text-white font-semibold transition-all duration-200 hover:bg-primary/90 min-h-12" data-tab="appearance">外觀</button>
+            <button class="tab-btn px-6 py-3 rounded-lg text-background-dark dark:text-background-light font-semibold hover:bg-primary/10 transition-all duration-200 min-h-12" data-tab="distribution">分佈</button>
+            <button class="tab-btn px-6 py-3 rounded-lg text-background-dark dark:text-background-light font-semibold hover:bg-primary/10 transition-all duration-200 min-h-12" data-tab="behavior">習性</button>
         </div>
 
         <!-- Tab 內容 -->
         <div class="tab-content">
             <!-- 外觀標籤 -->
             <div id="appearance" class="active">
-                <section class="rounded-xl overflow-hidden bg-white dark:bg-zinc-800/20 mb-6 shadow-lg">
-                    <div class="p-6">
-                        <h2 class="text-xl font-bold mb-4 text-primary">外觀特徵</h2>
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <div class="relative aspect-square rounded-lg overflow-hidden">
-                                <img id="chinese-image" alt="中華小熊貓" class="object-cover w-full h-full transition-transform duration-300 hover:scale-105" />
+                <div class="space-y-6">
+                    <!-- 中華小熊貓卡片 -->
+                    <div class="bg-white dark:bg-zinc-800/20 rounded-xl shadow-lg overflow-hidden">
+                        <div class="relative h-48 bg-gradient-to-br from-orange-100 to-orange-50 dark:from-orange-900/30 dark:to-orange-800/20">
+                            <img id="chinese-image" alt="中華小熊貓" class="absolute inset-0 w-full h-full object-cover" />
+                            <div class="absolute top-4 left-4 bg-white/90 dark:bg-black/70 px-3 py-1 rounded-full">
+                                <span class="text-sm font-semibold text-primary">🇨🇳 中華小熊貓</span>
                             </div>
-                            <div class="relative aspect-square rounded-lg overflow-hidden">
-                                <img id="himalayan-image" alt="喜馬拉雅小熊貓" class="object-cover w-full h-full transition-transform duration-300 hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Ailurus fulgens styani</h3>
+                            <div class="grid grid-cols-2 gap-4 text-base">
+                                <div class="space-y-3">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-lg">⚖️</span>
+                                        <div>
+                                            <div class="text-sm text-gray-600 dark:text-gray-400">體重</div>
+                                            <div class="font-semibold" id="chinese-weight"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-lg">🎨</span>
+                                        <div>
+                                            <div class="text-sm text-gray-600 dark:text-gray-400">毛色</div>
+                                            <div class="font-semibold" id="chinese-color"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex items-center space-x-2">
+                                <span class="text-lg">🦘</span>
+                                <div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">尾紋特徵</div>
+                                    <div class="font-semibold" id="chinese-tail"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="bg-background-light dark:bg-zinc-800/10 px-6 py-4">
-                        <div class="grid grid-cols-2 gap-4 text-center">
-                            <div id="chinese-appearance">
-                                <h3 class="font-bold text-lg mb-1">中華小熊貓</h3>
-                                <p class="text-sm text-background-dark/70 dark:text-background-light/70 mb-2">Ailurus fulgens styani</p>
-                                <div class="space-y-1 text-sm">
-                                    <p><strong>體重：</strong><span id="chinese-weight"></span></p>
-                                    <p><strong>毛色：</strong><span id="chinese-color"></span></p>
-                                    <p><strong>尾紋：</strong><span id="chinese-tail"></span></p>
+
+                    <!-- 喜馬拉雅小熊貓卡片 -->
+                    <div class="bg-white dark:bg-zinc-800/20 rounded-xl shadow-lg overflow-hidden">
+                        <div class="relative h-48 bg-gradient-to-br from-purple-100 to-blue-50 dark:from-purple-900/30 dark:to-blue-800/20">
+                            <img id="himalayan-image" alt="喜馬拉雅小熊貓" class="absolute inset-0 w-full h-full object-cover" />
+                            <div class="absolute top-4 left-4 bg-white/90 dark:bg-black/70 px-3 py-1 rounded-full">
+                                <span class="text-sm font-semibold text-primary">🏔️ 喜馬拉雅小熊貓</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Ailurus fulgens fulgens</h3>
+                            <div class="grid grid-cols-2 gap-4 text-base">
+                                <div class="space-y-3">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-lg">⚖️</span>
+                                        <div>
+                                            <div class="text-sm text-gray-600 dark:text-gray-400">體重</div>
+                                            <div class="font-semibold" id="himalayan-weight"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-lg">🎨</span>
+                                        <div>
+                                            <div class="text-sm text-gray-600 dark:text-gray-400">毛色</div>
+                                            <div class="font-semibold" id="himalayan-color"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div id="himalayan-appearance">
-                                <h3 class="font-bold text-lg mb-1">喜馬拉雅小熊貓</h3>
-                                <p class="text-sm text-background-dark/70 dark:text-background-light/70 mb-2">Ailurus fulgens fulgens</p>
-                                <div class="space-y-1 text-sm">
-                                    <p><strong>體重：</strong><span id="himalayan-weight"></span></p>
-                                    <p><strong>毛色：</strong><span id="himalayan-color"></span></p>
-                                    <p><strong>尾紋：</strong><span id="himalayan-tail"></span></p>
+                            <div class="mt-4 flex items-center space-x-2">
+                                <span class="text-lg">🦘</span>
+                                <div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">尾紋特徵</div>
+                                    <div class="font-semibold" id="himalayan-tail"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
             </div>
 
             <!-- 分佈標籤 -->
             <div id="distribution">
-                <section class="rounded-xl overflow-hidden bg-white dark:bg-zinc-800/20 mb-6 shadow-lg">
-                    <div class="p-6">
-                        <h2 class="text-xl font-bold mb-4 text-primary">棲息地分佈</h2>
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <div class="bg-gradient-to-br from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20 p-4 rounded-lg">
-                                <h4 class="font-semibold mb-2">🇨🇳 中華小熊貓</h4>
-                                <div class="space-y-2 text-sm">
-                                    <p><strong>地區：</strong><span id="chinese-location"></span></p>
-                                    <p><strong>海拔：</strong><span id="chinese-elevation"></span></p>
-                                    <p><strong>氣候：</strong><span id="chinese-climate"></span></p>
-                                </div>
+                <div class="space-y-6">
+                    <!-- 中華小熊貓分布卡片 -->
+                    <div class="bg-gradient-to-br from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20 rounded-xl p-6 border border-blue-200/50 dark:border-blue-700/30">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-800/30 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-2xl">🇨🇳</span>
                             </div>
-                            <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-4 rounded-lg">
-                                <h4 class="font-semibold mb-2">🏔️ 喜馬拉雅小熊貓</h4>
-                                <div class="space-y-2 text-sm">
-                                    <p><strong>地區：</strong><span id="himalayan-location"></span></p>
-                                    <p><strong>海拔：</strong><span id="himalayan-elevation"></span></p>
-                                    <p><strong>氣候：</strong><span id="himalayan-climate"></span></p>
+                            <div>
+                                <h3 class="text-xl font-bold text-blue-800 dark:text-blue-300">中華小熊貓</h3>
+                                <p class="text-sm text-blue-600 dark:text-blue-400">Ailurus fulgens styani</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bg-white/60 dark:bg-black/20 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <span class="text-lg mr-2">🌍</span>
+                                    <span class="font-semibold text-blue-800 dark:text-blue-300">分布地區</span>
                                 </div>
+                                <p class="text-base" id="chinese-location"></p>
+                            </div>
+
+                            <div class="bg-white/60 dark:bg-black/20 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <span class="text-lg mr-2">⛰️</span>
+                                    <span class="font-semibold text-blue-800 dark:text-blue-300">海拔高度</span>
+                                </div>
+                                <p class="text-base" id="chinese-elevation"></p>
+                            </div>
+
+                            <div class="bg-white/60 dark:bg-black/20 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <span class="text-lg mr-2">🌤️</span>
+                                    <span class="font-semibold text-blue-800 dark:text-blue-300">氣候條件</span>
+                                </div>
+                                <p class="text-base" id="chinese-climate"></p>
                             </div>
                         </div>
                     </div>
-                </section>
+
+                    <!-- 喜馬拉雅小熊貓分布卡片 -->
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/30">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-800/30 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-2xl">🏔️</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-purple-800 dark:text-purple-300">喜馬拉雅小熊貓</h3>
+                                <p class="text-sm text-purple-600 dark:text-purple-400">Ailurus fulgens fulgens</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bg-white/60 dark:bg-black/20 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <span class="text-lg mr-2">🌍</span>
+                                    <span class="font-semibold text-purple-800 dark:text-purple-300">分布地區</span>
+                                </div>
+                                <p class="text-base" id="himalayan-location"></p>
+                            </div>
+
+                            <div class="bg-white/60 dark:bg-black/20 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <span class="text-lg mr-2">⛰️</span>
+                                    <span class="font-semibold text-purple-800 dark:text-purple-300">海拔高度</span>
+                                </div>
+                                <p class="text-base" id="himalayan-elevation"></p>
+                            </div>
+
+                            <div class="bg-white/60 dark:bg-black/20 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <span class="text-lg mr-2">🌤️</span>
+                                    <span class="font-semibold text-purple-800 dark:text-purple-300">氣候條件</span>
+                                </div>
+                                <p class="text-base" id="himalayan-climate"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- 習性標籤 -->
             <div id="behavior">
-                <section class="rounded-xl overflow-hidden bg-white dark:bg-zinc-800/20 mb-6 shadow-lg">
-                    <div class="p-6">
-                        <h2 class="text-xl font-bold mb-4 text-primary">行為習性</h2>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="space-y-4">
-                                <h4 class="font-semibold text-center">🇨🇳 中華小熊貓</h4>
-                                <div class="space-y-3 text-sm">
-                                    <div class="flex justify-between">
-                                        <span class="font-medium">活動時間：</span>
-                                        <span id="chinese-activity"></span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="font-medium">社會性：</span>
-                                        <span id="chinese-social"></span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="font-medium">攀爬：</span>
-                                        <span id="chinese-movement"></span>
-                                    </div>
+                <div class="space-y-6">
+                    <!-- 中華小熊貓習性卡片 -->
+                    <div class="bg-white dark:bg-zinc-800/20 rounded-xl shadow-lg overflow-hidden border-l-4 border-orange-400">
+                        <div class="p-6">
+                            <div class="flex items-center mb-6">
+                                <div class="w-14 h-14 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mr-4">
+                                    <span class="text-3xl">🇨🇳</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-orange-600 dark:text-orange-400">中華小熊貓</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">行為習性特徵</p>
                                 </div>
                             </div>
+
                             <div class="space-y-4">
-                                <h4 class="font-semibold text-center">🏔️ 喜馬拉雅小熊貓</h4>
-                                <div class="space-y-3 text-sm">
-                                    <div class="flex justify-between">
-                                        <span class="font-medium">活動時間：</span>
-                                        <span id="himalayan-activity"></span>
+                                <div class="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4 border border-orange-200 dark:border-orange-800">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="text-xl mr-3">🌙</span>
+                                            <span class="font-semibold text-orange-800 dark:text-orange-300">活動時間</span>
+                                        </div>
+                                        <span class="text-base font-medium" id="chinese-activity"></span>
                                     </div>
-                                    <div class="flex justify-between">
-                                        <span class="font-medium">社會性：</span>
-                                        <span id="himalayan-social"></span>
+                                </div>
+
+                                <div class="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4 border border-orange-200 dark:border-orange-800">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="text-xl mr-3">👥</span>
+                                            <span class="font-semibold text-orange-800 dark:text-orange-300">社會性</span>
+                                        </div>
+                                        <span class="text-base font-medium" id="chinese-social"></span>
                                     </div>
-                                    <div class="flex justify-between">
-                                        <span class="font-medium">攀爬：</span>
-                                        <span id="himalayan-movement"></span>
+                                </div>
+
+                                <div class="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4 border border-orange-200 dark:border-orange-800">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="text-xl mr-3">🧗</span>
+                                            <span class="font-semibold text-orange-800 dark:text-orange-300">攀爬能力</span>
+                                        </div>
+                                        <span class="text-base font-medium" id="chinese-movement"></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+
+                    <!-- 喜馬拉雅小熊貓習性卡片 -->
+                    <div class="bg-white dark:bg-zinc-800/20 rounded-xl shadow-lg overflow-hidden border-l-4 border-indigo-400">
+                        <div class="p-6">
+                            <div class="flex items-center mb-6">
+                                <div class="w-14 h-14 bg-indigo-100 dark:bg-indigo-900/30 rounded-full flex items-center justify-center mr-4">
+                                    <span class="text-3xl">🏔️</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-indigo-600 dark:text-indigo-400">喜馬拉雅小熊貓</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">行為習性特徵</p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-4 border border-indigo-200 dark:border-indigo-800">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="text-xl mr-3">🌙</span>
+                                            <span class="font-semibold text-indigo-800 dark:text-indigo-300">活動時間</span>
+                                        </div>
+                                        <span class="text-base font-medium" id="himalayan-activity"></span>
+                                    </div>
+                                </div>
+
+                                <div class="bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-4 border border-indigo-200 dark:border-indigo-800">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="text-xl mr-3">👥</span>
+                                            <span class="font-semibold text-indigo-800 dark:text-indigo-300">社會性</span>
+                                        </div>
+                                        <span class="text-base font-medium" id="himalayan-social"></span>
+                                    </div>
+                                </div>
+
+                                <div class="bg-indigo-50 dark:bg-indigo-900/20 rounded-lg p-4 border border-indigo-200 dark:border-indigo-800">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="text-xl mr-3">🧗</span>
+                                            <span class="font-semibold text-indigo-800 dark:text-indigo-300">攀爬能力</span>
+                                        </div>
+                                        <span class="text-base font-medium" id="himalayan-movement"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

@@ -69,11 +69,11 @@
     <!-- 主要內容 -->
     <div id="main-content" class="hidden">
         <!-- Tab 按鈕 -->
-        <div class="flex justify-around mb-6 overflow-x-auto">
-            <button class="tab-btn active px-3 py-2 rounded-lg bg-primary text-white font-semibold transition-all duration-200 hover:bg-primary/90 text-sm whitespace-nowrap" data-tab="overview">總覽</button>
-            <button class="tab-btn px-3 py-2 rounded-lg text-background-dark dark:text-background-light font-semibold hover:bg-primary/10 transition-all duration-200 text-sm whitespace-nowrap" data-tab="physical">體型</button>
-            <button class="tab-btn px-3 py-2 rounded-lg text-background-dark dark:text-background-light font-semibold hover:bg-primary/10 transition-all duration-200 text-sm whitespace-nowrap" data-tab="habitat">棲息地</button>
-            <button class="tab-btn px-3 py-2 rounded-lg text-background-dark dark:text-background-light font-semibold hover:bg-primary/10 transition-all duration-200 text-sm whitespace-nowrap" data-tab="diet">飲食</button>
+        <div class="flex justify-around mb-8 gap-2 overflow-x-auto">
+            <button class="tab-btn active px-6 py-3 rounded-lg bg-primary text-white font-semibold transition-all duration-200 hover:bg-primary/90 text-base whitespace-nowrap min-h-12" data-tab="overview">總覽</button>
+            <button class="tab-btn px-6 py-3 rounded-lg text-background-dark dark:text-background-light font-semibold hover:bg-primary/10 transition-all duration-200 text-base whitespace-nowrap min-h-12" data-tab="physical">體型</button>
+            <button class="tab-btn px-6 py-3 rounded-lg text-background-dark dark:text-background-light font-semibold hover:bg-primary/10 transition-all duration-200 text-base whitespace-nowrap min-h-12" data-tab="habitat">棲息地</button>
+            <button class="tab-btn px-6 py-3 rounded-lg text-background-dark dark:text-background-light font-semibold hover:bg-primary/10 transition-all duration-200 text-base whitespace-nowrap min-h-12" data-tab="diet">飲食</button>
         </div>
 
         <!-- Tab 內容 -->
@@ -81,21 +81,21 @@
             <!-- 總覽標籤 -->
             <div id="overview" class="active">
                 <div class="mb-6">
-                    <h2 class="text-2xl font-bold mb-4 text-center text-primary">小熊貓 vs 其他動物</h2>
-                    <p class="text-center text-background-dark/70 dark:text-background-light/70 mb-6">
+                    <h2 class="text-3xl font-bold mb-6 text-center text-primary">小熊貓 vs 其他動物</h2>
+                    <p class="text-center text-background-dark/70 dark:text-background-light/70 mb-8 text-base leading-relaxed">
                         探索小熊貓與大熊貓、浣熊、狐狸之間的異同
                     </p>
                 </div>
 
                 <!-- 動物卡片網格 -->
-                <div id="animals-grid" class="grid grid-cols-2 gap-4 mb-6">
+                <div id="animals-grid" class="grid grid-cols-2 gap-6 mb-8">
                     <!-- 動物卡片會動態插入 -->
                 </div>
 
                 <!-- 重點比較 -->
-                <div class="bg-white dark:bg-zinc-800/20 rounded-xl p-6 shadow-lg">
-                    <h3 class="text-lg font-bold mb-4">🎯 重點比較</h3>
-                    <div class="space-y-4">
+                <div class="bg-white dark:bg-zinc-800/20 rounded-xl p-8 shadow-lg">
+                    <h3 class="text-xl font-bold mb-6">🎯 重點比較</h3>
+                    <div class="space-y-5 text-base">
                         <div class="flex justify-between items-center">
                             <span class="font-medium">體型最大：</span>
                             <span id="largest-animal" class="text-primary font-bold"></span>
@@ -119,20 +119,20 @@
             <!-- 體型標籤 -->
             <div id="physical">
                 <section class="rounded-xl overflow-hidden bg-white dark:bg-zinc-800/20 mb-6 shadow-lg">
-                    <div class="p-6">
-                        <h2 class="text-xl font-bold mb-4 text-primary">體型比較</h2>
+                    <div class="p-8">
+                        <h2 class="text-2xl font-bold mb-6 text-primary">體型比較</h2>
 
                         <!-- 重量比較 -->
-                        <div class="mb-6">
-                            <h3 class="font-semibold mb-3">體重 (公斤)</h3>
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold mb-4">體重 (公斤)</h3>
                             <div id="weight-chart" class="space-y-3">
                                 <!-- 重量圖表會動態插入 -->
                             </div>
                         </div>
 
                         <!-- 體長比較 -->
-                        <div class="mb-6">
-                            <h3 class="font-semibold mb-3">身長 (公分)</h3>
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold mb-4">身長 (公分)</h3>
                             <div id="length-chart" class="space-y-3">
                                 <!-- 體長圖表會動態插入 -->
                             </div>
@@ -144,9 +144,9 @@
             <!-- 棲息地標籤 -->
             <div id="habitat">
                 <section class="rounded-xl overflow-hidden bg-white dark:bg-zinc-800/20 mb-6 shadow-lg">
-                    <div class="p-6">
-                        <h2 class="text-xl font-bold mb-4 text-primary">棲息地比較</h2>
-                        <div id="habitat-comparison" class="space-y-4">
+                    <div class="p-8">
+                        <h2 class="text-2xl font-bold mb-6 text-primary">棲息地比較</h2>
+                        <div id="habitat-comparison" class="space-y-6 text-base">
                             <!-- 棲息地比較會動態插入 -->
                         </div>
                     </div>
@@ -156,9 +156,9 @@
             <!-- 飲食標籤 -->
             <div id="diet">
                 <section class="rounded-xl overflow-hidden bg-white dark:bg-zinc-800/20 mb-6 shadow-lg">
-                    <div class="p-6">
-                        <h2 class="text-xl font-bold mb-4 text-primary">飲食習性比較</h2>
-                        <div id="diet-comparison" class="space-y-6">
+                    <div class="p-8">
+                        <h2 class="text-2xl font-bold mb-6 text-primary">飲食習性比較</h2>
+                        <div id="diet-comparison" class="space-y-8 text-base">
                             <!-- 飲食比較會動態插入 -->
                         </div>
                     </div>
@@ -167,9 +167,9 @@
         </div>
 
         <!-- 趣味知識 -->
-        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 mb-6">
-            <h3 class="text-lg font-bold mb-4 text-blue-800 dark:text-blue-300">🤔 你知道嗎？</h3>
-            <div id="fun-facts" class="space-y-3">
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-8 mb-8">
+            <h3 class="text-xl font-bold mb-6 text-blue-800 dark:text-blue-300">🤔 你知道嗎？</h3>
+            <div id="fun-facts" class="space-y-4 text-base leading-relaxed">
                 <!-- 趣味知識會動態插入 -->
             </div>
         </div>
@@ -246,13 +246,22 @@ function renderOverview() {
         };
 
         card.innerHTML = `
-            <img src="${imageMap[animal.name] || '../../images/red-panda.jpg'}" alt="${animal.name}" class="w-full h-24 object-cover rounded-lg mb-3">
-            <h3 class="font-bold text-lg mb-1">${animal.name}</h3>
-            <p class="text-sm text-background-dark/70 dark:text-background-light/70 mb-2">${animal.scientific_name}</p>
-            <div class="text-xs space-y-1">
-                <p><span class="font-medium">重量:</span> ${animal.physical_characteristics.weight_kg}kg</p>
-                <p><span class="font-medium">棲息地:</span> ${animal.habitat.environment}</p>
-                <p><span class="font-medium">保育:</span> ${animal.conservation_status}</p>
+            <img src="${imageMap[animal.name] || '../../images/red-panda.jpg'}" alt="${animal.name}" class="w-full h-24 object-cover rounded-lg mb-4">
+            <h3 class="font-bold text-lg mb-2">${animal.name}</h3>
+            <p class="text-base text-background-dark/70 dark:text-background-light/70 mb-3 leading-relaxed">${animal.scientific_name}</p>
+            <div class="text-sm space-y-2 leading-relaxed">
+                <div class="flex justify-between items-center">
+                    <span class="font-medium">重量:</span>
+                    <span class="font-semibold">${animal.physical_characteristics.weight_kg}kg</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="font-medium">棲息地:</span>
+                    <span class="font-semibold text-right">${animal.habitat.environment}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="font-medium">保育:</span>
+                    <span class="font-semibold text-right">${animal.conservation_status}</span>
+                </div>
             </div>
         `;
 
@@ -283,11 +292,11 @@ function renderPhysicalComparison() {
         const bar = document.createElement('div');
         bar.className = 'flex items-center space-x-3';
         bar.innerHTML = `
-            <div class="w-16 text-sm font-medium">${animal.name}</div>
-            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-4 relative">
-                <div class="chart-bar bg-gradient-to-r from-primary to-orange-600 h-4 rounded-full" style="width: 0%"></div>
+            <div class="w-20 text-sm font-medium text-left">${animal.name}</div>
+            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-5 relative mx-2">
+                <div class="chart-bar bg-gradient-to-r from-primary to-orange-600 h-5 rounded-full" style="width: 0%"></div>
             </div>
-            <div class="w-16 text-sm text-right">${animal.physical_characteristics.weight_kg}kg</div>
+            <div class="w-20 text-sm text-right font-semibold">${animal.physical_characteristics.weight_kg}kg</div>
         `;
         weightChart.appendChild(bar);
 
@@ -308,11 +317,11 @@ function renderPhysicalComparison() {
         const bar = document.createElement('div');
         bar.className = 'flex items-center space-x-3';
         bar.innerHTML = `
-            <div class="w-16 text-sm font-medium">${animal.name}</div>
-            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-4 relative">
-                <div class="chart-bar bg-gradient-to-r from-green-500 to-emerald-600 h-4 rounded-full" style="width: 0%"></div>
+            <div class="w-20 text-sm font-medium text-left">${animal.name}</div>
+            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-5 relative mx-2">
+                <div class="chart-bar bg-gradient-to-r from-green-500 to-emerald-600 h-5 rounded-full" style="width: 0%"></div>
             </div>
-            <div class="w-16 text-sm text-right">${animal.physical_characteristics.body_length_cm}cm</div>
+            <div class="w-20 text-sm text-right font-semibold">${animal.physical_characteristics.body_length_cm}cm</div>
         `;
         lengthChart.appendChild(bar);
 
@@ -333,12 +342,24 @@ function renderHabitatComparison() {
         const card = document.createElement('div');
         card.className = 'bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20 rounded-lg p-4';
         card.innerHTML = `
-            <h3 class="font-bold text-lg mb-2">${animal.name}</h3>
-            <div class="grid grid-cols-2 gap-2 text-sm">
-                <div><span class="font-medium">分佈:</span> ${animal.habitat.geographic_range}</div>
-                <div><span class="font-medium">環境:</span> ${animal.habitat.environment}</div>
-                <div><span class="font-medium">海拔:</span> ${animal.habitat.altitude_m}m</div>
-                <div><span class="font-medium">氣候:</span> ${animal.habitat.climate}</div>
+            <h3 class="font-bold text-xl mb-4 text-center">${animal.name}</h3>
+            <div class="space-y-3 text-base">
+                <div class="flex flex-col space-y-1">
+                    <span class="font-medium text-blue-700 dark:text-blue-300">🌍 分佈地區</span>
+                    <span class="text-gray-700 dark:text-gray-300 leading-relaxed">${animal.habitat.geographic_range}</span>
+                </div>
+                <div class="flex flex-col space-y-1">
+                    <span class="font-medium text-green-700 dark:text-green-300">🌲 生活環境</span>
+                    <span class="text-gray-700 dark:text-gray-300 leading-relaxed">${animal.habitat.environment}</span>
+                </div>
+                <div class="flex flex-col space-y-1">
+                    <span class="font-medium text-purple-700 dark:text-purple-300">⛰️ 海拔高度</span>
+                    <span class="text-gray-700 dark:text-gray-300 leading-relaxed">${animal.habitat.altitude_m}m</span>
+                </div>
+                <div class="flex flex-col space-y-1">
+                    <span class="font-medium text-orange-700 dark:text-orange-300">🌤️ 氣候條件</span>
+                    <span class="text-gray-700 dark:text-gray-300 leading-relaxed">${animal.habitat.climate}</span>
+                </div>
             </div>
         `;
         habitatComparison.appendChild(card);
@@ -363,11 +384,22 @@ function renderDietComparison() {
         }
 
         card.innerHTML = `
-            <h3 class="font-bold text-lg mb-3">${animal.name}</h3>
-            <div class="space-y-2 text-sm">
-                <p><span class="font-medium">主食:</span> ${animal.diet.primary_food}</p>
-                <p><span class="font-medium">類型:</span> ${animal.diet.diet_type}</p>
-                ${dietDetails ? `<p><span class="font-medium">比例:</span> ${dietDetails}</p>` : ''}
+            <h3 class="font-bold text-xl mb-4 text-center">${animal.name}</h3>
+            <div class="space-y-4 text-base">
+                <div class="flex flex-col space-y-1">
+                    <span class="font-medium text-green-700 dark:text-green-300">🍃 主要食物</span>
+                    <span class="text-gray-700 dark:text-gray-300 leading-relaxed">${animal.diet.primary_food}</span>
+                </div>
+                <div class="flex flex-col space-y-1">
+                    <span class="font-medium text-orange-700 dark:text-orange-300">🍽️ 飲食類型</span>
+                    <span class="text-gray-700 dark:text-gray-300 leading-relaxed">${animal.diet.diet_type}</span>
+                </div>
+                ${dietDetails ? `
+                <div class="flex flex-col space-y-1">
+                    <span class="font-medium text-purple-700 dark:text-purple-300">📊 食物比例</span>
+                    <span class="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">${dietDetails}</span>
+                </div>
+                ` : ''}
             </div>
         `;
         dietComparison.appendChild(card);

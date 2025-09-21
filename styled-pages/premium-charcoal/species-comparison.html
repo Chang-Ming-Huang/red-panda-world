@@ -152,8 +152,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 48px;
-        height: 48px;
+        width: 52px;
+        height: 52px;
         border: 2px solid var(--premium-gold);
         background: transparent;
         color: var(--premium-gold);
@@ -161,6 +161,8 @@
         transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
     }
 
     .premium-back-btn::before {
@@ -185,7 +187,7 @@
     }
 
     .premium-header-title {
-        font-size: 1.5rem;
+        font-size: 1.75rem;
         font-weight: 700;
         color: var(--premium-gold);
         text-transform: uppercase;
@@ -194,7 +196,7 @@
     }
 
     .premium-spacer {
-        width: 48px;
+        width: 52px;
     }
 
     /* Main Container */
@@ -248,18 +250,24 @@
 
     .premium-tab {
         flex: 1;
-        padding: 1.25rem;
+        padding: 1.5rem 1rem;
         background: none;
         border: none;
         color: var(--charcoal-muted);
         font-weight: 600;
-        font-size: 0.9rem;
+        font-size: 1rem;
         cursor: pointer;
         transition: all 0.3s ease;
         border-right: 1px solid var(--charcoal-medium);
         position: relative;
         text-transform: uppercase;
         letter-spacing: 0.05em;
+        min-height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
     }
 
     .premium-tab:last-child {
@@ -339,21 +347,23 @@
     }
 
     .premium-card-title {
-        font-size: 2rem;
+        font-size: 2.25rem;
         font-weight: 700;
         color: var(--premium-gold);
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 0.05em;
+        line-height: 1.2;
     }
 
     .premium-card-subtitle {
-        font-size: 1.1rem;
+        font-size: 1.25rem;
         color: var(--charcoal-muted);
         text-align: center;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
         font-style: italic;
+        line-height: 1.5;
     }
 
     .premium-card-content {
@@ -364,18 +374,19 @@
     .premium-animals-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 2.5rem;
-        margin-bottom: 2rem;
+        gap: 2rem;
+        margin-bottom: 3rem;
     }
 
     .premium-animal-card {
         background: linear-gradient(135deg, var(--charcoal-medium), var(--charcoal-light));
         border: 2px solid var(--premium-copper);
-        padding: 2rem;
+        padding: 1.5rem;
         text-align: center;
         transition: all 0.4s ease;
         position: relative;
         overflow: hidden;
+        border-radius: 12px;
     }
 
     .premium-animal-card::before {
@@ -410,23 +421,25 @@
     }
 
     .premium-animal-name {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         font-weight: 700;
         color: var(--premium-gold);
         margin-bottom: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
+        line-height: 1.3;
     }
 
     .premium-animal-scientific {
-        font-size: 0.9rem;
+        font-size: 1rem;
         color: var(--charcoal-muted);
         margin-bottom: 1.5rem;
         font-style: italic;
+        line-height: 1.4;
     }
 
     .premium-animal-details {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .premium-animal-detail {
@@ -434,8 +447,9 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0.5rem 0;
+        padding: 0.75rem 0;
         border-bottom: 1px solid var(--charcoal-lighter);
+        min-height: 48px;
     }
 
     .premium-animal-detail:last-child {
@@ -446,13 +460,14 @@
         font-weight: 600;
         color: var(--charcoal-text);
         text-transform: uppercase;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         letter-spacing: 0.05em;
     }
 
     .premium-animal-value {
         color: var(--premium-copper);
         font-weight: 600;
+        font-size: 1rem;
     }
 
     /* Summary Section */
@@ -476,15 +491,16 @@
     }
 
     .premium-summary-title {
-        font-size: 1.5rem;
+        font-size: 1.75rem;
         font-weight: 700;
         color: var(--premium-gold);
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 0.1em;
         position: relative;
         z-index: 1;
+        line-height: 1.3;
     }
 
     .premium-summary-grid {
@@ -499,11 +515,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1.5rem;
+        padding: 1.75rem;
         background: var(--charcoal-light);
         border: 1px solid var(--premium-copper);
-        font-size: 1rem;
+        font-size: 1.125rem;
         transition: all 0.3s ease;
+        min-height: 56px;
+        border-radius: 8px;
     }
 
     .premium-summary-item:hover {
@@ -522,7 +540,7 @@
     .premium-summary-value {
         color: var(--premium-gold);
         font-weight: 700;
-        font-size: 1.1rem;
+        font-size: 1.25rem;
     }
 
     /* Chart Bars */
@@ -542,8 +560,8 @@
     }
 
     .premium-chart-label {
-        width: 90px;
-        font-size: 0.9rem;
+        width: 100px;
+        font-size: 1rem;
         font-weight: 600;
         color: var(--charcoal-text);
         flex-shrink: 0;
@@ -553,11 +571,12 @@
 
     .premium-chart-bar-container {
         flex: 1;
-        height: 24px;
+        height: 32px;
         background: var(--charcoal-medium);
         position: relative;
         border: 1px solid var(--charcoal-lighter);
         overflow: hidden;
+        border-radius: 6px;
     }
 
     .premium-chart-bar {
@@ -589,8 +608,8 @@
     }
 
     .premium-chart-value {
-        width: 90px;
-        font-size: 0.9rem;
+        width: 100px;
+        font-size: 1rem;
         color: var(--premium-copper);
         text-align: right;
         flex-shrink: 0;
@@ -623,27 +642,33 @@
     }
 
     .premium-habitat-title {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         font-weight: 700;
         color: var(--premium-gold);
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 0.05em;
+        line-height: 1.3;
     }
 
     .premium-habitat-details {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1.5rem;
-        font-size: 0.95rem;
+        font-size: 1.05rem;
     }
 
     .premium-habitat-item {
         background: var(--charcoal-dark);
-        padding: 1.5rem;
+        padding: 1.75rem;
         border: 1px solid var(--charcoal-lighter);
         transition: all 0.3s ease;
+        border-radius: 8px;
+        min-height: 56px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .premium-habitat-item:hover {
@@ -666,25 +691,31 @@
     }
 
     .premium-diet-title {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         font-weight: 700;
         color: var(--premium-gold);
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 0.05em;
+        line-height: 1.3;
     }
 
     .premium-diet-details {
-        font-size: 0.95rem;
+        font-size: 1.05rem;
     }
 
     .premium-diet-item {
         margin-bottom: 1.5rem;
-        padding: 1rem;
+        padding: 1.25rem;
         background: var(--charcoal-dark);
         border-left: 4px solid var(--premium-copper);
         transition: all 0.3s ease;
+        border-radius: 0 8px 8px 0;
+        min-height: 56px;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
     }
 
     .premium-diet-item:hover {
@@ -715,15 +746,16 @@
     }
 
     .premium-facts-title {
-        font-size: 1.6rem;
+        font-size: 1.875rem;
         font-weight: 700;
         color: var(--premium-gold);
-        margin-bottom: 2.5rem;
+        margin-bottom: 3rem;
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 0.1em;
         position: relative;
         z-index: 1;
+        line-height: 1.3;
     }
 
     .premium-facts-list {
@@ -732,15 +764,16 @@
     }
 
     .premium-fact-item {
-        font-size: 1rem;
+        font-size: 1.125rem;
         color: var(--charcoal-text);
         margin-bottom: 2rem;
-        line-height: 1.8;
-        padding: 1.5rem;
+        line-height: 1.7;
+        padding: 2rem;
         background: rgba(74, 74, 74, 0.5);
         border-left: 4px solid var(--premium-bronze);
         position: relative;
         transition: all 0.3s ease;
+        border-radius: 0 12px 12px 0;
     }
 
     .premium-fact-item:hover {
@@ -768,6 +801,7 @@
     @media (max-width: 768px) {
         .premium-animals-grid {
             grid-template-columns: 1fr;
+            gap: 1.5rem;
         }
 
         .premium-container {
@@ -776,25 +810,87 @@
 
         .premium-card-header,
         .premium-card-content {
-            padding: 2rem 1.5rem;
+            padding: 1.75rem 1.25rem;
         }
 
         .premium-habitat-details {
             grid-template-columns: 1fr;
+            gap: 1rem;
         }
 
         .premium-tab {
-            font-size: 0.8rem;
-            padding: 1rem;
+            font-size: 0.9rem;
+            padding: 1.25rem 0.75rem;
+            min-height: 52px;
         }
 
         .premium-chart-label,
         .premium-chart-value {
-            width: 70px;
+            width: 80px;
+            font-size: 0.9rem;
+        }
+
+        .premium-chart-bar-container {
+            height: 28px;
         }
 
         .premium-header-title {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+        }
+
+        .premium-card-title {
+            font-size: 1.875rem;
+        }
+
+        .premium-card-subtitle {
+            font-size: 1.125rem;
+        }
+
+        .premium-animal-name {
+            font-size: 1.375rem;
+        }
+
+        .premium-summary-title {
+            font-size: 1.5rem;
+        }
+
+        .premium-habitat-title,
+        .premium-diet-title {
+            font-size: 1.375rem;
+        }
+
+        .premium-facts-title {
+            font-size: 1.625rem;
+        }
+
+        .premium-fact-item {
+            font-size: 1rem;
+            padding: 1.5rem;
+        }
+
+        .premium-diet-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+            padding: 1rem;
+        }
+
+        .premium-habitat-item {
+            padding: 1.25rem;
+        }
+
+        .premium-animal-detail {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+        }
+
+        .premium-summary-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.75rem;
+            text-align: left;
         }
     }
 </style>
@@ -1094,20 +1190,28 @@
                 <h3 class="premium-habitat-title">${animal.name}</h3>
                 <div class="premium-habitat-details">
                     <div class="premium-habitat-item">
-                        <span class="premium-animal-label">分佈:</span>
-                        <span class="premium-animal-value">${animal.habitat.geographic_range}</span>
+                        <div class="premium-animal-detail">
+                            <span class="premium-animal-label">分佈:</span>
+                            <span class="premium-animal-value">${animal.habitat.geographic_range}</span>
+                        </div>
                     </div>
                     <div class="premium-habitat-item">
-                        <span class="premium-animal-label">環境:</span>
-                        <span class="premium-animal-value">${animal.habitat.environment}</span>
+                        <div class="premium-animal-detail">
+                            <span class="premium-animal-label">環境:</span>
+                            <span class="premium-animal-value">${animal.habitat.environment}</span>
+                        </div>
                     </div>
                     <div class="premium-habitat-item">
-                        <span class="premium-animal-label">海拔:</span>
-                        <span class="premium-animal-value">${animal.habitat.altitude_m}m</span>
+                        <div class="premium-animal-detail">
+                            <span class="premium-animal-label">海拔:</span>
+                            <span class="premium-animal-value">${animal.habitat.altitude_m}m</span>
+                        </div>
                     </div>
                     <div class="premium-habitat-item">
-                        <span class="premium-animal-label">氣候:</span>
-                        <span class="premium-animal-value">${animal.habitat.climate}</span>
+                        <div class="premium-animal-detail">
+                            <span class="premium-animal-label">氣候:</span>
+                            <span class="premium-animal-value">${animal.habitat.climate}</span>
+                        </div>
                     </div>
                 </div>
             `;
@@ -1143,7 +1247,7 @@
                         <span class="premium-animal-label">類型:</span>
                         <span class="premium-animal-value">${animal.diet.diet_type}</span>
                     </div>
-                    ${dietDetails ? `<div class="premium-diet-item"><span class="premium-animal-label">比例:</span> <span class="premium-animal-value">${dietDetails}</span></div>` : ''}
+                    ${dietDetails ? `<div class="premium-diet-item"><span class="premium-animal-label">比例:</span><span class="premium-animal-value">${dietDetails}</span></div>` : ''}
                 </div>
             `;
             dietComparison.appendChild(card);

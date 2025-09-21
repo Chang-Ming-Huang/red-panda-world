@@ -19,7 +19,11 @@
       "Bash(git commit:*)",
       "Bash(git reset:*)",
       "Bash(tree:*)",
-      "Bash(gh:*)"
+      "Bash(gh:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "WebFetch(domain:chang-ming-huang.github.io)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []

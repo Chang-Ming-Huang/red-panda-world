@@ -173,9 +173,9 @@
     }
 
     .explanation-section .explanation-text {
-        font-size: 15px;
+        font-size: 16px;
         color: #374151;
-        line-height: 1.6;
+        line-height: 1.7;
     }
 
     .dark .explanation-section .explanation-text {
@@ -219,44 +219,44 @@
     <div id="quiz-start" class="hidden text-center py-8">
         <!-- Quiz 主題區域 -->
         <div class="mb-8">
-            <h2 class="text-2xl font-bold text-background-dark dark:text-background-light mb-2">小熊貓亞種知識測驗</h2>
-            <p class="text-background-dark/70 dark:text-background-light/70">測試你對中華和喜馬拉雅小熊貓的了解程度</p>
+            <h2 class="text-3xl font-bold text-background-dark dark:text-background-light mb-4">小熊貓亞種知識測驗</h2>
+            <p class="text-base text-background-dark/70 dark:text-background-light/70 leading-relaxed">測試你對中華和喜馬拉雅小熊貓的了解程度</p>
         </div>
 
         <!-- 統計資訊卡片 -->
-        <div class="grid grid-cols-2 gap-3 mb-8">
-            <div class="bg-white dark:bg-zinc-800/20 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-600">
+        <div class="grid grid-cols-2 gap-4 mb-8">
+            <div class="bg-white dark:bg-zinc-800/20 rounded-lg p-6 text-center border border-gray-200 dark:border-gray-600 min-h-20">
                 <div class="text-xl mb-2">📋</div>
                 <div class="text-lg font-bold text-primary" id="total-questions-stat"></div>
-                <div class="text-xs text-background-dark/60 dark:text-background-light/60">題目</div>
+                <div class="text-sm text-background-dark/60 dark:text-background-light/60">題目</div>
             </div>
-            <div class="bg-white dark:bg-zinc-800/20 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-600">
+            <div class="bg-white dark:bg-zinc-800/20 rounded-lg p-6 text-center border border-gray-200 dark:border-gray-600 min-h-20">
                 <div class="text-xl mb-2">⏱️</div>
                 <div class="text-lg font-bold text-primary">3-5</div>
-                <div class="text-xs text-background-dark/60 dark:text-background-light/60">分鐘</div>
+                <div class="text-sm text-background-dark/60 dark:text-background-light/60">分鐘</div>
             </div>
-            <div class="bg-white dark:bg-zinc-800/20 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-600">
+            <div class="bg-white dark:bg-zinc-800/20 rounded-lg p-6 text-center border border-gray-200 dark:border-gray-600 min-h-20">
                 <div class="text-xl mb-2">🎯</div>
                 <div class="text-lg font-bold text-primary" id="passing-score-stat"></div>
-                <div class="text-xs text-background-dark/60 dark:text-background-light/60">通過分數</div>
+                <div class="text-sm text-background-dark/60 dark:text-background-light/60">通過分數</div>
             </div>
-            <div class="bg-white dark:bg-zinc-800/20 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-600">
+            <div class="bg-white dark:bg-zinc-800/20 rounded-lg p-6 text-center border border-gray-200 dark:border-gray-600 min-h-20">
                 <div class="text-xl mb-2">🏆</div>
                 <div class="text-lg font-bold text-primary">中級</div>
-                <div class="text-xs text-background-dark/60 dark:text-background-light/60">難度</div>
+                <div class="text-sm text-background-dark/60 dark:text-background-light/60">難度</div>
             </div>
         </div>
 
         <div class="bg-white dark:bg-zinc-800/20 rounded-xl p-6 mb-6 shadow-lg">
-            <h3 class="font-bold mb-4">測驗規則：</h3>
-            <div class="space-y-2 text-sm text-left">
+            <h3 class="text-lg font-bold mb-4">測驗規則：</h3>
+            <div class="space-y-3 text-base text-left leading-relaxed">
                 <p>📝 共 <span id="total-questions" class="font-bold text-primary"></span> 道題目</p>
                 <p>⏱️ 每題選擇後會立即顯示答案解釋</p>
                 <p>🎯 答對 <span id="passing-score" class="font-bold text-primary"></span> 題以上算通過</p>
                 <p>🏆 完成後會給你專屬的成績評價</p>
             </div>
         </div>
-        <button onclick="startQuiz()" class="bg-gradient-to-r from-primary to-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
+        <button onclick="startQuiz()" class="bg-gradient-to-r from-primary to-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 h-14 min-h-14">
             🚀 開始挑戰
         </button>
     </div>
@@ -283,7 +283,7 @@
                 <div class="mb-3">
                     <span id="question-category" class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium"></span>
                 </div>
-                <h2 id="question-text" class="text-lg font-bold mb-4"></h2>
+                <h2 id="question-text" class="text-xl font-bold mb-6 leading-relaxed"></h2>
 
                 <!-- 選項 -->
                 <div id="options-container" class="space-y-3">
@@ -294,8 +294,8 @@
             <!-- 獨立答案解說區塊 -->
             <div id="explanation-section" class="explanation-section hidden">
                 <div class="explanation-card">
-                    <div class="explanation-title">💡 答案解說</div>
-                    <div id="explanation-text" class="explanation-text"></div>
+                    <div class="explanation-title text-lg">💡 答案解說</div>
+                    <div id="explanation-text" class="explanation-text text-base leading-relaxed"></div>
                 </div>
             </div>
         </div>
@@ -303,7 +303,7 @@
         <!-- Quiz Footer: 下一題按鈕 -->
         <div class="quiz-footer text-center">
             <div id="next-button-container" class="hidden">
-                <button onclick="nextQuestion()" class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+                <button onclick="nextQuestion()" class="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors h-12 min-h-12">
                     下一題 →
                 </button>
             </div>
