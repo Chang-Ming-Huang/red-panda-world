@@ -14,6 +14,20 @@
         --tech-silver: #e5e7eb;
         --tech-accent: #ec6d13;
         --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+
+        /* 統一間距系統 */
+        --space-xs: 0.5rem;   /* 8px - 小元素間距 */
+        --space-sm: 1rem;     /* 16px - 一般元素間距 */
+        --space-md: 1.5rem;   /* 24px - 中等區塊間距 */
+        --space-lg: 2rem;     /* 32px - 主要區塊間距 */
+        --space-xl: 3rem;     /* 48px - 大區塊間距 */
+
+        /* 手機版間距變數 */
+        --mobile-space-xs: 0.5rem;   /* 8px */
+        --mobile-space-sm: 0.75rem;  /* 12px */
+        --mobile-space-md: 1rem;     /* 16px */
+        --mobile-space-lg: 1.5rem;   /* 24px */
+        --mobile-space-xl: 2rem;     /* 32px */
     }
 
     * {
@@ -65,7 +79,7 @@
     /* Header */
     .tech-header {
         text-align: center;
-        padding: 4rem 2rem 3rem;
+        padding: var(--space-xl) var(--space-lg) var(--space-xl);
         position: relative;
         margin-top: 3px;
     }
@@ -74,7 +88,7 @@
         font-size: 2.5rem;
         font-weight: 600;
         color: var(--tech-white);
-        margin-bottom: 1.5rem;
+        margin-bottom: var(--space-md);
         letter-spacing: -0.02em;
         text-transform: uppercase;
         line-height: 1.2;
@@ -83,7 +97,7 @@
     .tech-subtitle {
         font-size: 1.2rem;
         color: var(--tech-silver);
-        margin-bottom: 2rem;
+        margin-bottom: var(--space-lg);
         max-width: 600px;
         margin-left: auto;
         margin-right: auto;
@@ -95,13 +109,13 @@
     .tech-container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 2rem;
+        padding: 0 var(--space-lg);
     }
 
     /* Loading */
     .tech-loading {
         text-align: center;
-        padding: 4rem 0;
+        padding: var(--space-xl) 0;
     }
 
     .tech-spinner {
@@ -110,7 +124,7 @@
         border: 2px solid var(--tech-gray);
         border-top: 2px solid var(--tech-accent);
         border-radius: 50%;
-        margin: 0 auto 1rem;
+        margin: 0 auto var(--space-sm);
         animation: spin 1s linear infinite;
     }
 
@@ -124,7 +138,7 @@
         display: grid;
         grid-template-columns: 1fr;
         gap: 1.5rem;
-        margin-bottom: 4rem;
+        margin-bottom: var(--space-xl);
     }
 
     @media (min-width: 480px) {
@@ -237,7 +251,7 @@
     }
 
     .tech-placeholder-content {
-        padding: 2rem;
+        padding: var(--space-lg);
         margin-top: 3px;
     }
 
@@ -300,7 +314,7 @@
         background: var(--tech-dark);
         border: 1px solid var(--tech-gray);
         border-radius: 16px;
-        padding: 2.5rem 2rem;
+        padding: var(--space-lg) var(--space-lg);
         position: relative;
         transition: all 0.3s ease;
         touch-action: manipulation;
@@ -409,7 +423,7 @@
 
         .tech-about-title {
             font-size: 1.8rem;
-            margin-bottom: 2rem;
+            margin-bottom: var(--space-lg);
         }
 
         .tech-about-card {
@@ -445,8 +459,28 @@
     }
 
     @media (max-width: 768px) {
+        .tech-header {
+            padding: var(--mobile-space-xl) var(--mobile-space-md) var(--mobile-space-xl);
+        }
+
+        .tech-container {
+            padding: 0 var(--mobile-space-md);
+        }
+
+        .tech-loading {
+            padding: var(--mobile-space-xl) 0;
+        }
+
         .tech-gallery-grid {
-            gap: 1.25rem;
+            gap: var(--mobile-space-md);
+        }
+
+        .tech-gallery-card {
+            padding: var(--mobile-space-md);
+        }
+
+        .tech-info-section {
+            padding: var(--mobile-space-lg) var(--mobile-space-md);
         }
     }
 </style>

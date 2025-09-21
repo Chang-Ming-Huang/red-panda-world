@@ -14,6 +14,20 @@
         --tech-silver: #e5e7eb;
         --tech-accent: #ec6d13;
         --mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+
+        /* 統一間距系統 */
+        --space-xs: 0.5rem;   /* 8px - 小元素間距 */
+        --space-sm: 1rem;     /* 16px - 一般元素間距 */
+        --space-md: 1.5rem;   /* 24px - 中等區塊間距 */
+        --space-lg: 2rem;     /* 32px - 主要區塊間距 */
+        --space-xl: 3rem;     /* 48px - 大區塊間距 */
+
+        /* 手機版間距變數 */
+        --mobile-space-xs: 0.5rem;   /* 8px */
+        --mobile-space-sm: 0.75rem;  /* 12px */
+        --mobile-space-md: 1rem;     /* 16px */
+        --mobile-space-lg: 1.5rem;   /* 24px */
+        --mobile-space-xl: 2rem;     /* 32px */
     }
 
     * {
@@ -59,7 +73,7 @@
         justify-content: space-between;
         background: rgba(10, 10, 10, 0.95);
         backdrop-filter: blur(20px);
-        padding: 1.5rem;
+        padding: var(--space-md);
         border-bottom: 1px solid var(--tech-accent);
         box-shadow: 0 4px 20px rgba(236, 109, 19, 0.1);
     }
@@ -120,7 +134,7 @@
     .premium-container {
         max-width: 900px;
         margin: 0 auto;
-        padding: 0 2rem;
+        padding: 0 var(--space-lg);
     }
 
     /* Loading */
@@ -148,7 +162,7 @@
     .premium-tabs {
         display: flex;
         gap: 0.5rem;
-        margin: 2rem 0;
+        margin: var(--space-lg) 0;
         padding: 0.5rem;
         background: var(--tech-dark);
         border: 1px solid var(--tech-gray);
@@ -195,7 +209,7 @@
 
     /* Content Sections */
     .premium-content {
-        margin: 3rem 0;
+        margin: var(--space-xl) 0;
     }
 
     .premium-section {
@@ -222,7 +236,7 @@
         background: linear-gradient(135deg, var(--tech-dark) 0%, var(--tech-gray) 100%);
         border: 2px solid var(--tech-accent);
         border-radius: 12px;
-        margin-bottom: 3rem;
+        margin-bottom: var(--space-xl);
         overflow: hidden;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         position: relative;
@@ -248,7 +262,7 @@
         font-size: 2.25rem;
         font-weight: 700;
         color: var(--tech-accent);
-        margin-bottom: 1.5rem;
+        margin-bottom: var(--space-md);
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -259,13 +273,13 @@
         font-size: 1.25rem;
         color: var(--tech-silver);
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: var(--space-lg);
         font-style: italic;
         line-height: 1.5;
     }
 
     .premium-card-content {
-        padding: 2.5rem;
+        padding: var(--space-lg);
     }
 
     /* Animals Grid */
@@ -273,13 +287,13 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
-        margin-bottom: 3rem;
+        margin-bottom: var(--space-xl);
     }
 
     .premium-animal-card {
         background: linear-gradient(135deg, var(--tech-gray), var(--tech-light));
         border: 2px solid var(--tech-accent);
-        padding: 1.5rem;
+        padding: var(--space-md);
         text-align: center;
         transition: all 0.4s ease;
         position: relative;
@@ -313,7 +327,7 @@
         width: 100%;
         height: 120px;
         object-fit: cover;
-        margin-bottom: 1.5rem;
+        margin-bottom: var(--space-md);
         border: 2px solid var(--tech-accent);
         filter: brightness(1.1) contrast(1.2) saturate(1.1);
     }
@@ -331,7 +345,7 @@
     .premium-animal-scientific {
         font-size: 1rem;
         color: var(--tech-silver);
-        margin-bottom: 1.5rem;
+        margin-bottom: var(--space-md);
         font-style: italic;
         line-height: 1.4;
     }
@@ -374,7 +388,7 @@
         border: 2px solid var(--tech-accent);
         border-radius: 12px;
         padding: 3rem;
-        margin-bottom: 3rem;
+        margin-bottom: var(--space-xl);
         position: relative;
     }
 
@@ -393,7 +407,7 @@
         font-size: 1.75rem;
         font-weight: 700;
         color: var(--tech-accent);
-        margin-bottom: 2.5rem;
+        margin-bottom: var(--space-lg);
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 0.1em;
@@ -444,18 +458,18 @@
 
     /* Chart Bars */
     .premium-chart {
-        margin: 2rem 0;
+        margin: var(--space-lg) 0;
     }
 
     .premium-chart-item {
-        margin-bottom: 2rem;
+        margin-bottom: var(--space-lg);
     }
 
     .premium-chart-row {
         display: flex;
         align-items: center;
         gap: 1.5rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: var(--space-md);
     }
 
     .premium-chart-label {
@@ -526,7 +540,7 @@
         background: linear-gradient(135deg, var(--tech-gray), var(--tech-light));
         border: 2px solid var(--tech-accent);
         border-radius: 12px;
-        padding: 2.5rem;
+        padding: var(--space-lg);
         position: relative;
         overflow: hidden;
     }
@@ -545,7 +559,7 @@
         font-size: 1.5rem;
         font-weight: 700;
         color: var(--tech-accent);
-        margin-bottom: 2.5rem;
+        margin-bottom: var(--space-lg);
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -587,7 +601,7 @@
         background: linear-gradient(135deg, var(--tech-light), var(--tech-gray));
         border: 2px solid var(--tech-accent);
         border-radius: 12px;
-        padding: 2.5rem;
+        padding: var(--space-lg);
         box-shadow: 0 15px 40px rgba(236, 109, 19, 0.1);
     }
 
@@ -595,7 +609,7 @@
         font-size: 1.5rem;
         font-weight: 700;
         color: var(--tech-accent);
-        margin-bottom: 2.5rem;
+        margin-bottom: var(--space-lg);
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -607,7 +621,7 @@
     }
 
     .premium-diet-item {
-        margin-bottom: 1.5rem;
+        margin-bottom: var(--space-md);
         padding: 1.25rem;
         background: var(--tech-dark);
         border-left: 4px solid var(--tech-accent);
@@ -631,7 +645,7 @@
         border: 3px solid var(--tech-accent);
         border-radius: 12px;
         padding: 3rem;
-        margin-bottom: 3rem;
+        margin-bottom: var(--space-xl);
         position: relative;
         overflow: hidden;
     }
@@ -651,7 +665,7 @@
         font-size: 1.875rem;
         font-weight: 700;
         color: var(--tech-accent);
-        margin-bottom: 3rem;
+        margin-bottom: var(--space-xl);
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 0.1em;
@@ -668,7 +682,7 @@
     .premium-fact-item {
         font-size: 1.125rem;
         color: var(--tech-white);
-        margin-bottom: 2rem;
+        margin-bottom: var(--space-lg);
         line-height: 1.7;
         padding: 2rem;
         background: rgba(74, 74, 74, 0.5);
@@ -703,11 +717,15 @@
     @media (max-width: 768px) {
         .premium-animals-grid {
             grid-template-columns: 1fr;
-            gap: 1.5rem;
+            gap: var(--mobile-space-lg);
         }
 
         .premium-container {
-            padding: 0 1rem;
+            padding: 0 var(--mobile-space-md);
+        }
+
+        .premium-header {
+            padding: var(--mobile-space-md);
         }
 
         .premium-card-header,
@@ -777,7 +795,7 @@
 
         .premium-fact-item {
             font-size: 1rem;
-            padding: 1.5rem;
+            padding: var(--space-md);
         }
 
         .premium-diet-item {
