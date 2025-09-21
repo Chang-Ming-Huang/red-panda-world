@@ -177,7 +177,7 @@
         "climate": "各種氣候"
       },
       "behavior": {
-        "activity_pattern": "夜行性/晨昏性",
+        "activity_pattern": "晨昏性",
         "social_structure": "家族群體",
         "climbing_ability": "一般",
         "swimming_ability": "良好",
