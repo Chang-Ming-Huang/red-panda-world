@@ -43,8 +43,7 @@
         color: var(--tech-white);
         line-height: 1.6;
         overflow-x: hidden;
-        padding-bottom: calc(120px + env(safe-area-inset-bottom));
-        min-height: 100vh;
+        padding-bottom: calc(75px + env(safe-area-inset-bottom));
         font-weight: 400;
     }
 
@@ -473,6 +472,13 @@
 
         .tech-placeholder-desc {
             font-size: 0.95rem;
+        }
+    }
+
+    /* Desktop version: fixed padding */
+    @media (min-width: 769px) {
+        body {
+            padding-bottom: 100px;
         }
     }
 
